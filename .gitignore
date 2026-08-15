@@ -35,3 +35,5 @@ next-env.d.ts
 # temp screenshots
 screenshot_*.png
 screenshot_*.jpg
+
+scripts/
