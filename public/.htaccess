@@ -1,0 +1,76 @@
+DirectoryIndex index.html index.htm index.php
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Force non-WWW
+  RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+  # Force HTTPS for all requests.
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # Normalize explicit browser requests for index.html URLs to clean paths.
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+  RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L]
+
+  # Normalize explicit browser requests for index.php URLs to clean paths.
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.php[\s?] [NC]
+  RewriteRule ^(.*/)?index\.php$ /$1 [R=301,L]
+
+  # Ensure clean URLs use trailing slash when a static folder exists.
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+  RewriteRule ^(.*)$ /$1/ [R=301,L]
+
+  # Serve static-exported directory pages via index.html.
+  RewriteCond %{REQUEST_URI} .+/$
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}index.html -f
+  RewriteRule ^(.*/)$ $1index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # HSTS (Strict-Transport-Security) - 1 year
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Security headers
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "no-referrer-when-downgrade"
+
+  # Cache Control for static assets
+  <FilesMatch "\.(js|css|woff2?|png|jpe?g|webp|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Do not cache HTML/Data
+  <FilesMatch "\.(html?|txt|json)$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+
+  # Images, Fonts, JS, CSS
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+
+  # HTML, Data
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/plain "access plus 0 seconds"
+  ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
