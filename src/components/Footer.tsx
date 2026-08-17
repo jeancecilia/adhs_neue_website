@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import ConsentSettingsButton from "@/components/ConsentSettingsButton";
 
 export default function Footer() {
   return (
@@ -118,7 +119,8 @@ export default function Footer() {
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[rgba(255,255,255,0.22)] pt-6 text-[14px] font-normal text-slate-300 sm:flex-row">
           <span>&copy; {new Date().getFullYear()} {siteConfig.name} – Praxis für Psychotherapie nach dem HeilprG</span>
 
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 sm:justify-end">
+            <ConsentSettingsButton />
             <Link href="/impressum" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
               Impressum (§ 5 DDG)
             </Link>

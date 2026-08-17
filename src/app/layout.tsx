@@ -3,6 +3,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MobileStickyCta from '@/components/MobileStickyCta';
+import AnalyticsConsentManager from '@/components/AnalyticsConsentManager';
 import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
@@ -148,6 +149,7 @@ export default function RootLayout({
         </main>
         <MobileStickyCta />
         <Footer />
+        <AnalyticsConsentManager />
       </body>
     </html>
   );

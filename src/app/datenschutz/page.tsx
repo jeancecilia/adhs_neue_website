@@ -78,7 +78,23 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">6. Kontakt- und Terminanfrage</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">6. Google Analytics 4 und Einwilligungsverwaltung</h2>
+            <p>
+              Wir verwenden <strong>Google Analytics 4</strong> zur Reichweiten- und Nutzungsmessung. Anbieter ist für Nutzer im Europäischen Wirtschaftsraum grundsätzlich <strong>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland</strong>; Google LLC und weitere verbundene Unternehmen können in die Verarbeitung einbezogen sein. Das Google-Analytics-Skript und die Analyse-Speicherung sind beim ersten Besuch standardmäßig aktiviert, sofern in Ihrem Browser keine frühere Ablehnung gespeichert ist. Über „Nur notwendige“ können Sie die Messung deaktivieren.
+            </p>
+            <p className="mt-3">
+              Google Analytics verarbeitet insbesondere pseudonyme Online-Kennungen, gekürzte beziehungsweise von Google nicht dauerhaft protokollierte IP-Informationen, Geräte- und Browsermerkmale, aufgerufene Seiten, Referrer, ungefähre Region, Zeitpunkt und Dauer der Nutzung sowie Interaktionen mit der Website. Wir messen erfolgreiche Kontaktformularübermittlungen als Ereignis <code>generate_lead</code> und Klicks auf den externen WhatsApp-Link als <code>whatsapp_click</code>. Formularinhalte, Namen, E-Mail-Adressen, Nachrichten, ausgewählte Anliegen und andere Gesundheitsangaben werden nicht an Google Analytics oder Google Ads gesendet.
+            </p>
+            <p className="mt-3">
+              Wir verwenden Consent Mode v2. <code>analytics_storage</code> ist standardmäßig gewährt. <code>ad_storage</code>, <code>ad_user_data</code> und <code>ad_personalization</code> sind zunächst verweigert und werden erst über „Alle akzeptieren“ gewährt. Dann können Google Signals, Google-Ads-Konversionsmessung, Zielgruppenfunktionen und Anzeigenpersonalisierung eingesetzt werden. Die standardmäßige Reichweitenmessung stützen wir auf Art. 6 Abs. 1 lit. f DSGVO; unser Interesse liegt in der Messung und Verbesserung unseres Online-Angebots. Soweit eine Einwilligung erforderlich ist, erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TDDDG. Die Werbefunktionen beruhen auf Ihrer Einwilligung.
+            </p>
+            <p className="mt-3">
+              Ihre Entscheidung wird unter dem Schlüssel <code>adhs-praxis.analytics-consent.v1</code> im Local Storage Ihres Browsers gespeichert. Google Analytics kann insbesondere die Cookies <code>_ga</code> und <code>_ga_*</code> setzen. Sie können Ihre Entscheidung jederzeit über „Statistik-Einstellungen“ im Seitenfuß ändern. Bei Auswahl von „Nur notwendige“ werden weitere Analytics- und Werbemessungen deaktiviert und die für unsere Domain erreichbaren Google-Analytics-Cookies gelöscht. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt unberührt. Weitere Informationen finden Sie in der <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className={externalLinkClass}>Datenschutzerklärung von Google</a> und den <a href="https://support.google.com/analytics/answer/12017362" target="_blank" rel="noreferrer" className={externalLinkClass}>Datenschutzhinweisen zu Google Analytics</a>.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">7. Kontakt- und Terminanfrage</h2>
             <p>
               Bei Nutzung des Formulars verarbeiten wir Ihren Namen, Ihre E-Mail-Adresse, das gewählte Anliegen, den gewünschten Terminzeitraum, Ihre freiwillige Nachricht sowie den Zeitpunkt Ihrer Einwilligung. Die Pflichtangaben sind für die Zuordnung und Beantwortung Ihrer Anfrage erforderlich. Die Nachricht und der Terminwunsch sind freiwillig.
             </p>
@@ -91,7 +107,7 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">7. E-Mail-Zustellung und E-Mail-Postfach</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">8. E-Mail-Zustellung und E-Mail-Postfach</h2>
             <p>
               Die technische Formularzustellung erfolgt über Cloudflare Email Sending beziehungsweise Email Routing. Eingehende Nachrichten an die Praxisdomain und Formularanfragen werden an ein dafür bestimmtes Gmail-Postfach weitergeleitet. Anbieter des Postfachdienstes ist für Nutzer im Europäischen Wirtschaftsraum grundsätzlich <strong>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland</strong>; verbundene Unternehmen und Systeme der Google LLC in den USA können in die Verarbeitung einbezogen sein.
             </p>
@@ -101,7 +117,7 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">8. WhatsApp-Link</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">9. WhatsApp-Link</h2>
             <p>
               Auf der Website befinden sich reine Links zu WhatsApp; es ist kein WhatsApp-Widget eingebettet. Erst wenn Sie einen solchen Link anklicken, verlassen Sie unsere Website und stellen eine direkte Verbindung zu WhatsApp her. Anbieter für Nutzer im Europäischen Wirtschaftsraum ist <strong>WhatsApp Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Irland</strong>, ein Unternehmen der Meta-Gruppe. Dabei können insbesondere Ihre IP-Adresse, Geräteinformationen und die Information, dass Sie von unserer Website zu WhatsApp gewechselt sind, verarbeitet und gegebenenfalls in Drittländer übermittelt werden.
             </p>
@@ -111,38 +127,39 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">9. Cookies und lokale Speicherung</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">10. Cookies und lokale Speicherung</h2>
             <p>
-              Diese Website setzt im regulären Betrieb keine Analyse- oder Marketing-Cookies ein und speichert keine Analysekennungen im Local Storage Ihres Browsers. Cloudflare kann in besonderen Sicherheitsfällen technisch notwendige Cookies verwenden, etwa nach einer Sicherheitsprüfung oder Challenge. Solche Cookies dienen ausschließlich der Sicherheit und Funktionsfähigkeit der Website. Einwilligungspflichtige Tracking- oder Werbedienste sind nicht eingebunden.
+              Analyse-Cookies sind beim ersten Besuch standardmäßig aktiviert, sofern keine frühere Ablehnung gespeichert ist. Marketing-Cookies, Google Signals und personalisierte Werbefunktionen werden erst nach „Alle akzeptieren“ aktiviert. Cloudflare kann in besonderen Sicherheitsfällen technisch notwendige Cookies verwenden, etwa nach einer Sicherheitsprüfung oder Challenge. Die im Local Storage gespeicherte Auswahl ist erforderlich, um Ihre Entscheidung bei weiteren Seitenaufrufen zu beachten.
             </p>
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">10. Empfänger und Kategorien von Empfängern</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">11. Empfänger und Kategorien von Empfängern</h2>
             <p>Personenbezogene Daten erhalten nur Stellen, die sie für die genannten Zwecke benötigen:</p>
             <ul className="mt-3 list-disc space-y-1 pl-6">
               <li>Cloudflare, Inc. für Hosting, DNS, CDN, Sicherheit, Formularzustellung, E-Mail-Routing und Webanalyse,</li>
-              <li>Google Ireland Limited und gegebenenfalls Google LLC für das empfangende E-Mail-Postfach,</li>
+              <li>Google Ireland Limited und gegebenenfalls Google LLC für das empfangende E-Mail-Postfach, Google Analytics 4 sowie – nach „Alle akzeptieren“ – für Google-Ads-Messung und Werbefunktionen,</li>
               <li>WhatsApp Ireland Limited und Unternehmen der Meta-Gruppe nur, wenn Sie den WhatsApp-Link nutzen,</li>
               <li>Behörden, Gerichte, Steuerberatung oder sonstige Berufsgeheimnisträger, soweit eine gesetzliche Pflicht besteht oder dies zur Rechtsverteidigung erforderlich ist.</li>
             </ul>
-            <p className="mt-3">Eine Weitergabe zu Werbezwecken findet nicht statt.</p>
+            <p className="mt-3">Eine Verarbeitung für Google-Ads-Messung, Zielgruppen und Anzeigenpersonalisierung findet nur nach „Alle akzeptieren“ statt.</p>
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">11. Übermittlung in Drittländer</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">12. Übermittlung in Drittländer</h2>
             <p>
               Bei Cloudflare, Google und Meta kann eine Verarbeitung in den USA oder anderen Staaten außerhalb des Europäischen Wirtschaftsraums nicht vollständig ausgeschlossen werden. Soweit für ein Empfängerunternehmen eine gültige Zertifizierung nach dem EU-US Data Privacy Framework besteht, stützen die Anbieter die Übermittlung auf den Angemessenheitsbeschluss der Europäischen Kommission nach Art. 45 DSGVO. Ergänzend oder ersatzweise werden von den Anbietern Standardvertragsklauseln der Europäischen Kommission nach Art. 46 Abs. 2 lit. c DSGVO und zusätzliche Schutzmaßnahmen eingesetzt. Informationen zu Cloudflares Garantien enthält das <a href="https://www.cloudflare.com/en-gb/cloudflare-customer-dpa/" target="_blank" rel="noreferrer" className={externalLinkClass}>Cloudflare DPA</a>.
             </p>
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">12. Speicherdauer</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">13. Speicherdauer</h2>
             <ul className="list-disc space-y-2 pl-6">
               <li><strong>Kontakt- und Terminanfragen:</strong> grundsätzlich sechs Monate nach abschließender Bearbeitung; bei erforderlicher Rechtsverteidigung höchstens bis zum Ablauf der einschlägigen Verjährungsfrist.</li>
               <li><strong>E-Mails:</strong> entsprechend dem Zweck der Anfrage; behandlungsrelevante Inhalte werden gegebenenfalls in die Behandlungsdokumentation übernommen.</li>
               <li><strong>Behandlungsdokumentation:</strong> grundsätzlich zehn Jahre nach Abschluss der Behandlung, soweit keine längere gesetzliche Frist greift.</li>
               <li><strong>Cloudflare Web Analytics:</strong> nicht aggregierte Messdaten sieben Tage; aggregierte Auswertungen bis zu sechs Monate.</li>
+              <li><strong>Google Analytics 4:</strong> Ereignisdaten zwei Monate und pseudonyme Nutzerdaten bis zu 14 Monate nach den Einstellungen der Analytics-Property; die Einwilligungsentscheidung bleibt lokal gespeichert, bis Sie sie ändern oder den Browserspeicher löschen.</li>
               <li><strong>Sicherheits- und Netzwerkprotokolle:</strong> zweckgebunden nach den vertraglichen Cloudflare-Löschregeln; keine Übernahme in ein eigenes dauerhaftes Besucherarchiv.</li>
               <li><strong>Steuer- und handelsrechtlich relevante Unterlagen:</strong> entsprechend der jeweils geltenden gesetzlichen Aufbewahrungsfrist.</li>
             </ul>
@@ -150,7 +167,7 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">13. Ihre Datenschutzrechte</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">14. Ihre Datenschutzrechte</h2>
             <p>Sie haben im Rahmen der gesetzlichen Voraussetzungen insbesondere das Recht auf:</p>
             <ul className="mt-3 list-disc space-y-1 pl-6">
               <li>Auskunft nach Art. 15 DSGVO,</li>
@@ -166,7 +183,7 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">14. Beschwerderecht</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">15. Beschwerderecht</h2>
             <p>Sie haben nach Art. 77 DSGVO das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren. Für nichtöffentliche Stellen in Bayern ist grundsätzlich zuständig:</p>
             <p className="mt-3">
               <strong>Bayerisches Landesamt für Datenschutzaufsicht (BayLDA)</strong><br />
@@ -178,19 +195,19 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">15. Pflicht oder Freiwilligkeit der Bereitstellung</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">16. Pflicht oder Freiwilligkeit der Bereitstellung</h2>
             <p>
               Die Nutzung der Website ist ohne Angabe von Kontaktdaten möglich. Name, E-Mail-Adresse, Anliegen und die ausdrückliche Einwilligung sind erforderlich, wenn Sie das Kontaktformular verwenden möchten; ohne diese Angaben können wir die Anfrage nicht entgegennehmen und beantworten. Terminwunsch und Nachricht sind freiwillig. Gesetzlich oder vertraglich müssen Sie das Online-Formular nicht verwenden. Alternativ können Sie uns über die im Impressum genannten Kontaktwege erreichen.
             </p>
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">16. Automatisierte Entscheidungen und Profiling</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">17. Automatisierte Entscheidungen und Profiling</h2>
             <p>Wir treffen keine ausschließlich automatisierten Entscheidungen mit rechtlicher oder vergleichbar erheblicher Wirkung und führen kein Profiling im Sinne von Art. 22 DSGVO durch. Das ausgewählte Anliegen dient ausschließlich der manuellen Zuordnung Ihrer Anfrage.</p>
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">17. Datensicherheit und Aktualisierung</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">18. Datensicherheit und Aktualisierung</h2>
             <p>
               Die Website wird verschlüsselt über HTTPS übertragen. Wir setzen technische und organisatorische Schutzmaßnahmen ein, darunter Transportverschlüsselung, Sicherheitsheader, Zugriffsbeschränkungen, Eingabevalidierung und datensparsame Formulargestaltung. Wir aktualisieren diese Erklärung, wenn sich Dienste, Rechtsgrundlagen oder Verarbeitungsvorgänge ändern. Maßgeblich ist die jeweils auf dieser Seite veröffentlichte Fassung.
             </p>

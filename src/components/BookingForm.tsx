@@ -3,6 +3,7 @@
 import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 function BookingFormInner() {
   const searchParams = useSearchParams();
@@ -52,6 +53,7 @@ function BookingFormInner() {
         throw new Error("Die Anfrage konnte nicht übermittelt werden.");
       }
 
+      trackAnalyticsEvent("generate_lead", { method: "contact_form" });
       setSubmitted(true);
     } catch {
       setError("Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es später erneut oder nutzen Sie WhatsApp.");

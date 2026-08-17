@@ -15,6 +15,7 @@ Eingesetzte Dienste:
 - Cloudflare Workers und Email Sending für das Kontaktformular
 - Cloudflare Email Routing für eingehende Praxis-E-Mails
 - Cloudflare Web Analytics und Real User Measurement
+- Google Analytics 4 standardmäßig aktiv, mit jederzeitiger Opt-out-Möglichkeit
 
 Vertragsnachweis:
 
@@ -40,6 +41,9 @@ Dokumentierte Schutzmaßnahmen:
 - ausdrückliche Einwilligung für freiwillig übermittelte Gesundheitsdaten
 - Hinweis zur Datenminimierung unmittelbar am Formular
 - Cloudflare Web Analytics ohne Analyse-Cookies oder Local Storage
+- Google Consent Mode v2 mit standardmäßig gewährtem `analytics_storage`; Werbesignale bleiben bis „Alle akzeptieren“ verweigert
+- Google Signals, Werbespeicher, Anzeigenpersonalisierung und nutzerbereitgestellte Werbedaten nur nach „Alle akzeptieren“
+- Analytics-Ereignisse ohne Formularinhalte, Kontaktdaten oder ausgewählte Gesundheitsanliegen
 
 ## Regelmäßige Kontrolle
 
@@ -47,6 +51,9 @@ Mindestens jährlich sowie bei Änderungen der eingesetzten Dienste sind folgend
 
 - aktuelle Fassung des Cloudflare DPA und der Unterauftragsverarbeiter
 - Cloudflare-Einstellungen für Pages, Workers, Email Routing und Web Analytics
+- Google-Analytics-Property, Consent-Mode-Diagnose, Datenaufbewahrung und verknüpfte Produkte
+- Funktionsprüfung des Einwilligungsdialogs einschließlich Widerruf und Löschung erreichbarer GA-Cookies
+- Abgleich, dass `generate_lead` nur nach erfolgreicher Formularübermittlung und ohne Formularparameter gesendet wird
 - tatsächliche Speicherdauern und vorhandene Protokolle
 - Sicherheitsheader der veröffentlichten Website
 - Empfänger und Löschfristen von Kontaktanfragen
