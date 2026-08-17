@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { siteConfig } from "@/config/site";
 
 export default function MobileStickyCta() {
@@ -13,19 +12,13 @@ export default function MobileStickyCta() {
         >
           WhatsApp
         </a>
-        <a
-          href={siteConfig.phoneHref}
-          className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-[rgba(47,79,79,0.2)] bg-white px-3 py-2 shadow-sm"
-          aria-label="ADHS Praxis München anrufen: 089 44135911"
-        >
-          <Image src="/figma_assets/icon_22.svg" alt="" aria-hidden="true" width={18} height={18} className="brightness-0" />
-        </a>
         <Link
           href="/termin"
+          prefetch={false}
           className="flex-1 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#173838] px-3 py-2 text-center text-[13px] font-bold text-white shadow-sm transition-opacity hover:opacity-90"
           aria-label="Erstgespräch in der Praxis anfragen"
         >
-          Erstgespräch
+          Kontaktformular
         </Link>
       </div>
     </div>

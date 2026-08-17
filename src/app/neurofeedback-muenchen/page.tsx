@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import FaqAccordion from "@/components/FaqAccordion";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Neurofeedback München bei ADHS | ADHS Praxis",
@@ -67,6 +68,10 @@ const TRAININGS_ZIELE = [
 export default function NeurofeedbackPage() {
   return (
     <div className="w-full">
+      <BreadcrumbJsonLd items={[
+        { name: "Startseite", path: "" },
+        { name: "Neurofeedback München", path: "/neurofeedback-muenchen" },
+      ]} />
       {/* 1. HERO SECTION */}
       <section className="border-b border-[rgba(47,79,79,0.1)] bg-[#faf9f8] py-12 sm:py-18">
         <div className="container-shell max-w-4xl">
@@ -366,7 +371,7 @@ export default function NeurofeedbackPage() {
             <div className="space-y-3">
               <p className="eyebrow mb-1">Neurofeedback mit therapeutischer Einordnung</p>
               <h2 className="text-[24px] font-bold text-[#173838]">
-                Jean-Maurice Cecilia-Menzel
+                Jean-Maurice Cecilia-Menzel, M.Sc.
               </h2>
               <p className="text-[14px] font-semibold text-[#7a5600]">
                 Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie · Schwerpunkt ADHS bei Erwachsenen & Neurofeedback

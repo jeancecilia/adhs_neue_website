@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Über mich | Jean-Maurice Cecilia-Menzel | ADHS Praxis München",
@@ -23,30 +24,58 @@ const SCHWERPUNKTE = [
 
 const QUALIFIKATIONEN = [
   {
+    title: "Master of Science",
+    detail: "Abgeschlossenes Masterstudium mit dem akademischen Grad Master of Science (M.Sc.).",
+  },
+  {
     title: "Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie",
-    detail: "Amtliche Erlaubnis zur Ausübung der Heilkunde ohne Bestallung, beschränkt auf das Gebiet der Psychotherapie (nach dem Heilpraktikergesetz).",
+    detail: "Amtliche Erlaubnis zur Ausübung der Heilkunde ohne Bestallung, beschränkt auf das Gebiet der Psychotherapie, nach dem Heilpraktikergesetz.",
   },
   {
     title: "Spezifische Weiterbildung & Praxisfokus: ADHS im Erwachsenenalter",
-    detail: "Vertiefte klinische Fortbildungen in leitliniengerechter ADHS-Diagnostik (DIVA-5, standardisierte Skalen) und verhaltenstherapeutischer Behandlung bei Erwachsenen.",
+    detail: "Vertiefte fachliche Weiterbildung zu ADHS im Erwachsenenalter mit Schwerpunkt auf strukturierter Diagnostik, standardisierten Verfahren wie DIVA-5 und psychotherapeutischen Behandlungsansätzen.",
   },
   {
-    title: "Ausbildung im apparativen Neurofeedback / Biofeedback",
-    detail: "Fundierte apparative Ausbildung in Frequenzband- und SMR-Protokollen zur computergestützten Regulation von Gehirnaktivitätsmustern.",
+    title: "Ausbildung in Neurofeedback & Biofeedback",
+    detail: "Fundierte Ausbildung im apparativen Neurofeedback und Biofeedback, unter anderem in Frequenzband- und SMR-Protokollen zur computergestützten Selbstregulation physiologischer und neuronaler Aktivitätsmuster.",
   },
   {
-    title: "Ausbildung in Hypnosetherapie & Entspannungsverfahren",
-    detail: "Zertifizierte Fachausbildung in lösungsorientierter Hypnosetherapie und somatischen Selbstregulationstechniken.",
+    title: "Ausbildung in Hypnosetherapie & KVT",
+    detail: "Fachausbildung in lösungsorientierter Hypnosetherapie sowie in Methoden der kognitiven Verhaltenstherapie und psychotherapeutischen Selbstregulation.",
   },
   {
     title: "Mehrjährige Praxiserfahrung in München",
-    detail: "Langjährige Praxistätigkeit mit klarem Schwerpunkt auf neurodivergenten Erwachsenen, strukturierter Diagnostik und multimodaler psychotherapeutischer Begleitung.",
+    detail: "Fünf Jahre Praxiserfahrung mit besonderem Schwerpunkt auf Erwachsenen mit ADHS und anderen neurodivergenten Ausprägungen, strukturierter Diagnostik sowie multimodaler psychotherapeutischer Begleitung.",
   },
 ];
 
 export default function UeberMichPage() {
   return (
     <div className="w-full">
+      <BreadcrumbJsonLd items={[
+        { name: "Startseite", path: "" },
+        { name: "Über mich", path: "/ueber-mich" },
+      ]} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            mainEntity: {
+              "@type": "Person",
+              "@id": `${siteConfig.baseUrl}/#therapeut`,
+              name: siteConfig.practitioner,
+              url: `${siteConfig.baseUrl}/ueber-mich`,
+              image: `${siteConfig.baseUrl}/images/portrait-jean-maurice-hd.jpg`,
+              jobTitle: siteConfig.credentials[0],
+              sameAs: siteConfig.sameAs,
+              worksFor: { "@id": `${siteConfig.baseUrl}/#praxis` },
+              knowsAbout: ["ADHS im Erwachsenenalter", "Psychotherapie", "ADHS-Diagnostik", "Neurofeedback"],
+            },
+          }),
+        }}
+      />
       {/* 1. HERO HEADER */}
       <section className="border-b border-[rgba(47,79,79,0.1)] bg-[#faf9f8] py-12 sm:py-16">
         <div className="container-shell grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
@@ -58,7 +87,7 @@ export default function UeberMichPage() {
             </nav>
             <p className="eyebrow mb-2">Praxisprofil</p>
             <h1 className="text-[32px] leading-[1.15] text-[#173838] sm:text-[46px]">
-              Jean-Maurice Cecilia-Menzel
+              Jean-Maurice Cecilia-Menzel, M.Sc.
             </h1>
             <p className="mt-2 text-[16px] font-bold text-[#7a5600] sm:text-[18px]">
               Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie
@@ -105,7 +134,34 @@ export default function UeberMichPage() {
         </div>
       </section>
 
-      {/* 2. MEIN SCHWERPUNKT: ADHS IM ERWACHSENENALTER */}
+      {/* 2. QUALIFIKATION & ERFAHRUNG */}
+      <section className="section-space border-b border-[rgba(47,79,79,0.1)]">
+        <div className="container-shell max-w-4xl space-y-8">
+          <div>
+            <p className="eyebrow mb-2">Transparenz & Fachkunde</p>
+            <h2 className="text-[28px] text-[#173838] sm:text-[36px] leading-[1.2]">
+              Qualifikation und Praxiserfahrung
+            </h2>
+            <p className="mt-3 text-[16px] text-slate-700">
+              Fundierte therapeutische Ausbildung, kontinuierliche fachliche Weiterbildung und mehrjährige Praxiserfahrung in München:
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {QUALIFIKATIONEN.map((q) => (
+              <div key={q.title} className="rounded-2xl border border-slate-200 bg-white p-6 card-shadow flex items-start gap-4">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#173838] text-[12px] font-bold text-white mt-0.5">✓</span>
+                <div>
+                  <h3 className="text-[17px] font-bold text-[#173838]">{q.title}</h3>
+                  <p className="mt-1 text-[14px] leading-relaxed text-slate-600">{q.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. MEIN SCHWERPUNKT: ADHS IM ERWACHSENENALTER */}
       <section className="section-space">
         <div className="container-shell max-w-4xl space-y-6">
           <p className="eyebrow mb-1">Positionierung & Fokus</p>
@@ -126,7 +182,7 @@ export default function UeberMichPage() {
         </div>
       </section>
 
-      {/* 3. WIE ICH ARBEITE (DREI PRINZIPIEN) */}
+      {/* 4. WIE ICH ARBEITE (DREI PRINZIPIEN) */}
       <section className="section-space bg-[#faf9f8] border-y border-[rgba(47,79,79,0.1)]">
         <div className="container-shell max-w-4xl space-y-8">
           <div>
@@ -175,43 +231,6 @@ export default function UeberMichPage() {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. QUALIFIKATION & ERFAHRUNG */}
-      <section className="section-space">
-        <div className="container-shell max-w-4xl space-y-8">
-          <div>
-            <p className="eyebrow mb-2">Transparenz & Fachkunde</p>
-            <h2 className="text-[28px] text-[#173838] sm:text-[36px] leading-[1.2]">
-              Qualifikation und Praxiserfahrung
-            </h2>
-            <p className="mt-3 text-[16px] text-slate-700">
-              Fundierte therapeutische Ausbildung, kontinuierliche Weiterbildung und mehrjährige praktische Erfahrung in München:
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            {QUALIFIKATIONEN.map((q) => (
-              <div key={q.title} className="rounded-2xl border border-slate-200 bg-white p-6 card-shadow flex items-start gap-4">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#173838] text-[12px] font-bold text-white mt-0.5">✓</span>
-                <div>
-                  <h3 className="text-[17px] font-bold text-[#173838]">{q.title}</h3>
-                  <p className="mt-1 text-[14px] leading-relaxed text-slate-600">{q.detail}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Weitere akademische Qualifikationen (getrennt) */}
-          <div className="rounded-2xl border border-slate-200 bg-[#faf9f8] p-6 text-[14px] text-slate-600">
-            <h3 className="text-[15px] font-bold text-[#173838] mb-1">
-              Weitere akademische Qualifikationen
-            </h3>
-            <p>
-              Master of Arts (M.A.) Digital Business Management (SRH Fernhochschule) – <em>Diese akademische Qualifikation ist getrennt von den therapeutischen Erlaubnissen zu betrachten.</em>
-            </p>
           </div>
         </div>
       </section>

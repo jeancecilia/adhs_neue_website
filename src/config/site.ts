@@ -8,10 +8,19 @@ export const siteConfig = {
   name: "ADHS Praxis München",
   shortName: "ADHS PRAXIS MÜNCHEN",
   domain: "neurofeedback-praxis-muenchen.de",
-  baseUrl: "https://www.neurofeedback-praxis-muenchen.de",
-  phoneDisplay: "089 44135911",
-  phoneHref: "tel:+498944135911",
-  whatsappHref: "https://wa.me/498944135911",
+  baseUrl: "https://neurofeedback-praxis-muenchen.de",
+  logo: {
+    url: "/brand/logo-mark.svg",
+    width: 512,
+    height: 512,
+  },
+  sameAs: [
+    "https://www.amazon.de/Jean-Maurice-Cecilia-Menzel/e/B0B2M4LK3S",
+    "https://www.udemy.com/user/jean-maurice-cecilia-menzel-3/",
+    "https://www.youtube.com/@adhs-hilfe",
+  ],
+  whatsappDisplay: "+49 174 3243387",
+  whatsappHref: "https://wa.me/491743243387",
   email: "kontakt@neurofeedback-praxis-muenchen.de",
   emailHref: "mailto:kontakt@neurofeedback-praxis-muenchen.de",
   addressLine1: "Hildeboldstraße 1",
@@ -41,8 +50,8 @@ export const siteConfig = {
   neighborhoods: ["Schwabing", "Schwabing-West", "Maxvorstadt", "Milbertshofen", "Neuhausen", "Altstadt-Lehel"],
   openingHours: "Mo-Fr 08:00-19:00 Uhr (Sa/So nach Vereinbarung)",
   geo: {
-    latitude: 48.1585521,
-    longitude: 11.5673942,
+    latitude: 48.1662598,
+    longitude: 11.5642558,
   },
 };
 
@@ -80,7 +89,7 @@ export const processSteps = [
 export const homeContent = {
   hero: {
     eyebrow: "ADHS PRAXIS MÜNCHEN · DIAGNOSTIK · PSYCHOTHERAPIE · NEUROFEEDBACK",
-    h1: "ADHS bei Erwachsenen in München",
+    h1: "ADHS Praxis München für Erwachsene",
     subtitle: "ADHS-Diagnostik, Psychotherapie und Neurofeedback für Erwachsene.",
     description:
       "Spezialisierte Begleitung bei ADHS oder ADHS-Verdacht – von der diagnostischen Abklärung bis zur individuellen Behandlung.",
@@ -149,7 +158,7 @@ export const homeContent = {
       },
       {
         title: "Emotionale Intensität",
-        text: "Kritik oder Frustration treffen Sie härter und unmittelbarer als andere (RSD).",
+        text: "Kritik oder Frustration können besonders intensiv wirken. Der verbreitete Begriff RSD ist dabei keine eigenständige medizinische Diagnose.",
       },
       {
         title: "Beruf & Beziehungen",

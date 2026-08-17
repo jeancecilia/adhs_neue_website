@@ -18,17 +18,40 @@ function BookingFormInner() {
   const [service, setService] = useState(getInitialService);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [timeslot, setTimeslot] = useState("egal");
+  const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email || !service) {
-      alert("Bitte füllen Sie alle erforderlichen Felder aus.");
+      setError("Bitte füllen Sie alle erforderlichen Felder aus.");
       return;
     }
-    setSubmitted(true);
+
+    setSubmitting(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, service, timeslot, message, website }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Die Anfrage konnte nicht übermittelt werden.");
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es später erneut oder nutzen Sie WhatsApp.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const getServiceName = (key: string) => {
@@ -116,22 +139,6 @@ function BookingFormInner() {
         </div>
 
         <div>
-          <label htmlFor="form-phone" className="block text-[13px] font-bold uppercase tracking-wider text-[#173838] mb-1.5">
-            Telefonnummer (optional)
-          </label>
-          <input
-            type="tel"
-            id="form-phone"
-            name="phone"
-            autoComplete="tel"
-            className="w-full rounded-xl border border-slate-200 bg-[#faf9f8] px-4 py-3 text-[15px] text-slate-800 focus:border-[#173838] focus:bg-white focus:outline-none"
-            placeholder="Für eventuelle Rückfragen"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-        </div>
-
-        <div>
           <label htmlFor="form-service" className="block text-[13px] font-bold uppercase tracking-wider text-[#173838] mb-1.5">
             Worum geht es bei Ihnen? *
           </label>
@@ -168,11 +175,47 @@ function BookingFormInner() {
           </select>
         </div>
 
+        <div>
+          <label htmlFor="form-message" className="block text-[13px] font-bold uppercase tracking-wider text-[#173838] mb-1.5">
+            Kurze Nachricht (optional)
+          </label>
+          <textarea
+            id="form-message"
+            name="message"
+            rows={4}
+            maxLength={2000}
+            className="w-full resize-y rounded-xl border border-slate-200 bg-[#faf9f8] px-4 py-3 text-[15px] text-slate-800 focus:border-[#173838] focus:bg-white focus:outline-none"
+            placeholder="Was sollten wir für die Terminabstimmung wissen? Bitte keine ausführlichen Gesundheitsdaten eintragen."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+        </div>
+
+        <div className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+          <label htmlFor="form-website">Website</label>
+          <input
+            id="form-website"
+            name="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
+        </div>
+
+        {error && (
+          <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-[14px] leading-relaxed text-red-800">
+            {error}
+          </p>
+        )}
+
         <button
           type="submit"
-          className="inline-flex w-full min-h-[48px] items-center justify-center rounded-full bg-[#173838] px-8 py-3.5 text-[14px] font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[#173838] focus-visible:ring-offset-2"
+          disabled={submitting}
+          className="inline-flex w-full min-h-[48px] items-center justify-center rounded-full bg-[#173838] px-8 py-3.5 text-[14px] font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-[#173838] focus-visible:ring-offset-2 disabled:cursor-wait disabled:opacity-70"
         >
-          Termin anfragen →
+          {submitting ? "Wird sicher gesendet …" : "Termin anfragen →"}
         </button>
       </form>
     </div>

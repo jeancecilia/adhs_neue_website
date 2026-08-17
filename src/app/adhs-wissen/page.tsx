@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "ADHS-Wissen | Ratgeber für Erwachsene | ADHS Praxis München",
@@ -15,49 +16,53 @@ const ARTICLES = [
     href: "/adhs-wissen/adhs-prokrastination",
     category: "Alltag & Handeln",
     title: "ADHS und Prokrastination",
-    description: "Warum Aufschieben kein Mangel an Disziplin ist, sondern eine Dopamin-Blockade des Gehirns – und wie Sie die Lähmung überwinden.",
-    readTime: "4 Min. Lesezeit",
+    description: "Warum Aufschieben kein Mangel an Disziplin ist und wie exekutive Funktionen, Motivation und Belohnungsverarbeitung den Aufgabenstart beeinflussen.",
+    readTime: "12 Min. Lesezeit",
   },
   {
     href: "/adhs-wissen/adhs-emotionale-dysregulation",
     category: "Gefühle & Reizfilter",
     title: "ADHS & emotionale Dysregulation",
-    description: "Rejection Sensitivity (RSD), schnelle Wutausbrüche und plötzliche Überwältigung: Wie Sie emotionale Stabilität aufbauen.",
-    readTime: "5 Min. Lesezeit",
+    description: "Starke Kränkbarkeit, schnelle Wutausbrüche und plötzliche Überwältigung: Wie Sie emotionale Stabilität aufbauen. RSD ist keine eigenständige Diagnose.",
+    readTime: "11 Min. Lesezeit",
   },
   {
     href: "/adhs-wissen/adhs-im-beruf",
     category: "Arbeitswelt & Karriere",
     title: "ADHS im Beruf & Karriere",
     description: "Stärken wie Hyperfokus und Kreativität nutzen, während administrative Hürden, Deadlines und Meeting-Überlastung reduziert werden.",
-    readTime: "4 Min. Lesezeit",
+    readTime: "9 Min. Lesezeit",
   },
   {
     href: "/adhs-wissen/adhs-und-beziehungen",
     category: "Partnerschaft & Soziales",
     title: "ADHS und Beziehungen",
     description: "Missverständnisse, Vergesslichkeit und emotionale Distanz in der Partnerschaft: Wie Paare neurodivergente Dynamiken meistern.",
-    readTime: "5 Min. Lesezeit",
+    readTime: "17 Min. Lesezeit",
   },
   {
     href: "/adhs-wissen/adhs-und-schlaf",
     category: "Körper & Erholung",
     title: "ADHS und Schlafstörungen",
-    description: "Das abendliche Gedankenkarussell und die verzögerte Melatonin-Ausschüttung: Strategien für erholsamen Schlaf bei ADHS.",
-    readTime: "4 Min. Lesezeit",
+    description: "Das abendliche Gedankenkarussell und mögliche Verschiebungen des Schlaf-Wach-Rhythmus: Strategien für erholsamen Schlaf bei ADHS.",
+    readTime: "12 Min. Lesezeit",
   },
   {
     href: "/adhs-wissen/adhs-bei-frauen",
     category: "Spätdiagnose & Masking",
     title: "ADHS bei Frauen",
-    description: "Warum Mädchen und Frauen jahrzehntelang übersehen werden, die Rolle von Hormonschwankungen und der Preis von ständiger Anpassung.",
-    readTime: "5 Min. Lesezeit",
+    description: "Warum ADHS bei Mädchen und Frauen oft später erkannt wird, wie Masking die Diagnostik erschwert und welchen Preis ständige Anpassung haben kann.",
+    readTime: "6 Min. Lesezeit",
   },
 ];
 
 export default function AdhsWissenPage() {
   return (
     <div className="w-full">
+      <BreadcrumbJsonLd items={[
+        { name: "Startseite", path: "" },
+        { name: "ADHS-Wissen", path: "/adhs-wissen" },
+      ]} />
       <section className="border-b border-[rgba(47,79,79,0.1)] bg-[#faf9f8] py-12 sm:py-16 text-center">
         <div className="container-shell max-w-3xl">
           <nav className="mb-6 inline-flex items-center gap-2 text-[13px] text-slate-500" aria-label="Breadcrumb">

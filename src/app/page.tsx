@@ -5,7 +5,7 @@ import { siteConfig, trustPoints, processSteps, homeContent } from "@/config/sit
 import FaqAccordion from "@/components/FaqAccordion";
 
 export const metadata: Metadata = {
-  title: "ADHS bei Erwachsenen in München | ADHS Praxis München",
+  title: "ADHS Praxis München | Diagnostik, Therapie & Neurofeedback",
   description:
     "ADHS-Diagnostik, Psychotherapie und Neurofeedback für Erwachsene in München-Schwabing. Spezialisierte Privatpraxis für ADHS im Erwachsenenalter. Jetzt Erstgespräch anfragen.",
   alternates: {
@@ -63,8 +63,8 @@ export default function HomePage() {
     <div className="w-full">
       {/* 1. HERO SECTION */}
       <section className="overflow-hidden pb-12 pt-4 sm:pb-16 sm:pt-8">
-        <div className="container-shell grid items-center gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
-          <div className="max-w-2xl">
+        <div className="container-shell grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:gap-x-14 lg:gap-y-0">
+          <div className="max-w-2xl lg:col-start-1 lg:row-start-1 lg:self-end">
             <p className="eyebrow mb-3">{homeContent.hero.eyebrow}</p>
             <h1 className="max-w-xl text-[32px] leading-[1.1] tracking-[-0.02em] text-[#173838] sm:text-[46px] md:text-[50px] sm:leading-[1.05]">
               {homeContent.hero.h1}
@@ -75,6 +75,39 @@ export default function HomePage() {
             <p className="mt-4 max-w-xl text-[16px] leading-[1.65] text-slate-700 sm:text-[18px]">
               {homeContent.hero.description}
             </p>
+          </div>
+
+          <div className="relative lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center">
+            <div className="overflow-hidden rounded-2xl bg-white p-2 card-shadow">
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet="/images/portrait-jean-maurice-menzel-400.webp 400w, /images/portrait-jean-maurice-menzel-640.webp 640w, /images/portrait-jean-maurice-menzel.webp 800w"
+                  sizes="(max-width: 639px) calc(100vw - 56px), (max-width: 1023px) calc(100vw - 80px), 49vw"
+                />
+                <img
+                  src="/images/portrait-jean-maurice-menzel.webp"
+                  alt={homeContent.hero.imageAlt}
+                  width={800}
+                  height={999}
+                  fetchPriority="high"
+                  decoding="async"
+                  className="aspect-[4/5] w-full rounded-xl object-cover object-top"
+                />
+              </picture>
+            </div>
+            <div className="mt-4 rounded-2xl bg-white px-5 py-4 card-shadow sm:absolute sm:-bottom-5 sm:left-6 sm:mt-0">
+              <div className="flex items-center gap-3">
+                <Image src="/figma_assets/icon_1.svg" alt="" aria-hidden="true" width={22} height={28} />
+                <div>
+                  <p className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">{homeContent.hero.locationLabel}</p>
+                  <p className="mt-0.5 text-[15px] font-bold text-[#173838]">{homeContent.hero.locationName}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-2xl lg:col-start-1 lg:row-start-2 lg:self-start">
 
             {/* Vorteile */}
             <ul className="mt-6 space-y-3 text-[15px] leading-6 text-[#173838]">
@@ -89,12 +122,14 @@ export default function HomePage() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
               <Link
                 href="/adhs-test-muenchen"
+                prefetch={false}
                 className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#173838] px-8 py-3.5 text-[15px] font-semibold text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5"
               >
                 {homeContent.hero.ctaPrimary}
               </Link>
               <Link
                 href="/termin"
+                prefetch={false}
                 className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-[rgba(47,79,79,0.2)] bg-white px-8 py-3.5 text-[15px] font-semibold text-[#173838] transition-colors hover:bg-slate-50"
               >
                 {homeContent.hero.ctaSecondary}
@@ -103,28 +138,6 @@ export default function HomePage() {
             <p className="mt-3 text-[13px] text-slate-500">
               Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie · Praxis in München-Schwabing
             </p>
-          </div>
-
-          <div className="relative">
-            <div className="overflow-hidden rounded-2xl bg-white p-2 card-shadow">
-              <Image
-                src="/images/portrait-jean-maurice-menzel.webp"
-                alt={homeContent.hero.imageAlt}
-                width={1200}
-                height={1500}
-                priority
-                className="aspect-[4/5] w-full rounded-xl object-cover object-top"
-              />
-            </div>
-            <div className="mt-4 rounded-2xl bg-white px-5 py-4 card-shadow sm:absolute sm:-bottom-5 sm:left-6 sm:mt-0">
-              <div className="flex items-center gap-3">
-                <Image src="/figma_assets/icon_1.svg" alt="" aria-hidden="true" width={22} height={28} />
-                <div>
-                  <p className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">{homeContent.hero.locationLabel}</p>
-                  <p className="mt-0.5 text-[15px] font-bold text-[#173838]">{homeContent.hero.locationName}</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -359,7 +372,7 @@ export default function HomePage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((step) => (
               <div key={step.step} className="rounded-2xl border border-slate-200 bg-white p-6 card-shadow">
-                <span className="text-[28px] font-black text-[#f0cc65]">{step.step}</span>
+                <span className="text-[28px] font-black text-[#9a6900]">{step.step}</span>
                 <h3 className="mt-2 text-[17px] font-bold text-[#173838]">{step.title}</h3>
                 <p className="mt-2 text-[14px] leading-relaxed text-slate-600">{step.blurb}</p>
               </div>
@@ -387,7 +400,6 @@ export default function HomePage() {
                 alt="Jean-Maurice Cecilia-Menzel – Praxisleitung"
                 width={720}
                 height={900}
-                loading="eager"
                 className="aspect-[4/5] w-full rounded-xl object-cover object-top"
               />
               <div className="absolute bottom-4 left-4 right-4 rounded-xl bg-white/95 px-4 py-2.5 backdrop-blur-sm card-shadow text-[13px] font-bold text-[#173838]">
@@ -397,7 +409,7 @@ export default function HomePage() {
             <div>
               <p className="eyebrow mb-2">Praxisleitung & Qualifikation</p>
               <h2 className="text-[28px] text-[#173838] sm:text-[36px]">
-                {siteConfig.practitioner}
+                {siteConfig.practitioner}, M.Sc.
               </h2>
               <p className="text-[14px] font-semibold text-[#7a5600] mb-4">
                 Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie

@@ -1,10 +1,19 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import Link from "next/link";
 import type { Metadata } from "next";
+import ArticleTrust from "@/components/ArticleTrust";
+import MarkdownArticle from "@/components/MarkdownArticle";
+
+const articleSource = readFileSync(
+  join(process.cwd(), "src/content/adhs-bei-frauen.md"),
+  "utf8",
+);
 
 export const metadata: Metadata = {
-  title: "ADHS bei Frauen: Spätdiagnose, Masking & hormonelle Einflüsse",
+  title: "ADHS bei Frauen: Spätdiagnose und Masking",
   description:
-    "Warum ADHS bei Frauen oft erst spät erkannt wird: Internalisierte Symptome, Erschöpfung durch ständiges Masking und der Einfluss von Östrogen.",
+    "Warum ADHS bei Frauen häufig spät erkannt wird, wie Masking und Kompensation die Diagnostik erschweren und welche Hinweise für eine Abklärung sprechen.",
   alternates: {
     canonical: "/adhs-wissen/adhs-bei-frauen",
   },
@@ -20,54 +29,53 @@ export default function AdhsBeiFrauenPage() {
             <span>/</span>
             <Link href="/adhs-wissen" className="inline-flex min-h-[44px] items-center hover:text-[#173838]">ADHS-Wissen</Link>
             <span>/</span>
-            <span className="text-[#173838] font-medium">ADHS bei Frauen</span>
+            <span className="font-medium text-[#173838]">ADHS bei Frauen</span>
           </nav>
-          <div className="flex items-center gap-3 mb-3">
-            <p className="eyebrow">Spätdiagnose & Masking</p>
-            <span className="text-[12px] text-slate-500">• 5 Min. Lesezeit</span>
+          <div className="mb-3 flex items-center gap-3">
+            <p className="eyebrow">Spätdiagnose &amp; Masking</p>
+            <span className="text-[12px] text-slate-500">• ca. 6 Min. Lesezeit</span>
           </div>
           <h1 className="text-[32px] leading-[1.15] text-[#173838] sm:text-[46px]">
-            ADHS bei Frauen: Der hohe Preis ständiger Anpassung (Masking)
+            Spätdiagnose &amp; Masking: Warum ADHS bei Frauen so lange unsichtbar bleiben kann
           </h1>
           <p className="mt-4 text-[17px] leading-[1.65] text-slate-700">
-            Frauen mit ADHS werden im Schnitt 5 bis 10 Jahre später diagnostiziert als Männer – oft erst nach Fehldiagnosen wie Depression oder Angststörung.
+            Unauffällige Symptome, Perfektionismus und aufwendige Kompensationsstrategien können dazu beitragen, dass ADHS bei Frauen lange nicht erkannt wird.
           </p>
         </div>
       </section>
 
       <section className="section-space">
-        <div className="container-shell max-w-4xl space-y-8 text-[16px] leading-[1.7] text-slate-700">
-          {/* Summary Box */}
-          <div className="rounded-2xl bg-[#faf9f8] p-6 border border-slate-200">
-            <p className="text-[12px] font-bold uppercase tracking-wider text-[#7a5600] mb-2">Inhalt auf einen Blick</p>
-            <ul className="space-y-1.5 text-[14px] text-slate-700">
-              <li>• Warum unaufmerksame Symptome (ADS) bei Mädchen oft übersehen werden</li>
-              <li>• Das Phänomen des „Masking“ und der drohende Erschöpfungszustand</li>
-              <li>• Wechselwirkung mit Hormonen: Östrogenabfall und ADHS-Symptome</li>
-            </ul>
+        <div className="container-shell max-w-4xl text-[16px] leading-[1.7] text-slate-700">
+          <ArticleTrust
+            title="Spätdiagnose und Masking: ADHS bei Frauen"
+            path="/adhs-wissen/adhs-bei-frauen"
+            sources={[
+              {
+                label: "Expert:innenkonsens zu ADHS bei Frauen (PubMed)",
+                href: "https://pubmed.ncbi.nlm.nih.gov/32787804/",
+              },
+              {
+                label: "S3-Leitlinie ADHS (AWMF)",
+                href: "https://register.awmf.org/assets/guidelines/028-045l_S3_KF_Aufmerksamkeitsdefizit-Hyperaktivitaetsstoerung-ADHS-Kinder-Jugendliche-Erwachsene_205-05.pdf",
+              },
+            ]}
+          />
+
+          <div className="mt-10">
+            <MarkdownArticle source={articleSource} />
           </div>
 
-          <div>
-            <h2 className="text-[28px] text-[#173838] sm:text-[36px]">
-              Internalisierte Symptome statt äußerer Unruhe
-            </h2>
-            <p className="mt-3">
-              Während Jungen in der Kindheit häufiger durch körperliche Hyperaktivität auffallen, äußert sich ADHS bei Mädchen oft nach innen gerichtet: Tagträumerei, soziale Ängste, Perfektionismus und extremes Verantwortungsgefühl.
+          <div className="mt-12 rounded-2xl border-2 border-[#173838] bg-[#fdfbf7] p-8 card-shadow">
+            <h2 className="text-[22px] font-bold text-[#173838]">Diagnostische Orientierung</h2>
+            <p className="mb-6 mt-2 text-[15px] text-slate-600">
+              Ein Screening kann erste Hinweise geben, ersetzt aber keine fachkundige Diagnostik. Bei anhaltendem Leidensdruck oder deutlichen Einschränkungen kann eine strukturierte ADHS-Abklärung sinnvoll sein.
             </p>
-          </div>
-
-          {/* Conversion Box */}
-          <div className="rounded-2xl bg-[#fdfbf7] p-8 border-2 border-[#173838] card-shadow">
-            <h2 className="text-[22px] font-bold text-[#173838] mb-2">Diagnostische Orientierung & Erleichterung</h2>
-            <p className="text-[15px] text-slate-600 mb-6">
-              Eine späte Diagnose bringt oft tiefgreifende Erleichterung. Nutzen Sie unser kostenloses Screening oder sprechen Sie persönlich mit uns in München.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/adhs-test-muenchen"
                 className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#173838] px-7 py-3 text-[12px] font-bold uppercase tracking-[0.08em] text-white shadow hover:opacity-95"
               >
-                Zum ADHS-Orientierungstest
+                ADHS-Diagnostik kennenlernen
               </Link>
               <Link
                 href="/termin?anliegen=screening"
@@ -78,13 +86,12 @@ export default function AdhsBeiFrauenPage() {
             </div>
           </div>
 
-          {/* Next Article */}
-          <div className="flex items-center justify-between border-t border-slate-200 pt-6">
+          <div className="mt-10 flex flex-col justify-between gap-3 border-t border-slate-200 pt-6 sm:flex-row sm:items-center">
             <Link href="/adhs-wissen/adhs-und-schlaf" className="inline-flex min-h-[44px] items-center text-[13px] font-bold text-slate-600 hover:text-[#173838]">
-              ← Vorheriger Artikel: ADHS & Schlaf
+              ← Vorheriger Artikel: ADHS &amp; Schlaf
             </Link>
             <Link href="/adhs-wissen/adhs-prokrastination" className="inline-flex min-h-[44px] items-center text-[13px] font-bold text-[#7a5600] hover:underline">
-              Erster Artikel: ADHS & Prokrastination →
+              Erster Artikel: ADHS &amp; Prokrastination →
             </Link>
           </div>
         </div>

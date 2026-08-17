@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import FaqAccordion from "@/components/FaqAccordion";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "ADHS-Diagnostik München für Erwachsene | ADHS Praxis",
@@ -68,6 +69,10 @@ const DIAGNOSTIK_FAQS = [
 export default function AdhsTestPage() {
   return (
     <div className="w-full">
+      <BreadcrumbJsonLd items={[
+        { name: "Startseite", path: "" },
+        { name: "ADHS-Diagnostik", path: "/adhs-test-muenchen" },
+      ]} />
       {/* 1. HERO SECTION */}
       <section className="border-b border-[rgba(47,79,79,0.1)] bg-[#faf9f8] py-12 sm:py-18">
         <div className="container-shell max-w-4xl">
@@ -574,7 +579,7 @@ export default function AdhsTestPage() {
             />
             <div>
               <p className="eyebrow mb-1">Ihr Diagnostiker & Therapeut in München</p>
-              <h3 className="text-[24px] font-bold text-[#173838]">Jean-Maurice Cecilia-Menzel</h3>
+              <h3 className="text-[24px] font-bold text-[#173838]">Jean-Maurice Cecilia-Menzel, M.Sc.</h3>
               <p className="text-[14px] font-semibold text-[#7a5600] mb-3">
                 Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie
               </p>
