@@ -7,7 +7,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 export const metadata: Metadata = {
   title: "ADHS Praxis München | Diagnostik, Therapie & Neurofeedback",
   description:
-    "ADHS-Diagnostik, Psychotherapie und Neurofeedback für Erwachsene in München-Schwabing. Spezialisierte Privatpraxis für ADHS im Erwachsenenalter. Jetzt Erstgespräch anfragen.",
+    "Psychotherapie in München-Schwabing mit Schwerpunkt ADHS im Erwachsenenalter. Diagnostik, Neurofeedback sowie Hilfe bei Angst, Panik, Phobien und depressiven Beschwerden.",
   alternates: {
     canonical: "/",
   },
@@ -17,7 +17,7 @@ const HOMEPAGE_FAQS = [
   {
     question: "Wer diagnostiziert und behandelt ADHS bei Erwachsenen in Ihrer Praxis?",
     answer:
-      "Die Diagnostik und psychotherapeutische Begleitung wird von Jean-Maurice Cecilia-Menzel, Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie, mit fachlicher Spezialisierung auf ADHS im Erwachsenenalter durchgeführt.",
+      "Die Diagnostik und psychotherapeutische Begleitung wird von Jean-Maurice Cecilia-Menzel, Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie, mit fachlichem Schwerpunkt ADHS im Erwachsenenalter durchgeführt.",
   },
   {
     question: "Brauche ich bereits eine offizielle ADHS-Diagnose für eine Psychotherapie?",
@@ -56,6 +56,29 @@ const THERAPIE_THEMEN_HOMEPAGE = [
   "Herausforderungen im Beruf, Studium und Karriere",
   "Partnerschaft, Ehe und soziale Beziehungen",
   "Umgang mit einer späten ADHS-Diagnose",
+];
+
+const WEITERE_SCHWERPUNKTE = [
+  {
+    title: "Soziale Angst",
+    text: "Bewertungsangst, Vermeidung, Sicherheitsverhalten und belastendes Grübeln nach sozialen Situationen gezielt bearbeiten.",
+    href: "/soziale-angst-muenchen",
+  },
+  {
+    title: "Panikattacken",
+    text: "Die Angst vor der Angst verstehen, körperliche Signale neu einordnen und vermiedene Situationen zurückgewinnen.",
+    href: "/panikattacken-muenchen",
+  },
+  {
+    title: "Spezifische Phobien",
+    text: "Klar umschriebene Ängste mit individuell geplanter kognitiver Verhaltenstherapie und Exposition behandeln.",
+    href: "/spezifische-phobien-muenchen",
+  },
+  {
+    title: "Depressive Verstimmung",
+    text: "Bei Antriebsmangel, Rückzug, Grübeln und Selbstabwertung wieder Struktur und Handlungsspielraum entwickeln.",
+    href: "/depressive-verstimmung-muenchen",
+  },
 ];
 
 export default function HomePage() {
@@ -314,7 +337,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. NEUROFEEDBACK BEI ADHS (TEASER ~160 WÖRTER) */}
+      {/* 7. WEITERE PSYCHOTHERAPEUTISCHE SCHWERPUNKTE */}
+      <section className="section-space">
+        <div className="container-shell max-w-5xl">
+          <div className="mx-auto mb-10 max-w-3xl text-center">
+            <p className="eyebrow mb-3">Über ADHS hinaus</p>
+            <h2 className="text-[28px] leading-[1.2] text-[#173838] sm:text-[38px]">
+              Weitere psychotherapeutische Schwerpunkte
+            </h2>
+            <p className="mt-4 text-[16px] leading-[1.7] text-slate-700">
+              ADHS im Erwachsenenalter bleibt der klare Schwerpunkt der Praxis. Zusätzlich bieten wir strukturierte psychotherapeutische Begleitung bei ausgewählten Angststörungen und depressiven Beschwerden.
+            </p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {WEITERE_SCHWERPUNKTE.map((item) => (
+              <Link key={item.href} href={item.href} className="group rounded-2xl border border-slate-200 bg-white p-6 card-shadow card-shadow-hover">
+                <h3 className="text-[20px] font-bold text-[#173838]">{item.title}</h3>
+                <p className="mt-2 text-[14px] leading-relaxed text-slate-600">{item.text}</p>
+                <span className="mt-4 inline-flex min-h-[44px] items-center text-[14px] font-bold text-[#7a5600] group-hover:underline">Mehr erfahren →</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. NEUROFEEDBACK BEI ADHS (TEASER ~160 WÖRTER) */}
       <section className="section-space">
         <div className="container-shell max-w-4xl space-y-6">
           <p className="eyebrow mb-1">Ergänzendes Verfahren</p>
@@ -340,17 +387,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. SPEZIALISIERUNG AUF ADHS BEI ERWACHSENEN */}
+      {/* 9. SCHWERPUNKT ADHS BEI ERWACHSENEN */}
       <section className="section-space bg-[#faf9f8] border-y border-[rgba(47,79,79,0.1)]">
         <div className="container-shell max-w-4xl text-center">
           <span className="inline-block rounded-full bg-[#f0cc65]/30 px-4 py-1 text-[12px] font-bold uppercase tracking-wider text-[#7a5600] mb-3">
             Klarer Praxis-Fokus
           </span>
           <h2 className="text-[28px] text-[#173838] sm:text-[40px] leading-[1.15]">
-            Spezialisiert auf ADHS bei Erwachsenen
+            Schwerpunkt ADHS im Erwachsenenalter
           </h2>
           <p className="mt-5 text-[17px] leading-[1.7] text-slate-700 max-w-3xl mx-auto">
-            Unsere Praxis konzentriert sich bewusst auf Erwachsene mit bestehender ADHS-Diagnose oder dem Verdacht auf ADHS. Dadurch erhalten Sie keine pauschalen Standardratschläge, sondern tiefgreifende Fachexpertise für die neurodivergenten Herausforderungen des Erwachsenenlebens.
+            Unsere Praxis konzentriert sich fachlich besonders auf Erwachsene mit bestehender ADHS-Diagnose oder dem Verdacht auf ADHS. Ergänzend behandeln wir soziale Angst, Panikattacken, spezifische Phobien und depressive Beschwerden mit verhaltenstherapeutisch orientierten Verfahren.
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 border border-slate-200 card-shadow text-[15px] font-bold text-[#173838]">
             <span>🎯</span>

@@ -1,8 +1,8 @@
 # ADHS Praxis München
 
-> Die ADHS Praxis München von Jean-Maurice Cecilia-Menzel ist auf ADHS-Diagnostik, Psychotherapie und Neurofeedback für Erwachsene spezialisiert. Praxisstandort ist München-Schwabing.
+> Die ADHS Praxis München von Jean-Maurice Cecilia-Menzel ist eine Praxis für Psychotherapie mit Schwerpunkt ADHS im Erwachsenenalter. Praxisstandort ist München-Schwabing.
 
-Die Praxis begleitet Erwachsene bei bestehender ADHS-Diagnose oder einem begründeten ADHS-Verdacht. Das Angebot umfasst strukturierte Diagnostik, psychotherapeutische Begleitung, alltagsnahe Strategien und ergänzendes Neurofeedback. Es werden keine Heilversprechen gegeben. Ob ein Angebot im individuellen Fall geeignet ist, wird im Erstkontakt geklärt.
+Die Praxis begleitet Erwachsene bei bestehender ADHS-Diagnose oder einem begründeten ADHS-Verdacht sowie bei ausgewählten Angststörungen und depressiven Beschwerden. Das Angebot umfasst strukturierte ADHS-Diagnostik, psychotherapeutische Begleitung, alltagsnahe Strategien und ergänzendes Neurofeedback. Es werden keine Heilversprechen gegeben. Ob ein Angebot im individuellen Fall geeignet ist, wird im Erstkontakt geklärt.
 
 ## Offizielle Website
 
@@ -18,6 +18,10 @@ Die Praxis begleitet Erwachsene bei bestehender ADHS-Diagnose oder einem begrün
 
 - ADHS-Diagnostik für Erwachsene: https://neurofeedback-praxis-muenchen.de/adhs-test-muenchen
 - Psychotherapeutische Begleitung bei ADHS: https://neurofeedback-praxis-muenchen.de/adhs-therapie-muenchen
+- Psychotherapie bei sozialer Angst und sozialer Phobie: https://neurofeedback-praxis-muenchen.de/soziale-angst-muenchen
+- Psychotherapie bei Panikattacken und Panikstörung: https://neurofeedback-praxis-muenchen.de/panikattacken-muenchen
+- Psychotherapie bei spezifischen Phobien: https://neurofeedback-praxis-muenchen.de/spezifische-phobien-muenchen
+- Psychotherapie bei depressiver Verstimmung: https://neurofeedback-praxis-muenchen.de/depressive-verstimmung-muenchen
 - Neurofeedback für Erwachsene: https://neurofeedback-praxis-muenchen.de/neurofeedback-muenchen
 - Informationen zu ADHS im Erwachsenenalter: https://neurofeedback-praxis-muenchen.de/adhs-erwachsene-muenchen
 

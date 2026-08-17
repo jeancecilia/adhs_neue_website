@@ -584,7 +584,7 @@ export default function AdhsTestPage() {
                 Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie
               </p>
               <p className="text-[14px] leading-relaxed text-slate-700 mb-4">
-                Spezialisiert auf die strukturierte Diagnostik und psychotherapeutische Behandlung von ADHS im Erwachsenenalter. In unserer Schwabinger Praxis verbinden wir fundierte leitlinienbasierte Testinstrumente (DIVA-5) mit einer empathischen und entlastenden Atmosphäre.
+                Fachlicher Schwerpunkt sind die strukturierte Diagnostik und psychotherapeutische Behandlung von ADHS im Erwachsenenalter. In unserer Schwabinger Praxis verbinden wir fundierte leitlinienbasierte Testinstrumente (DIVA-5) mit einer empathischen und entlastenden Atmosphäre.
               </p>
               <Link
                 href="/ueber-mich"

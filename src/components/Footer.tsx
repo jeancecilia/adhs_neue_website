@@ -23,7 +23,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="mt-3 max-w-xs text-[14px] font-normal leading-[1.65] text-slate-200">
-              Praxis für Psychotherapie bei ADHS im Erwachsenenalter in München-Schwabing.
+              Praxis für Psychotherapie mit Schwerpunkt ADHS im Erwachsenenalter in München-Schwabing.
             </p>
             <p className="mt-2 text-[13px] text-slate-300">
               {siteConfig.practitioner}<br />
@@ -31,20 +31,44 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Navigation */}
+          {/* Psychotherapie */}
           <div>
             <p className="text-[13px] font-bold uppercase tracking-[0.08em] text-white">
-              Navigation
+              Psychotherapie
             </p>
             <nav className="mt-3 flex flex-col text-[14px] font-normal text-slate-200" aria-label="Footer Navigation">
               <Link href="/adhs-therapie-muenchen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
                 ADHS-Therapie
               </Link>
+              <Link href="/soziale-angst-muenchen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
+                Soziale Angst
+              </Link>
+              <Link href="/panikattacken-muenchen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
+                Panikattacken
+              </Link>
+              <Link href="/spezifische-phobien-muenchen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
+                Spezifische Phobien
+              </Link>
+              <Link href="/depressive-verstimmung-muenchen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
+                Depressive Verstimmung
+              </Link>
+            </nav>
+          </div>
+
+          {/* Weitere Bereiche */}
+          <div>
+            <p className="text-[13px] font-bold uppercase tracking-[0.08em] text-white">
+              Weitere Bereiche
+            </p>
+            <nav className="mt-3 flex flex-col text-[14px] font-normal text-slate-200" aria-label="Weitere Bereiche">
               <Link href="/adhs-test-muenchen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
                 ADHS-Diagnostik
               </Link>
               <Link href="/neurofeedback-muenchen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
                 Neurofeedback
+              </Link>
+              <Link href="/adhs-wissen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
+                ADHS-Wissen
               </Link>
               <Link href="/ueber-mich" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
                 Über mich
@@ -57,36 +81,6 @@ export default function Footer() {
               </Link>
               <Link href="/termin" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
                 Termin anfragen
-              </Link>
-            </nav>
-          </div>
-
-          {/* Schwerpunkte & Wissen */}
-          <div>
-            <p className="text-[13px] font-bold uppercase tracking-[0.08em] text-white">
-              ADHS-Wissen
-            </p>
-            <nav className="mt-3 flex flex-col text-[14px] font-normal text-slate-200" aria-label="Footer Ratgeber">
-              <Link href="/adhs-erwachsene-muenchen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
-                ADHS bei Erwachsenen
-              </Link>
-              <Link href="/adhs-wissen/adhs-prokrastination" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
-                ADHS & Prokrastination
-              </Link>
-              <Link href="/adhs-wissen/adhs-emotionale-dysregulation" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
-                Emotionale Dysregulation (RSD)
-              </Link>
-              <Link href="/adhs-wissen/adhs-im-beruf" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
-                ADHS im Beruf
-              </Link>
-              <Link href="/adhs-wissen/adhs-und-beziehungen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
-                ADHS & Beziehungen
-              </Link>
-              <Link href="/adhs-wissen/adhs-und-schlaf" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
-                ADHS & Schlaf
-              </Link>
-              <Link href="/adhs-wissen/adhs-bei-frauen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
-                ADHS bei Frauen
               </Link>
             </nav>
           </div>

@@ -7,7 +7,7 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 export const metadata: Metadata = {
   title: "Über mich | Jean-Maurice Cecilia-Menzel | ADHS Praxis München",
   description:
-    "Erfahren Sie mehr über Jean-Maurice Cecilia-Menzel, Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie mit Spezialisierung auf ADHS im Erwachsenenalter in München-Schwabing.",
+    "Erfahren Sie mehr über Jean-Maurice Cecilia-Menzel, M.Sc., Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie mit Schwerpunkt ADHS im Erwachsenenalter in München-Schwabing.",
   alternates: {
     canonical: "/ueber-mich",
   },
@@ -93,7 +93,7 @@ export default function UeberMichPage() {
               Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie
             </p>
             <p className="text-[14px] font-semibold text-[#173838] mb-4">
-              Spezialisierung auf ADHS im Erwachsenenalter · München-Schwabing
+              Schwerpunkt ADHS im Erwachsenenalter · München-Schwabing
             </p>
             <div className="space-y-3 text-[16px] leading-[1.7] text-slate-700">
               <p>

@@ -6,8 +6,8 @@ import MobileStickyCta from '@/components/MobileStickyCta';
 import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: 'ADHS Praxis München | Diagnostik, Therapie & Neurofeedback',
-  description: 'Diagnostische Orientierung, Psychotherapie und Neurofeedback bei ADHS im Erwachsenenalter in München-Schwabing. Praxis nach HeilprG.',
+  title: 'ADHS Praxis München | Psychotherapie & Diagnostik',
+  description: 'Psychotherapie in München-Schwabing mit Schwerpunkt ADHS im Erwachsenenalter sowie Behandlung von Angst, Panik, Phobien und depressiven Beschwerden.',
   metadataBase: new URL('https://neurofeedback-praxis-muenchen.de'),
   alternates: {
     canonical: '/',
@@ -52,7 +52,7 @@ export default function RootLayout({
                   "@type": "MedicalBusiness",
                   "@id": "https://neurofeedback-praxis-muenchen.de/#praxis",
                   "name": "ADHS Praxis München - Jean-Maurice Cecilia-Menzel",
-                  "alternateName": "Praxis für Psychotherapie bei ADHS im Erwachsenenalter",
+                  "alternateName": "Praxis für Psychotherapie mit Schwerpunkt ADHS im Erwachsenenalter",
                   "url": "https://neurofeedback-praxis-muenchen.de/",
                   "email": "kontakt@neurofeedback-praxis-muenchen.de",
                   "image": "https://neurofeedback-praxis-muenchen.de/images/portrait-jean-maurice-hd.jpg",
@@ -89,6 +89,22 @@ export default function RootLayout({
                     {
                       "@type": "MedicalTherapy",
                       "name": "Neurofeedback bei ADHS"
+                    },
+                    {
+                      "@type": "MedicalTherapy",
+                      "name": "Psychotherapie bei sozialer Angst und sozialer Phobie"
+                    },
+                    {
+                      "@type": "MedicalTherapy",
+                      "name": "Psychotherapie bei Panikattacken und Panikstörung"
+                    },
+                    {
+                      "@type": "MedicalTherapy",
+                      "name": "Psychotherapie bei spezifischen Phobien"
+                    },
+                    {
+                      "@type": "MedicalTherapy",
+                      "name": "Psychotherapie bei depressiver Verstimmung"
                     }
                   ]
                 },

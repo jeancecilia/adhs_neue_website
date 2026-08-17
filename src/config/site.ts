@@ -46,7 +46,7 @@ export const siteConfig = {
     scope: "Deutschland / EU",
   },
   description:
-    "ADHS-Diagnostik, Psychotherapie und Neurofeedback für Erwachsene in München. Schwerpunkt ADHS im Erwachsenenalter. Erstgespräch anfragen.",
+    "Psychotherapie, ADHS-Diagnostik und Neurofeedback für Erwachsene in München. Schwerpunkt ADHS sowie ausgewählte Angststörungen und depressive Beschwerden.",
   neighborhoods: ["Schwabing", "Schwabing-West", "Maxvorstadt", "Milbertshofen", "Neuhausen", "Altstadt-Lehel"],
   openingHours: "Mo-Fr 08:00-19:00 Uhr (Sa/So nach Vereinbarung)",
   geo: {
@@ -56,7 +56,7 @@ export const siteConfig = {
 };
 
 export const trustPoints = [
-  "Spezialisierung auf Erwachsene mit ADHS",
+  "Schwerpunkt ADHS im Erwachsenenalter",
   "Strukturierte ADHS-Diagnostik",
   "Wissenschaftlich fundierte Psychotherapie",
   "Ergänzendes Neurofeedback-Training",
@@ -92,7 +92,7 @@ export const homeContent = {
     h1: "ADHS Praxis München für Erwachsene",
     subtitle: "ADHS-Diagnostik, Psychotherapie und Neurofeedback für Erwachsene.",
     description:
-      "Spezialisierte Begleitung bei ADHS oder ADHS-Verdacht – von der diagnostischen Abklärung bis zur individuellen Behandlung.",
+      "Psychotherapeutische Begleitung mit Schwerpunkt ADHS – von der diagnostischen Abklärung bis zur individuellen Behandlung.",
     bulletPoints: [
       "Strukturierte ADHS-Diagnostik bei Verdacht",
       "Psychotherapie & Alltagsstrategien für Erwachsene",

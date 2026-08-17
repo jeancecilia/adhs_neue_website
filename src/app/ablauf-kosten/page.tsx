@@ -4,9 +4,9 @@ import FaqAccordion from "@/components/FaqAccordion";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
-  title: "Kosten ADHS-Diagnostik & Therapie München | ADHS Praxis",
+  title: "Kosten Psychotherapie & ADHS-Diagnostik München",
   description:
-    "Transparente Festpreise: ADHS-Diagnostik für Erwachsene 199 €, Psychotherapie bei ADHS 69 € / 60 Min., Neurofeedback 69 € in München-Schwabing.",
+    "Transparente Festpreise: ADHS-Diagnostik für Erwachsene 199 €, Psychotherapie / Einzeltherapie 69 € / 60 Min. und Neurofeedback 69 € in München-Schwabing.",
   alternates: {
     canonical: "/ablauf-kosten",
   },
@@ -57,10 +57,10 @@ export default function AblaufKostenPage() {
           </nav>
           <p className="eyebrow mb-2">Transparenz & Faires Honorar</p>
           <h1 className="text-[32px] leading-[1.15] text-[#173838] sm:text-[44px] md:text-[48px]">
-            Ablauf & Kosten in unserer ADHS Praxis München
+            Ablauf & Kosten in unserer Praxis in München
           </h1>
           <p className="mt-4 text-[16px] leading-[1.65] text-slate-700 sm:text-[18px]">
-            Als spezialisierte Privatpraxis in München-Schwabing bieten wir Ihnen volle Kostentransparenz, klare Festpreise und kurzfristige Termine nach Verfügbarkeit.
+            Als Privatpraxis mit Schwerpunkt ADHS im Erwachsenenalter bieten wir Ihnen volle Kostentransparenz, klare Festpreise und kurzfristige Termine nach Verfügbarkeit.
           </p>
         </div>
       </section>
@@ -134,7 +134,7 @@ export default function AblaufKostenPage() {
               </Link>
             </div>
 
-            {/* Karte 2: Psychotherapie bei ADHS */}
+            {/* Karte 2: Psychotherapie / Einzeltherapie */}
             <div className="rounded-2xl border-2 border-slate-300 bg-white p-8 card-shadow flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
@@ -146,30 +146,30 @@ export default function AblaufKostenPage() {
                   </span>
                 </div>
                 <h3 className="text-[22px] font-bold text-[#173838]">
-                  Psychotherapie bei ADHS
+                  Psychotherapie / Einzeltherapie
                 </h3>
                 <p className="font-serif text-[34px] font-bold text-[#173838] my-3">
                   69 € <span className="text-[15px] font-sans font-normal text-slate-500">/ 60 Min.</span>
                 </p>
                 <p className="text-[14px] leading-relaxed text-slate-600 mb-4">
-                  Spezialisierte verhaltenstherapeutische Einzelsitzung mit alltagstauglichen Strategien.
+                  Verhaltenstherapeutisch orientierte Einzelsitzung bei ADHS, Angststörungen oder depressiven Beschwerden.
                 </p>
                 <ul className="space-y-2 text-[13px] text-slate-700 mb-6">
                   <li className="flex items-center gap-2">
                     <span className="text-[#7a5600] font-bold">✓</span>
-                    <span>Praxiserprobte Systeme gegen Prokrastination & Zeitblindheit</span>
+                    <span>ADHS im Erwachsenenalter & alltagstaugliche Strategien</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#7a5600] font-bold">✓</span>
-                    <span>Emotionsregulation & Umgang mit Rejection Sensitivity (RSD)</span>
+                    <span>Soziale Angst, Panikattacken & spezifische Phobien</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#7a5600] font-bold">✓</span>
-                    <span>Abbau von Schuldgefühlen, Selbstzweifeln & Scham</span>
+                    <span>Depressive Verstimmung, Grübeln & Aktivitätsaufbau</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-[#7a5600] font-bold">✓</span>
-                    <span>Alltagsroutinen, die langfristig funktionieren</span>
+                    <span>Individuell geplante Ziele und Übungen für den Alltag</span>
                   </li>
                 </ul>
               </div>

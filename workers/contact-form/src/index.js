@@ -3,7 +3,7 @@ const DESTINATION = "neurofeedback.praxis.muenchen@gmail.com";
 
 const serviceNames = {
   "adhs-diagnostik": "ADHS-Diagnostik (Verdacht auf ADHS)",
-  "adhs-therapie": "ADHS-Therapie / psychotherapeutische Begleitung",
+  "adhs-therapie": "Psychotherapie / Einzeltherapie",
   neurofeedback: "Neurofeedback",
   allgemein: "Allgemeine Anfrage",
 };

@@ -65,7 +65,7 @@ function BookingFormInner() {
       case "adhs-diagnostik":
         return "ADHS-Diagnostik (Verdacht auf ADHS)";
       case "adhs-therapie":
-        return "ADHS-Therapie / psychotherapeutische Begleitung";
+        return "Psychotherapie / Einzeltherapie";
       case "neurofeedback":
         return "Neurofeedback";
       case "allgemein":
@@ -157,7 +157,7 @@ function BookingFormInner() {
             required
           >
             <option value="adhs-diagnostik">ADHS-Diagnostik (Verdacht auf ADHS)</option>
-            <option value="adhs-therapie">ADHS-Therapie / psychotherapeutische Begleitung</option>
+            <option value="adhs-therapie">Psychotherapie / Einzeltherapie</option>
             <option value="neurofeedback">Neurofeedback</option>
             <option value="allgemein">Allgemeine Anfrage</option>
           </select>

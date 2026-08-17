@@ -369,7 +369,7 @@ export default function AdhsTherapiePage() {
               Häufige Begleiterscheinungen bei ADHS
             </h2>
             <p className="mt-3 text-[16px] leading-[1.7] text-slate-700">
-              Unser Fokus liegt klar auf ADHS. Da chronische Überforderung jedoch oft sekundäre Begleitprobleme erzeugt, denken wir diese im therapeutischen Prozess stets mit:
+              Auf dieser Leistungsseite steht ADHS im Mittelpunkt. Da chronische Überforderung jedoch häufig mit depressiven Beschwerden, Angst oder Schlafproblemen verbunden ist, berücksichtigen wir diese im therapeutischen Prozess und klären, ob eine eigenständige Behandlung sinnvoll ist:
             </p>
           </div>
 
@@ -497,7 +497,7 @@ export default function AdhsTherapiePage() {
                 Jean-Maurice Cecilia-Menzel, M.Sc.
               </h3>
               <p className="text-[14px] font-semibold text-[#7a5600]">
-                Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie · Spezialisierung auf ADHS im Erwachsenenalter
+                Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie · Schwerpunkt ADHS im Erwachsenenalter
               </p>
               <p className="text-[15px] leading-relaxed text-slate-600">
                 Mein fachlicher Schwerpunkt liegt auf der Begleitung von Erwachsenen mit ADHS. Warum? Weil Standardtherapien die neurodivergente Natur des Gehirns oft verkennen. Ich begegne Ihnen auf Augenhöhe, ohne Stigmatisierung, und verbinde fundierte Psychoedukation, verhaltensorientierte Alltagsstrategien und Neurofeedback zu einem passgenauen Gesamtkonzept.

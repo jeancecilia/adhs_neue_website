@@ -1,8 +1,15 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 
-const navItems = [
+const psychotherapyItems = [
   { href: "/adhs-therapie-muenchen", label: "ADHS-Therapie" },
+  { href: "/soziale-angst-muenchen", label: "Soziale Angst" },
+  { href: "/panikattacken-muenchen", label: "Panikattacken" },
+  { href: "/spezifische-phobien-muenchen", label: "Spezifische Phobien" },
+  { href: "/depressive-verstimmung-muenchen", label: "Depressive Verstimmung" },
+];
+
+const navItems = [
   { href: "/adhs-test-muenchen", label: "ADHS-Diagnostik" },
   { href: "/neurofeedback-muenchen", label: "Neurofeedback" },
   { href: "/ueber-mich", label: "Über mich" },
@@ -29,7 +36,20 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-4 lg:flex xl:gap-5" aria-label="Hauptnavigation">
+        <nav className="hidden items-center gap-3 lg:flex xl:gap-4" aria-label="Hauptnavigation">
+          <details className="group relative">
+            <summary className="inline-flex min-h-[44px] cursor-pointer list-none items-center gap-1.5 px-1.5 text-[13.5px] text-slate-700 transition-colors hover:text-[#173838] [&::-webkit-details-marker]:hidden">
+              Psychotherapie
+              <span aria-hidden="true" className="text-[10px] transition-transform group-open:rotate-180">▼</span>
+            </summary>
+            <div className="absolute left-0 top-[calc(100%+0.35rem)] w-64 rounded-2xl border border-[rgba(47,79,79,0.12)] bg-white p-2 shadow-[0_20px_45px_rgba(23,56,56,0.14)]">
+              {psychotherapyItems.map((item) => (
+                <Link key={item.href} href={item.href} prefetch={false} className="flex min-h-[44px] items-center rounded-xl px-4 py-2 text-[13.5px] text-slate-700 transition-colors hover:bg-[#faf9f8] hover:text-[#173838]">
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </details>
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} prefetch={false} className="inline-flex min-h-[44px] items-center px-1.5 text-[13.5px] text-slate-700 transition-colors hover:text-[#173838]">
               {item.label}
@@ -53,6 +73,13 @@ export default function Header() {
                 <Link href="/" prefetch={false} className="inline-flex min-h-[44px] items-center border-b border-slate-100 py-2.5 text-[16px] font-medium text-slate-800 hover:text-[#173838]">
                   Startseite
                 </Link>
+                <p className="mb-0 mt-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#7a5600]">Psychotherapie</p>
+                {psychotherapyItems.map((item) => (
+                  <Link key={item.href} href={item.href} prefetch={false} className="inline-flex min-h-[44px] items-center border-b border-slate-100 py-2.5 pl-3 text-[15px] font-medium text-slate-800 hover:text-[#173838]">
+                    {item.label}
+                  </Link>
+                ))}
+                <p className="mb-0 mt-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#7a5600]">Weitere Bereiche</p>
                 {navItems.map((item) => (
                   <Link key={item.href} href={item.href} prefetch={false} className="inline-flex min-h-[44px] items-center border-b border-slate-100 py-2.5 text-[16px] font-medium text-slate-800 last:border-0 hover:text-[#173838]">
                     {item.label}

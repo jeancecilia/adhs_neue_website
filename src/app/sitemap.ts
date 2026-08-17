@@ -16,6 +16,10 @@ const routes = [
   '/adhs-wissen/adhs-und-schlaf',
   '/kontakt-anfahrt',
   '/neurofeedback-muenchen',
+  '/soziale-angst-muenchen',
+  '/panikattacken-muenchen',
+  '/spezifische-phobien-muenchen',
+  '/depressive-verstimmung-muenchen',
   '/termin',
   '/ueber-mich',
 ];
