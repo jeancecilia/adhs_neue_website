@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "ADHS bei Erwachsenen in München | Symptome, Ursachen & Hilfe",
@@ -13,6 +14,10 @@ export const metadata: Metadata = {
 export default function AdhsErwachsenePage() {
   return (
     <div className="w-full">
+      <BreadcrumbJsonLd items={[
+        { name: "Startseite", path: "" },
+        { name: "ADHS bei Erwachsenen", path: "/adhs-erwachsene-muenchen" },
+      ]} />
       <section className="border-b border-[rgba(47,79,79,0.1)] bg-[#faf9f8] py-12 sm:py-16">
         <div className="container-shell max-w-4xl">
           <nav className="mb-6 flex items-center gap-2 text-[13px] text-slate-500" aria-label="Breadcrumb">
@@ -52,8 +57,8 @@ export default function AdhsErwachsenePage() {
                 <p className="mt-2 text-[14px] leading-relaxed text-slate-600">Ein ständiges Gedankenkarussell und das Gefühl, innerlich niemals ganz zur Ruhe zu kommen.</p>
               </div>
               <div className="rounded-2xl bg-white p-6 card-shadow border border-slate-200">
-                <h3 className="text-[17px] font-bold text-[#173838]">Dopaminmangel</h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-slate-600">Aufgaben ohne unmittelbaren Druck oder Belohnung fühlen sich neuronal unüberwindbar an.</p>
+                <h3 className="text-[17px] font-bold text-[#173838]">Motivation & Belohnung</h3>
+                <p className="mt-2 text-[14px] leading-relaxed text-slate-600">Aufgaben ohne unmittelbaren Druck oder erkennbare Belohnung können besonders schwer zu beginnen sein.</p>
               </div>
               <div className="rounded-2xl bg-white p-6 card-shadow border border-slate-200">
                 <h3 className="text-[17px] font-bold text-[#173838]">Zeitblindheit</h3>

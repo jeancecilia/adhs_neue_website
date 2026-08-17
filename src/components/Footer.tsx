@@ -8,9 +8,20 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.3fr_0.7fr_1.1fr_1fr] md:gap-12">
           {/* Praxis Info */}
           <div>
-            <p className="text-[13px] font-bold uppercase tracking-[0.08em] text-white">
-              {siteConfig.name}
-            </p>
+            <Link href="/" className="inline-flex min-h-[44px] items-center gap-3" aria-label="Zur Startseite der ADHS Praxis München">
+              <img
+                src={siteConfig.logo.url}
+                width={44}
+                height={44}
+                alt=""
+                aria-hidden="true"
+                className="h-11 w-11 rounded-xl ring-1 ring-white/20"
+              />
+              <span className="leading-none text-white">
+                <span className="block text-[13px] font-extrabold uppercase tracking-[0.1em]">ADHS Praxis</span>
+                <span className="mt-1.5 block text-[10px] font-semibold uppercase tracking-[0.2em] text-[#f0cc65]">München</span>
+              </span>
+            </Link>
             <p className="mt-3 max-w-xs text-[14px] font-normal leading-[1.65] text-slate-200">
               Praxis für Psychotherapie bei ADHS im Erwachsenenalter in München-Schwabing.
             </p>
@@ -86,17 +97,17 @@ export default function Footer() {
               Kontakt & Praxis
             </p>
             <div className="mt-3 flex flex-col text-[14px] font-normal text-slate-200">
-              <a
-                href={siteConfig.emailHref}
+              <Link
+                href="/termin"
                 className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4"
               >
-                {siteConfig.email}
-              </a>
+                Kontaktformular
+              </Link>
               <a
-                href={siteConfig.phoneHref}
+                href={siteConfig.whatsappHref}
                 className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4"
               >
-                {siteConfig.phoneDisplay}
+                WhatsApp {siteConfig.whatsappDisplay}
               </a>
               <p className="mt-2 text-[14px] leading-relaxed text-slate-300">
                 {siteConfig.addressLine1}<br />

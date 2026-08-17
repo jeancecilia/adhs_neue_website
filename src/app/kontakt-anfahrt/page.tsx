@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Kontakt & Anfahrt | ADHS Praxis München",
@@ -15,6 +16,10 @@ export const metadata: Metadata = {
 export default function KontaktAnfahrtPage() {
   return (
     <div className="w-full">
+      <BreadcrumbJsonLd items={[
+        { name: "Startseite", path: "" },
+        { name: "Kontakt & Anfahrt", path: "/kontakt-anfahrt" },
+      ]} />
       <section className="border-b border-[rgba(47,79,79,0.1)] bg-[#faf9f8] py-12 sm:py-16">
         <div className="container-shell max-w-4xl">
           <nav className="mb-6 flex items-center gap-2 text-[13px] text-slate-500" aria-label="Breadcrumb">
@@ -42,8 +47,8 @@ export default function KontaktAnfahrtPage() {
                 {siteConfig.practitioner}<br />
                 {siteConfig.addressLine1}<br />
                 {siteConfig.postalCity} (Schwabing)<br /><br />
-                📞 <strong>Telefon:</strong> <a href={siteConfig.phoneHref} className="hover:underline">{siteConfig.phoneDisplay}</a><br />
-                ✉️ <strong>E-Mail:</strong> <a href={siteConfig.emailHref} className="hover:underline">{siteConfig.email}</a><br />
+                <Link href="/termin" className="font-bold underline underline-offset-4">Kontaktformular öffnen</Link><br />
+                <a href={siteConfig.whatsappHref} className="font-bold underline underline-offset-4">WhatsApp {siteConfig.whatsappDisplay}</a><br />
                 🕒 <strong>Öffnungszeiten:</strong> {siteConfig.openingHours}
               </p>
             </div>

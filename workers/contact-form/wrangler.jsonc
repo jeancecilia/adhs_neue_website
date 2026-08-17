@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "adhs-praxis-contact-form",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-16",
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "destination_address": "neurofeedback.praxis.muenchen@gmail.com"
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "neurofeedback-praxis-muenchen.de/api/contact*",
+      "zone_name": "neurofeedback-praxis-muenchen.de"
+    }
+  ]
+}

@@ -46,7 +46,6 @@ export default function ImpressumPage() {
           <div>
             <h2 className="text-[20px] font-bold text-[#173838] mb-2">Kontakt</h2>
             <p>
-              Telefon: {siteConfig.phoneDisplay}<br />
               E-Mail: {siteConfig.email}<br />
               Website: {siteConfig.domain}
             </p>

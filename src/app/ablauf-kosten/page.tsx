@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import FaqAccordion from "@/components/FaqAccordion";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Kosten ADHS-Diagnostik & Therapie München | ADHS Praxis",
@@ -42,6 +43,10 @@ const KOSTEN_FAQS = [
 export default function AblaufKostenPage() {
   return (
     <div className="w-full">
+      <BreadcrumbJsonLd items={[
+        { name: "Startseite", path: "" },
+        { name: "Ablauf & Kosten", path: "/ablauf-kosten" },
+      ]} />
       {/* 1. HERO SECTION */}
       <section className="border-b border-[rgba(47,79,79,0.1)] bg-[#faf9f8] py-10 sm:py-13">
         <div className="container-shell max-w-4xl">

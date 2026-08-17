@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import BookingForm from "@/components/BookingForm";
+import { siteConfig } from "@/config/site";
+import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
 export const metadata: Metadata = {
   title: "Termin anfragen | ADHS Praxis München",
@@ -14,6 +16,10 @@ export const metadata: Metadata = {
 export default function TerminPage() {
   return (
     <div className="w-full">
+      <BreadcrumbJsonLd items={[
+        { name: "Startseite", path: "" },
+        { name: "Termin anfragen", path: "/termin" },
+      ]} />
       <section className="border-b border-[rgba(47,79,79,0.1)] bg-[#faf9f8] py-10 sm:py-14">
         <div className="container-shell max-w-4xl">
           <nav className="mb-5 flex items-center gap-2 text-[13px] text-slate-500" aria-label="Breadcrumb">
@@ -43,7 +49,7 @@ export default function TerminPage() {
 
             <div className="space-y-3.5 text-[15px] text-slate-700">
               <p>📍 <strong>Praxis:</strong> Hildeboldstraße 1, 80797 München-Schwabing</p>
-              <p>☎ <strong>Telefon:</strong> 089 44135911</p>
+              <p>💬 <strong>Alternativ per WhatsApp:</strong> <a href={siteConfig.whatsappHref} className="underline underline-offset-4">{siteConfig.whatsappDisplay}</a></p>
               <p>◷ <strong>Rückmeldung:</strong> meist innerhalb von 24–48 Std. werktags</p>
               <p>🔒 <strong>Vertraulichkeit:</strong> Ihre Angaben werden vertraulich behandelt.</p>
             </div>

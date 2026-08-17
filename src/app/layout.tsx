@@ -3,11 +3,12 @@ import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MobileStickyCta from '@/components/MobileStickyCta';
+import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: 'ADHS bei Erwachsenen in München | ADHS Praxis München',
+  title: 'ADHS Praxis München | Diagnostik, Therapie & Neurofeedback',
   description: 'Diagnostische Orientierung, Psychotherapie und Neurofeedback bei ADHS im Erwachsenenalter in München-Schwabing. Praxis nach HeilprG.',
-  metadataBase: new URL('https://www.neurofeedback-praxis-muenchen.de'),
+  metadataBase: new URL('https://neurofeedback-praxis-muenchen.de'),
   alternates: {
     canonical: '/',
   },
@@ -16,6 +17,19 @@ export const metadata: Metadata = {
     description: 'Diagnostische Orientierung, strukturierende Psychotherapie und Neurofeedback bei ADHS im Erwachsenenalter.',
     locale: 'de_DE',
     type: 'website',
+    siteName: siteConfig.name,
+    url: siteConfig.baseUrl,
+    images: [siteConfig.socialImage],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ADHS Praxis München | Diagnostik, Therapie & Neurofeedback',
+    description: 'Diagnostische Orientierung, Psychotherapie und Neurofeedback bei ADHS im Erwachsenenalter.',
+    images: [siteConfig.socialImage.url],
+  },
+  icons: {
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' }],
+    shortcut: '/favicon.svg',
   },
 };
 
@@ -36,11 +50,19 @@ export default function RootLayout({
               "@graph": [
                 {
                   "@type": "MedicalBusiness",
-                  "@id": "https://www.neurofeedback-praxis-muenchen.de/#praxis",
+                  "@id": "https://neurofeedback-praxis-muenchen.de/#praxis",
                   "name": "ADHS Praxis München - Jean-Maurice Cecilia-Menzel",
                   "alternateName": "Praxis für Psychotherapie bei ADHS im Erwachsenenalter",
-                  "url": "https://www.neurofeedback-praxis-muenchen.de/",
-                  "telephone": "+49-89-44135911",
+                  "url": "https://neurofeedback-praxis-muenchen.de/",
+                  "email": "kontakt@neurofeedback-praxis-muenchen.de",
+                  "image": "https://neurofeedback-praxis-muenchen.de/images/portrait-jean-maurice-hd.jpg",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": `${siteConfig.baseUrl}${siteConfig.logo.url}`,
+                    "contentUrl": `${siteConfig.baseUrl}${siteConfig.logo.url}`,
+                    "width": siteConfig.logo.width,
+                    "height": siteConfig.logo.height
+                  },
                   "priceRange": "$$",
                   "address": {
                     "@type": "PostalAddress",
@@ -51,8 +73,8 @@ export default function RootLayout({
                   },
                   "geo": {
                     "@type": "GeoCoordinates",
-                    "latitude": "48.1585521",
-                    "longitude": "11.5673942"
+                    "latitude": "48.1662598",
+                    "longitude": "11.5642558"
                   },
                   "medicalSpecialty": "Psychotherapy",
                   "availableService": [
@@ -72,12 +94,23 @@ export default function RootLayout({
                 },
                 {
                   "@type": "Person",
-                  "@id": "https://www.adhs-praxis-muenchen.de/#therapeut",
+                  "@id": "https://neurofeedback-praxis-muenchen.de/#therapeut",
                   "name": "Jean-Maurice Cecilia-Menzel",
                   "jobTitle": "Heilpraktiker beschränkt auf das Gebiet der Psychotherapie",
+                  "url": "https://neurofeedback-praxis-muenchen.de/ueber-mich",
+                  "image": "https://neurofeedback-praxis-muenchen.de/images/portrait-jean-maurice-hd.jpg",
+                  "sameAs": siteConfig.sameAs,
                   "worksFor": {
-                    "@id": "https://www.adhs-praxis-muenchen.de/#praxis"
+                    "@id": "https://neurofeedback-praxis-muenchen.de/#praxis"
                   }
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://neurofeedback-praxis-muenchen.de/#website",
+                  "url": "https://neurofeedback-praxis-muenchen.de/",
+                  "name": "ADHS Praxis München",
+                  "inLanguage": "de-DE",
+                  "publisher": { "@id": "https://neurofeedback-praxis-muenchen.de/#praxis" }
                 }
               ]
             })

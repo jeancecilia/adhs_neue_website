@@ -57,7 +57,21 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="text-[22px] font-bold text-[#173838] mb-3">4. Ihre Rechte als betroffene Person</h2>
+            <h2 className="text-[22px] font-bold text-[#173838] mb-3">4. Terminanfrage über das Kontaktformular</h2>
+            <p>
+              Wenn Sie das Formular nutzen, verarbeiten wir Ihren Namen, Ihre E-Mail-Adresse, das ausgewählte Anliegen, Ihren Terminwunsch und freiwillige Angaben in der Nachricht, um Ihre Anfrage zu beantworten und vorvertragliche Maßnahmen durchzuführen (Art. 6 Abs. 1 lit. b DSGVO). Bitte tragen Sie keine ausführlichen Gesundheitsdaten ein. Die Übermittlung und Zustellung erfolgt über Cloudflare, Inc. als technischen Dienstleister. Die Angaben werden nur so lange gespeichert, wie dies für die Bearbeitung und gesetzliche Aufbewahrungspflichten erforderlich ist.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-[22px] font-bold text-[#173838] mb-3">5. Hosting, Sicherheit und E-Mail-Routing</h2>
+            <p>
+              Diese Website wird über Cloudflare bereitgestellt. Dabei können technisch notwendige Verbindungsdaten wie IP-Adresse, Zeitpunkt, aufgerufene URL, Referrer sowie Browser- und Geräteinformationen verarbeitet werden, um die Website sicher und zuverlässig auszuliefern. Für eingehende Nachrichten an die Praxisdomain wird Cloudflare Email Routing eingesetzt und die Nachricht an das hierfür vorgesehene Gmail-Postfach weitergeleitet.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-[22px] font-bold text-[#173838] mb-3">6. Ihre Rechte als betroffene Person</h2>
             <p>
               Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung sowie ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten.
             </p>
