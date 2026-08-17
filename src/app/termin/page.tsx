@@ -49,7 +49,10 @@ export default function TerminPage() {
 
             <div className="space-y-3.5 text-[15px] text-slate-700">
               <p>📍 <strong>Praxis:</strong> Hildeboldstraße 1, 80797 München-Schwabing</p>
-              <p>💬 <strong>Alternativ per WhatsApp:</strong> <a href={siteConfig.whatsappHref} className="underline underline-offset-4">{siteConfig.whatsappDisplay}</a></p>
+              <div>
+                <p>💬 <strong>Alternativ per WhatsApp:</strong> <a href={siteConfig.whatsappHref} className="underline underline-offset-4">{siteConfig.whatsappDisplay} (externer Dienst)</a></p>
+                <p className="mt-1 pl-7 text-[12px] leading-relaxed text-slate-600">Beim Klick verlassen Sie diese Website. Bitte senden Sie über WhatsApp keine Diagnosen, Befunde oder anderen Gesundheitsdaten.</p>
+              </div>
               <p>◷ <strong>Rückmeldung:</strong> meist innerhalb von 24–48 Std. werktags</p>
               <p>🔒 <strong>Vertraulichkeit:</strong> Ihre Angaben werden vertraulich behandelt.</p>
             </div>

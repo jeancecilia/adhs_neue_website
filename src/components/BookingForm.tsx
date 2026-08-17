@@ -20,6 +20,7 @@ function BookingFormInner() {
   const [email, setEmail] = useState("");
   const [timeslot, setTimeslot] = useState("egal");
   const [message, setMessage] = useState("");
+  const [healthDataConsent, setHealthDataConsent] = useState(false);
   const [website, setWebsite] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -32,6 +33,11 @@ function BookingFormInner() {
       return;
     }
 
+    if (!healthDataConsent) {
+      setError("Bitte bestätigen Sie die Datenschutzeinwilligung, bevor Sie die Anfrage absenden.");
+      return;
+    }
+
     setSubmitting(true);
     setError("");
 
@@ -39,7 +45,7 @@ function BookingFormInner() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, service, timeslot, message, website }),
+        body: JSON.stringify({ name, email, service, timeslot, message, healthDataConsent, website }),
       });
 
       if (!response.ok) {
@@ -182,13 +188,37 @@ function BookingFormInner() {
           <textarea
             id="form-message"
             name="message"
+            aria-describedby="form-message-hint"
             rows={4}
             maxLength={2000}
             className="w-full resize-y rounded-xl border border-slate-200 bg-[#faf9f8] px-4 py-3 text-[15px] text-slate-800 focus:border-[#173838] focus:bg-white focus:outline-none"
-            placeholder="Was sollten wir für die Terminabstimmung wissen? Bitte keine ausführlichen Gesundheitsdaten eintragen."
+            placeholder="Was sollten wir für die Terminabstimmung wissen?"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
+          <p id="form-message-hint" className="mt-2 text-[13px] leading-relaxed text-slate-600">
+            Bitte tragen Sie hier keine Diagnosen, Befunde, Medikamentenangaben oder ausführlichen Gesundheitsinformationen ein. Für die erste Kontaktaufnahme reichen organisatorische Angaben.
+          </p>
+        </div>
+
+        <div className="rounded-xl border border-[#dec77f] bg-[#fffaf0] p-4">
+          <label htmlFor="form-health-data-consent" className="flex cursor-pointer items-start gap-3 text-[13px] leading-relaxed text-slate-700">
+            <input
+              id="form-health-data-consent"
+              name="healthDataConsent"
+              type="checkbox"
+              required
+              checked={healthDataConsent}
+              onChange={(e) => setHealthDataConsent(e.target.checked)}
+              className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300 text-[#173838] focus:ring-[#173838]"
+            />
+            <span>
+              Ich willige ausdrücklich ein, dass die von mir im Formular freiwillig übermittelten Gesundheitsdaten zum Zweck der Bearbeitung meiner Anfrage verarbeitet werden. Ich kann diese Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen. Weitere Informationen finde ich in der{" "}
+              <Link href="/datenschutz" className="font-semibold text-[#173838] underline decoration-[#c99a1d] underline-offset-2 hover:text-[#7a5600]">
+                Datenschutzerklärung
+              </Link>.
+            </span>
+          </label>
         </div>
 
         <div className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
@@ -209,6 +239,10 @@ function BookingFormInner() {
             {error}
           </p>
         )}
+
+        <p className="text-[12px] leading-relaxed text-slate-600">
+          Ihre Angaben werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet. Bitte beachten Sie den obigen Hinweis und übermitteln Sie im Formular nur die dafür notwendigen Informationen.
+        </p>
 
         <button
           type="submit"

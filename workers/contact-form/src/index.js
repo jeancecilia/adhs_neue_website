@@ -64,10 +64,13 @@ export default {
     const service = clean(body.service, 60);
     const timeslot = clean(body.timeslot, 60);
     const message = clean(body.message, 2000);
+    const healthDataConsent = body.healthDataConsent === true;
 
-    if (!name || !serviceNames[service] || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!name || !serviceNames[service] || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !healthDataConsent) {
       return json({ error: "Invalid form data" }, 400);
     }
+
+    const consentTimestamp = new Date().toISOString();
 
     const subject = `Neue Terminanfrage: ${serviceNames[service]}`;
     const text = [
@@ -78,9 +81,11 @@ export default {
       `Anliegen: ${serviceNames[service]}`,
       `Terminwunsch: ${timeslotNames[timeslot] || "–"}`,
       `Nachricht: ${message || "–"}`,
+      "Ausdrückliche Einwilligung zur Verarbeitung freiwillig übermittelter Gesundheitsdaten: erteilt",
+      `Einwilligungszeitpunkt: ${consentTimestamp}`,
     ].join("\n");
 
-    const html = `<h2>Neue Terminanfrage</h2><table cellpadding="6" style="border-collapse:collapse"><tr><th align="left">Name</th><td>${escapeHtml(name)}</td></tr><tr><th align="left">E-Mail</th><td>${escapeHtml(email)}</td></tr><tr><th align="left">Anliegen</th><td>${escapeHtml(serviceNames[service])}</td></tr><tr><th align="left">Terminwunsch</th><td>${escapeHtml(timeslotNames[timeslot] || "–")}</td></tr><tr><th align="left">Nachricht</th><td>${escapeHtml(message || "–")}</td></tr></table>`;
+    const html = `<h2>Neue Terminanfrage</h2><table cellpadding="6" style="border-collapse:collapse"><tr><th align="left">Name</th><td>${escapeHtml(name)}</td></tr><tr><th align="left">E-Mail</th><td>${escapeHtml(email)}</td></tr><tr><th align="left">Anliegen</th><td>${escapeHtml(serviceNames[service])}</td></tr><tr><th align="left">Terminwunsch</th><td>${escapeHtml(timeslotNames[timeslot] || "–")}</td></tr><tr><th align="left">Nachricht</th><td>${escapeHtml(message || "–")}</td></tr><tr><th align="left">Datenschutzeinwilligung</th><td>Ausdrücklich erteilt</td></tr><tr><th align="left">Einwilligungszeitpunkt</th><td>${escapeHtml(consentTimestamp)}</td></tr></table>`;
 
     try {
       await env.EMAIL.send({

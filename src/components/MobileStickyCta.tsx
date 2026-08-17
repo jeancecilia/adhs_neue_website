@@ -8,9 +8,10 @@ export default function MobileStickyCta() {
         <a
           href={siteConfig.whatsappHref}
           className="flex-1 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-[#075e54] px-3 py-2 text-center text-[13px] font-bold text-white shadow-sm transition-opacity hover:opacity-90"
-          aria-label="ADHS Praxis München per WhatsApp kontaktieren"
+          aria-label="WhatsApp als externen Dienst öffnen; bitte keine Gesundheitsdaten senden"
+          title="Externer Dienst – bitte keine Gesundheitsdaten über WhatsApp senden"
         >
-          WhatsApp
+          WhatsApp (extern)
         </a>
         <Link
           href="/termin"

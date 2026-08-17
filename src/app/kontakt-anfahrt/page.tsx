@@ -48,7 +48,8 @@ export default function KontaktAnfahrtPage() {
                 {siteConfig.addressLine1}<br />
                 {siteConfig.postalCity} (Schwabing)<br /><br />
                 <Link href="/termin" className="font-bold underline underline-offset-4">Kontaktformular öffnen</Link><br />
-                <a href={siteConfig.whatsappHref} className="font-bold underline underline-offset-4">WhatsApp {siteConfig.whatsappDisplay}</a><br />
+                <a href={siteConfig.whatsappHref} className="font-bold underline underline-offset-4">WhatsApp {siteConfig.whatsappDisplay} (externer Dienst)</a><br />
+                <span className="text-[12px] text-slate-600">Beim Klick verlassen Sie diese Website. Bitte keine Gesundheitsdaten über WhatsApp senden.</span><br />
                 🕒 <strong>Öffnungszeiten:</strong> {siteConfig.openingHours}
               </p>
             </div>

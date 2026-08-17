@@ -107,8 +107,11 @@ export default function Footer() {
                 href={siteConfig.whatsappHref}
                 className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4"
               >
-                WhatsApp {siteConfig.whatsappDisplay}
+                WhatsApp {siteConfig.whatsappDisplay} (extern)
               </a>
+              <p className="mb-2 text-[11px] leading-relaxed text-slate-300">
+                Beim Klick verlassen Sie diese Website. Bitte keine Gesundheitsdaten über WhatsApp senden.
+              </p>
               <p className="mt-2 text-[14px] leading-relaxed text-slate-300">
                 {siteConfig.addressLine1}<br />
                 {siteConfig.postalCity} (Schwabing)
