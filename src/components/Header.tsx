@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import { siteConfig } from "@/config/site";
 
 const psychotherapyItems = [
@@ -18,6 +21,38 @@ const navItems = [
 ];
 
 export default function Header() {
+  const menuRefs = useRef<Array<HTMLDetailsElement | null>>([]);
+
+  useEffect(() => {
+    const closeOpenMenus = (returnFocus = false) => {
+      menuRefs.current.forEach((menu) => {
+        if (!menu?.open) return;
+        menu.open = false;
+        if (returnFocus) menu.querySelector("summary")?.focus();
+      });
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      menuRefs.current.forEach((menu) => {
+        if (menu?.open && !menu.contains(event.target as Node)) {
+          menu.open = false;
+        }
+      });
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeOpenMenus(true);
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 border-b border-[rgba(47,79,79,0.1)] bg-[rgba(253,251,247,0.96)] shadow-[0_10px_30px_rgba(23,56,56,0.05)] backdrop-blur">
       <div className="container-shell flex h-16 items-center justify-between gap-3 sm:h-20 sm:gap-4">
@@ -37,7 +72,7 @@ export default function Header() {
         </Link>
 
         <nav className="hidden items-center gap-3 lg:flex xl:gap-4" aria-label="Hauptnavigation">
-          <details className="group relative">
+          <details ref={(node) => { menuRefs.current[0] = node; }} className="group relative">
             <summary className="inline-flex min-h-[44px] cursor-pointer list-none items-center gap-1.5 px-1.5 text-[13.5px] text-slate-700 transition-colors hover:text-[#173838] [&::-webkit-details-marker]:hidden">
               Psychotherapie
               <span aria-hidden="true" className="text-[10px] transition-transform group-open:rotate-180">▼</span>
@@ -62,7 +97,7 @@ export default function Header() {
             Termin anfragen
           </Link>
 
-          <details className="group relative lg:hidden">
+          <details ref={(node) => { menuRefs.current[1] = node; }} className="group relative lg:hidden">
             <summary aria-label="Hauptmenü öffnen oder schließen" className="inline-flex h-11 min-h-[44px] w-11 min-w-[44px] cursor-pointer list-none items-center justify-center rounded-full border border-[rgba(47,79,79,0.16)] text-[#173838] focus-visible:ring-2 focus-visible:ring-[#173838] [&::-webkit-details-marker]:hidden">
               <span className="text-xl leading-none group-open:hidden" aria-hidden="true">☰</span>
               <span className="hidden text-xl leading-none group-open:inline" aria-hidden="true">✕</span>
