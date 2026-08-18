@@ -122,7 +122,7 @@ export default function AnalyticsConsentManager() {
               </h2>
             </div>
             <p className="mt-1 text-[13px] leading-relaxed text-slate-700 hyphens-none">
-              Google Analytics ist zur Reichweitenmessung standardmäßig aktiv. Google Ads, Anzeigenpersonalisierung und Google Signals aktivieren wir nur mit Ihrer Zustimmung. Mit „Nur notwendige“ können Sie alles deaktivieren.{" "}
+              Mit Ihrer Einwilligung nutzen wir Nutzungsdaten, um Reichweite und Nutzung unserer Website zu analysieren, unser Angebot zu verbessern und Werbung gezielter auszuspielen.{" "}
               <Link
                 href="/datenschutz"
                 className="font-medium text-[#173838] underline decoration-slate-300 underline-offset-2 hover:text-[#1b4343]"
