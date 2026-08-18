@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import {
   ANALYTICS_CONSENT_STORAGE_KEY,
   GA_MEASUREMENT_ID,
+  getContactLinkAnalyticsEvent,
   loadGoogleAnalytics,
   readAnalyticsConsent,
   setDefaultConsent,
@@ -123,6 +124,32 @@ describe("granular Google consent", () => {
       "generate_lead",
       { method: "contact_form" },
     ]);
+    expect(trackAnalyticsEvent("whatsapp_click", { method: "whatsapp" })).toBe(
+      true,
+    );
+    expect(trackAnalyticsEvent("email_click", { method: "email" })).toBe(true);
+    expect(dataLayerCommands()).toContainEqual([
+      "event",
+      "whatsapp_click",
+      { method: "whatsapp" },
+    ]);
+    expect(dataLayerCommands()).toContainEqual([
+      "event",
+      "email_click",
+      { method: "email" },
+    ]);
+  });
+
+  it("classifies only WhatsApp and email contact links", () => {
+    expect(
+      getContactLinkAnalyticsEvent("https://wa.me/491743243387"),
+    ).toEqual({ eventName: "whatsapp_click", method: "whatsapp" });
+    expect(
+      getContactLinkAnalyticsEvent(
+        "mailto:kontakt@neurofeedback-praxis-muenchen.de",
+      ),
+    ).toEqual({ eventName: "email_click", method: "email" });
+    expect(getContactLinkAnalyticsEvent("/termin")).toBeNull();
   });
 
   it("grants advertising consent signals after full acceptance", () => {

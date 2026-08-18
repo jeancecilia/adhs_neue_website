@@ -7,6 +7,7 @@ import {
   type AnalyticsConsent,
   hasAnalyticsConsent,
   hasMarketingConsent,
+  getContactLinkAnalyticsEvent,
   loadGoogleAnalytics,
   OPEN_CONSENT_SETTINGS_EVENT,
   readAnalyticsConsent,
@@ -81,18 +82,25 @@ export default function AnalyticsConsentManager() {
   }, [consent, pathname]);
 
   useEffect(() => {
-    const trackWhatsAppExit = (event: MouseEvent) => {
+    const trackContactExit = (event: MouseEvent) => {
       const target = event.target;
       if (!(target instanceof Element)) return;
 
-      const link = target.closest<HTMLAnchorElement>('a[href^="https://wa.me/"]');
+      const link = target.closest<HTMLAnchorElement>("a[href]");
       if (!link) return;
 
-      trackAnalyticsEvent("whatsapp_click", { method: "whatsapp" });
+      const contactEvent = getContactLinkAnalyticsEvent(
+        link.getAttribute("href") ?? "",
+      );
+      if (!contactEvent) return;
+
+      trackAnalyticsEvent(contactEvent.eventName, {
+        method: contactEvent.method,
+      });
     };
 
-    document.addEventListener("click", trackWhatsAppExit);
-    return () => document.removeEventListener("click", trackWhatsAppExit);
+    document.addEventListener("click", trackContactExit);
+    return () => document.removeEventListener("click", trackContactExit);
   }, []);
 
   const chooseConsent = (nextConsent: AnalyticsConsent) => {

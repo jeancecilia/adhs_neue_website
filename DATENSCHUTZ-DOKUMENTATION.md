@@ -55,7 +55,7 @@ Mindestens jährlich sowie bei Änderungen der eingesetzten Dienste sind folgend
 - Cloudflare-Einstellungen für Pages, Workers, Email Routing und Web Analytics
 - Google-Analytics-Property, Consent-Mode-Diagnose, Datenaufbewahrung und verknüpfte Produkte
 - Funktionsprüfung des Einwilligungsdialogs einschließlich Widerruf und Löschung erreichbarer GA-Cookies
-- Abgleich, dass `generate_lead` nur nach erfolgreicher Formularübermittlung und ohne Formularparameter gesendet wird
+- Abgleich, dass `generate_lead` nur nach erfolgreicher Formularübermittlung sowie `whatsapp_click` und `email_click` nur bei den jeweiligen Kontaktlink-Klicks und jeweils ohne Kontakt- oder Formularparameter gesendet werden
 - tatsächliche Speicherdauern und vorhandene Protokolle
 - Sicherheitsheader der veröffentlichten Website
 - Empfänger und Löschfristen von Kontaktanfragen

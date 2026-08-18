@@ -11,6 +11,11 @@ export type AnalyticsConsent =
 
 type Gtag = (...args: unknown[]) => void;
 
+export type ContactLinkAnalyticsEvent = {
+  eventName: "whatsapp_click" | "email_click";
+  method: "whatsapp" | "email";
+};
+
 declare global {
   interface Window {
     dataLayer?: unknown[];
@@ -152,6 +157,22 @@ export function trackAnalyticsEvent(
 
   gtag("event", eventName, parameters);
   return true;
+}
+
+export function getContactLinkAnalyticsEvent(
+  href: string,
+): ContactLinkAnalyticsEvent | null {
+  const normalizedHref = href.trim().toLowerCase();
+
+  if (normalizedHref.startsWith("https://wa.me/")) {
+    return { eventName: "whatsapp_click", method: "whatsapp" };
+  }
+
+  if (normalizedHref.startsWith("mailto:")) {
+    return { eventName: "email_click", method: "email" };
+  }
+
+  return null;
 }
 
 function clearGoogleCookies(prefix: "_ga" | "_gcl"): void {
