@@ -94,9 +94,7 @@ export function updateAnalyticsConsent(consent: AnalyticsConsent): void {
     analytics_storage: analyticsStorage,
     ad_storage: advertisingStorage,
     ad_user_data: advertisingStorage,
-    // The practice concerns sensitive health services. Conversion measurement
-    // is allowed after acceptance, but visitor-based ad personalization is not.
-    ad_personalization: "denied",
+    ad_personalization: advertisingStorage,
   });
 
   if (consent === "denied") clearGoogleAnalyticsCookies();
@@ -117,8 +115,8 @@ export function loadGoogleAnalytics(): void {
 
   gtag("js", new Date());
   gtag("config", GA_MEASUREMENT_ID, {
-    allow_ad_personalization_signals: false,
-    allow_google_signals: false,
+    allow_ad_personalization_signals: true,
+    allow_google_signals: true,
     anonymize_ip: true,
     send_page_view: false,
   });

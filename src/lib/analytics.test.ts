@@ -108,8 +108,8 @@ describe("privacy-first Google Analytics", () => {
       "config",
       GA_MEASUREMENT_ID,
       expect.objectContaining({
-        allow_ad_personalization_signals: false,
-        allow_google_signals: false,
+        allow_ad_personalization_signals: true,
+        allow_google_signals: true,
         send_page_view: false,
       }),
     ]);
@@ -134,7 +134,7 @@ describe("privacy-first Google Analytics", () => {
         analytics_storage: "granted",
         ad_storage: "granted",
         ad_user_data: "granted",
-        ad_personalization: "denied",
+        ad_personalization: "granted",
       },
     ]);
   });

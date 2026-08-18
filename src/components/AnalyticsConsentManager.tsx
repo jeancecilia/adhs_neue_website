@@ -122,7 +122,7 @@ export default function AnalyticsConsentManager() {
               </h2>
             </div>
             <p className="mt-1 text-[13px] leading-relaxed text-slate-700 hyphens-none">
-              Google Analytics ist zur Reichweitenmessung standardmäßig aktiv. Google-Ads-Konversionsmessung aktivieren wir nur mit Ihrer Zustimmung. Mit „Nur notwendige“ können Sie beides deaktivieren.{" "}
+              Google Analytics ist zur Reichweitenmessung standardmäßig aktiv. Google Ads, Anzeigenpersonalisierung und Google Signals aktivieren wir nur mit Ihrer Zustimmung. Mit „Nur notwendige“ können Sie alles deaktivieren.{" "}
               <Link
                 href="/datenschutz"
                 className="font-medium text-[#173838] underline decoration-slate-300 underline-offset-2 hover:text-[#1b4343]"
@@ -246,7 +246,7 @@ export default function AnalyticsConsentManager() {
               </p>
             </div>
 
-            {/* Category: Google Ads measurement (Optional) */}
+            {/* Category: Google Ads and personalization (Optional) */}
             <div
               className={`rounded-xl border p-3.5 sm:p-4 transition-all duration-200 cursor-pointer ${
                 nonEssentialSelected
@@ -276,7 +276,7 @@ export default function AnalyticsConsentManager() {
                       setNonEssentialSelected(!nonEssentialSelected);
                     }}
                   >
-                    Google-Ads-Konversionsmessung
+                    Google Ads & Personalisierung
                   </label>
                 </div>
                 <span
@@ -290,7 +290,7 @@ export default function AnalyticsConsentManager() {
                 </span>
               </div>
               <p className="mt-1.5 pl-6.5 text-[12px] leading-relaxed text-slate-600 hyphens-none">
-                Hilft uns nach Ihrer Zustimmung zu erkennen, welche Anzeigen zu einer Anfrage führen. Besucherbasierte Werbezielgruppen und Google Signals verwenden wir nicht.
+                Hilft uns nach Ihrer Zustimmung zu erkennen, welche Anzeigen zu einer Anfrage führen, und ermöglicht Google Signals, personalisierte Anzeigen sowie besucherbasierte Zielgruppen.
               </p>
 
               {/* Details toggle */}
@@ -308,7 +308,7 @@ export default function AnalyticsConsentManager() {
 
                 {showDetails && (
                   <div className="mt-2 rounded-lg border border-slate-200/80 bg-slate-50 p-2.5 text-[11px] leading-relaxed text-slate-600 animate-in fade-in">
-                    Eingesetzt wird Google Analytics 4 (Google Ireland Ltd.) zur Analyse der Websitenutzung und – nach Ihrer Zustimmung – zur Google-Ads-Konversionsmessung. Formularinhalte und Gesundheitsangaben werden zu keinem Zeitpunkt übertragen.
+                    Eingesetzt wird Google Analytics 4 (Google Ireland Ltd.) zur Analyse der Websitenutzung und – nach Ihrer Zustimmung – für Google-Ads-Konversionsmessung, Google Signals, Anzeigenpersonalisierung und besucherbasierte Zielgruppen. Formularinhalte und Gesundheitsangaben werden zu keinem Zeitpunkt übertragen.
                   </div>
                 )}
               </div>
