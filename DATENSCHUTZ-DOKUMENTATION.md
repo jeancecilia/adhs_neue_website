@@ -1,6 +1,6 @@
 # Datenschutz-Dokumentation der Website
 
-Stand der Prüfung: 17. August 2026
+Stand der Prüfung: 18. August 2026
 
 ## Cloudflare-Auftragsverarbeitung
 
@@ -15,7 +15,7 @@ Eingesetzte Dienste:
 - Cloudflare Workers und Email Sending für das Kontaktformular
 - Cloudflare Email Routing für eingehende Praxis-E-Mails
 - Cloudflare Web Analytics und Real User Measurement
-- Google Analytics 4 standardmäßig aktiv, mit jederzeitiger Opt-out-Möglichkeit
+- Google Analytics 4 und Google-Marketingdienste erst nach einer Einwilligung in den jeweiligen Zweck
 
 Vertragsnachweis:
 
@@ -41,8 +41,10 @@ Dokumentierte Schutzmaßnahmen:
 - ausdrückliche Einwilligung für freiwillig übermittelte Gesundheitsdaten
 - Hinweis zur Datenminimierung unmittelbar am Formular
 - Cloudflare Web Analytics ohne Analyse-Cookies oder Local Storage
-- Google Consent Mode v2 mit standardmäßig gewährtem `analytics_storage`; Werbesignale bleiben bis „Alle akzeptieren“ verweigert
-- Google-Ads-Speicher, Google Signals, besucherbasierte Zielgruppen und Anzeigenpersonalisierung nur nach „Alle akzeptieren“
+- Google Consent Mode v2 mit standardmäßig verweigertem `analytics_storage`, `ad_storage`, `ad_user_data` und `ad_personalization`
+- zwei unabhängige optionale Zwecke: „Statistik & Reichweite“ sowie „Marketing & Personalisierung“
+- Google Analytics 4 nur nach Statistik-Einwilligung; Google Ads, Conversion-Messung, Google Signals und Anzeigenpersonalisierung nur nach Marketing-Einwilligung
+- Google Ireland Limited wird in den Details beider Zwecke mit vollständiger Anschrift benannt
 - Analytics-Ereignisse ohne Formularinhalte, Kontaktdaten oder ausgewählte Gesundheitsanliegen
 
 ## Regelmäßige Kontrolle

@@ -3,7 +3,11 @@ export const ANALYTICS_CONSENT_STORAGE_KEY =
   "adhs-praxis.analytics-consent.v1";
 export const OPEN_CONSENT_SETTINGS_EVENT = "analytics-consent:open";
 
-export type AnalyticsConsent = "analytics" | "granted" | "denied";
+export type AnalyticsConsent =
+  | "analytics"
+  | "marketing"
+  | "granted"
+  | "denied";
 
 type Gtag = (...args: unknown[]) => void;
 
@@ -24,6 +28,7 @@ export function readAnalyticsConsent(): AnalyticsConsent | null {
   try {
     const stored = window.localStorage.getItem(ANALYTICS_CONSENT_STORAGE_KEY);
     return stored === "analytics" ||
+      stored === "marketing" ||
       stored === "granted" ||
       stored === "denied"
       ? stored
@@ -62,9 +67,9 @@ export function setDefaultConsent(): void {
   const gtag = ensureGtag();
   if (!gtag) return;
 
-  setAnalyticsDisabled(false);
+  setAnalyticsDisabled(true);
   gtag("consent", "default", {
-    analytics_storage: "granted",
+    analytics_storage: "denied",
     ad_storage: "denied",
     ad_user_data: "denied",
     ad_personalization: "denied",
@@ -86,8 +91,12 @@ export function updateAnalyticsConsent(consent: AnalyticsConsent): void {
   const gtag = ensureGtag();
   if (!gtag) return;
 
-  const analyticsStorage = consent === "denied" ? "denied" : "granted";
-  const advertisingStorage = consent === "granted" ? "granted" : "denied";
+  const analyticsStorage = hasAnalyticsConsent(consent)
+    ? "granted"
+    : "denied";
+  const advertisingStorage = hasMarketingConsent(consent)
+    ? "granted"
+    : "denied";
 
   setAnalyticsDisabled(consent === "denied");
   gtag("consent", "update", {
@@ -97,7 +106,16 @@ export function updateAnalyticsConsent(consent: AnalyticsConsent): void {
     ad_personalization: advertisingStorage,
   });
 
-  if (consent === "denied") clearGoogleAnalyticsCookies();
+  if (!hasAnalyticsConsent(consent)) clearGoogleCookies("_ga");
+  if (!hasMarketingConsent(consent)) clearGoogleCookies("_gcl");
+}
+
+export function hasAnalyticsConsent(consent: AnalyticsConsent): boolean {
+  return consent === "analytics" || consent === "granted";
+}
+
+export function hasMarketingConsent(consent: AnalyticsConsent): boolean {
+  return consent === "marketing" || consent === "granted";
 }
 
 export function loadGoogleAnalytics(): void {
@@ -126,7 +144,8 @@ export function trackAnalyticsEvent(
   eventName: string,
   parameters: Record<string, string | number | boolean> = {},
 ): boolean {
-  if (readAnalyticsConsent() === "denied") return false;
+  const consent = readAnalyticsConsent();
+  if (!consent || consent === "denied") return false;
 
   const gtag = ensureGtag();
   if (!gtag) return false;
@@ -135,16 +154,21 @@ export function trackAnalyticsEvent(
   return true;
 }
 
-export function clearGoogleAnalyticsCookies(): void {
+function clearGoogleCookies(prefix: "_ga" | "_gcl"): void {
   if (typeof document === "undefined") return;
 
   const cookieNames = document.cookie
     .split(";")
     .map((cookie) => cookie.split("=")[0]?.trim())
-    .filter((name): name is string => Boolean(name?.startsWith("_ga")));
+    .filter((name): name is string => Boolean(name?.startsWith(prefix)));
 
   for (const name of cookieNames) {
     document.cookie = `${name}=; Max-Age=0; Path=/; SameSite=Lax`;
     document.cookie = `${name}=; Max-Age=0; Path=/; Domain=.neurofeedback-praxis-muenchen.de; SameSite=Lax`;
   }
+}
+
+export function clearGoogleAnalyticsCookies(): void {
+  clearGoogleCookies("_ga");
+  clearGoogleCookies("_gcl");
 }

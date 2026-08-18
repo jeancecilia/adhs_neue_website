@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
   type AnalyticsConsent,
+  hasAnalyticsConsent,
+  hasMarketingConsent,
   loadGoogleAnalytics,
   OPEN_CONSENT_SETTINGS_EVENT,
   readAnalyticsConsent,
@@ -20,9 +22,10 @@ export default function AnalyticsConsentManager() {
   const [isOpen, setIsOpen] = useState(false);
   // View mode: 'banner' (compact floating bottom bar) or 'modal' (detailed category settings)
   const [viewMode, setViewMode] = useState<"banner" | "modal">("banner");
-  // Advertising measurement is optional; analytics remains active by default.
-  const [nonEssentialSelected, setNonEssentialSelected] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
+  const [analyticsSelected, setAnalyticsSelected] = useState(false);
+  const [marketingSelected, setMarketingSelected] = useState(false);
+  const [showAnalyticsDetails, setShowAnalyticsDetails] = useState(false);
+  const [showMarketingDetails, setShowMarketingDetails] = useState(false);
   const lastTrackedPath = useRef<string | null>(null);
 
   useEffect(() => {
@@ -32,20 +35,27 @@ export default function AnalyticsConsentManager() {
     if (savedConsent) {
       updateAnalyticsConsent(savedConsent);
       setConsent(savedConsent);
-      setNonEssentialSelected(savedConsent === "granted");
+      setAnalyticsSelected(hasAnalyticsConsent(savedConsent));
+      setMarketingSelected(hasMarketingConsent(savedConsent));
+      if (savedConsent !== "denied") loadGoogleAnalytics();
     } else {
       // First visit: show floating bottom banner
-      setConsent("analytics");
-      setNonEssentialSelected(false);
+      setConsent("denied");
+      setAnalyticsSelected(false);
+      setMarketingSelected(false);
       setViewMode("banner");
       setIsOpen(true);
     }
-    loadGoogleAnalytics();
 
     // Triggered by footer button "Statistik-Einstellungen" -> opens detailed modal directly
     const openSettings = () => {
       const currentSaved = readAnalyticsConsent();
-      setNonEssentialSelected(currentSaved === "granted");
+      setAnalyticsSelected(
+        currentSaved ? hasAnalyticsConsent(currentSaved) : false,
+      );
+      setMarketingSelected(
+        currentSaved ? hasMarketingConsent(currentSaved) : false,
+      );
       setViewMode("modal");
       setIsOpen(true);
     };
@@ -90,14 +100,16 @@ export default function AnalyticsConsentManager() {
     updateAnalyticsConsent(nextConsent);
     if (nextConsent !== "denied") loadGoogleAnalytics();
     setConsent(nextConsent);
-    setNonEssentialSelected(nextConsent === "granted");
+    setAnalyticsSelected(hasAnalyticsConsent(nextConsent));
+    setMarketingSelected(hasMarketingConsent(nextConsent));
     setIsOpen(false);
   };
 
   const handleConfirmSelection = () => {
-    const nextConsent: AnalyticsConsent = nonEssentialSelected
-      ? "granted"
-      : "analytics";
+    let nextConsent: AnalyticsConsent = "denied";
+    if (analyticsSelected && marketingSelected) nextConsent = "granted";
+    else if (analyticsSelected) nextConsent = "analytics";
+    else if (marketingSelected) nextConsent = "marketing";
     chooseConsent(nextConsent);
   };
 
@@ -122,7 +134,7 @@ export default function AnalyticsConsentManager() {
               </h2>
             </div>
             <p className="mt-1 text-[13px] leading-relaxed text-slate-700 hyphens-none">
-              Mit Ihrer Einwilligung nutzen wir Nutzungsdaten, um Reichweite und Nutzung unserer Website zu analysieren, unser Angebot zu verbessern und Werbung gezielter auszuspielen.{" "}
+              Mit Ihrer Einwilligung analysieren wir Nutzung und Reichweite unserer Website, messen den Erfolg unserer Werbung und können Anzeigen relevanter ausspielen.{" "}
               <Link
                 href="/datenschutz"
                 className="font-medium text-[#173838] underline decoration-slate-300 underline-offset-2 hover:text-[#1b4343]"
@@ -173,7 +185,7 @@ export default function AnalyticsConsentManager() {
     >
       <section
         aria-label="Cookie- und Datenschutzeinstellungen"
-        className="relative w-full max-w-[600px] overflow-hidden rounded-2xl border border-[rgba(47,79,79,0.18)] bg-white shadow-[0_24px_80px_rgba(23,56,56,0.24)] animate-in zoom-in-95 duration-200"
+        className="relative max-h-[calc(100vh-1.5rem)] w-full max-w-[620px] overflow-y-auto rounded-2xl border border-[rgba(47,79,79,0.18)] bg-white shadow-[0_24px_80px_rgba(23,56,56,0.24)] animate-in zoom-in-95 duration-200"
       >
         <div className="p-5 sm:p-6 sm:pb-7">
           {/* Header */}
@@ -246,42 +258,42 @@ export default function AnalyticsConsentManager() {
               </p>
             </div>
 
-            {/* Category: Google Ads and personalization (Optional) */}
+            {/* Category: Statistics and reach (Optional) */}
             <div
               className={`rounded-xl border p-3.5 sm:p-4 transition-all duration-200 cursor-pointer ${
-                nonEssentialSelected
+                analyticsSelected
                   ? "border-[#173838] bg-[#173838]/5 ring-1 ring-[#173838]"
                   : "border-slate-200 bg-white hover:border-slate-300"
               }`}
-              onClick={() => setNonEssentialSelected(!nonEssentialSelected)}
+              onClick={() => setAnalyticsSelected(!analyticsSelected)}
             >
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5">
                   <input
                     type="checkbox"
-                    id="cookie-cat-analytics-modal"
-                    checked={nonEssentialSelected}
+                    id="cookie-cat-statistics-modal"
+                    checked={analyticsSelected}
                     onChange={(e) => {
                       e.stopPropagation();
-                      setNonEssentialSelected(e.target.checked);
+                      setAnalyticsSelected(e.target.checked);
                     }}
                     onClick={(e) => e.stopPropagation()}
                     className="h-4 w-4 rounded border-slate-300 text-[#173838] focus:ring-[#173838]/30 cursor-pointer"
                   />
                   <label
-                    htmlFor="cookie-cat-analytics-modal"
+                    htmlFor="cookie-cat-statistics-modal"
                     className="text-[14px] font-bold text-[#173838] cursor-pointer select-none"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setNonEssentialSelected(!nonEssentialSelected);
+                      setAnalyticsSelected(!analyticsSelected);
                     }}
                   >
-                    Google Ads & Personalisierung
+                    Statistik & Reichweite
                   </label>
                 </div>
                 <span
                   className={`rounded-md px-2 py-0.5 text-[11px] font-semibold transition-colors ${
-                    nonEssentialSelected
+                    analyticsSelected
                       ? "bg-[#173838]/10 text-[#173838]"
                       : "bg-slate-100 text-slate-500"
                   }`}
@@ -290,7 +302,7 @@ export default function AnalyticsConsentManager() {
                 </span>
               </div>
               <p className="mt-1.5 pl-6.5 text-[12px] leading-relaxed text-slate-600 hyphens-none">
-                Hilft uns nach Ihrer Zustimmung zu erkennen, welche Anzeigen zu einer Anfrage führen, und ermöglicht Google Signals, personalisierte Anzeigen sowie besucherbasierte Zielgruppen.
+                Hilft uns zu verstehen, wie unsere Website genutzt wird und welche Inhalte besonders relevant sind.
               </p>
 
               {/* Details toggle */}
@@ -299,16 +311,96 @@ export default function AnalyticsConsentManager() {
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setShowDetails(!showDetails);
+                    setShowAnalyticsDetails(!showAnalyticsDetails);
                   }}
                   className="text-left text-[12px] font-medium text-slate-500 underline decoration-slate-300 underline-offset-2 hover:text-[#173838]"
                 >
-                  {showDetails ? "Details verbergen" : "Details anzeigen"}
+                  {showAnalyticsDetails
+                    ? "Details verbergen"
+                    : "Details anzeigen"}
                 </button>
 
-                {showDetails && (
+                {showAnalyticsDetails && (
                   <div className="mt-2 rounded-lg border border-slate-200/80 bg-slate-50 p-2.5 text-[11px] leading-relaxed text-slate-600 animate-in fade-in">
-                    Eingesetzt wird Google Analytics 4 (Google Ireland Ltd.) zur Analyse der Websitenutzung und – nach Ihrer Zustimmung – für Google-Ads-Konversionsmessung, Google Signals, Anzeigenpersonalisierung und besucherbasierte Zielgruppen. Formularinhalte und Gesundheitsangaben werden zu keinem Zeitpunkt übertragen.
+                    Google Analytics 4 – Google Ireland Limited, Gordon House,
+                    Barrow Street, Dublin 4, Irland. Der Dienst misst Nutzung,
+                    Reichweite und relevante Inhalte. Formularinhalte,
+                    Kontaktdaten und Gesundheitsangaben werden nicht an Google
+                    übermittelt.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Category: Marketing and personalization (Optional) */}
+            <div
+              className={`rounded-xl border p-3.5 sm:p-4 transition-all duration-200 cursor-pointer ${
+                marketingSelected
+                  ? "border-[#173838] bg-[#173838]/5 ring-1 ring-[#173838]"
+                  : "border-slate-200 bg-white hover:border-slate-300"
+              }`}
+              onClick={() => setMarketingSelected(!marketingSelected)}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <input
+                    type="checkbox"
+                    id="cookie-cat-marketing-modal"
+                    checked={marketingSelected}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      setMarketingSelected(e.target.checked);
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                    className="h-4 w-4 cursor-pointer rounded border-slate-300 text-[#173838] focus:ring-[#173838]/30"
+                  />
+                  <label
+                    htmlFor="cookie-cat-marketing-modal"
+                    className="cursor-pointer select-none text-[14px] font-bold text-[#173838]"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setMarketingSelected(!marketingSelected);
+                    }}
+                  >
+                    Marketing & Personalisierung
+                  </label>
+                </div>
+                <span
+                  className={`rounded-md px-2 py-0.5 text-[11px] font-semibold transition-colors ${
+                    marketingSelected
+                      ? "bg-[#173838]/10 text-[#173838]"
+                      : "bg-slate-100 text-slate-500"
+                  }`}
+                >
+                  Optional
+                </span>
+              </div>
+              <p className="mt-1.5 pl-6.5 text-[12px] leading-relaxed text-slate-600 hyphens-none">
+                Hilft uns zu erkennen, welche Anzeigen zu Anfragen führen, und
+                Werbung relevanter auszuspielen.
+              </p>
+
+              <div className="mt-2 pl-6.5">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowMarketingDetails(!showMarketingDetails);
+                  }}
+                  className="text-left text-[12px] font-medium text-slate-500 underline decoration-slate-300 underline-offset-2 hover:text-[#173838]"
+                >
+                  {showMarketingDetails
+                    ? "Details verbergen"
+                    : "Details anzeigen"}
+                </button>
+
+                {showMarketingDetails && (
+                  <div className="mt-2 rounded-lg border border-slate-200/80 bg-slate-50 p-2.5 text-[11px] leading-relaxed text-slate-600 animate-in fade-in">
+                    Google Ads, Conversion-Messung und Google Signals – Google
+                    Ireland Limited, Gordon House, Barrow Street, Dublin 4,
+                    Irland. Dazu gehören Erfolgsmessung, Google Signals und
+                    personalisierte Werbung. Formularinhalte, Kontaktdaten und
+                    Gesundheitsangaben werden nicht an Google übermittelt.
                   </div>
                 )}
               </div>
