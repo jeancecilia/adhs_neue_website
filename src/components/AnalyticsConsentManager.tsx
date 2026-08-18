@@ -134,7 +134,7 @@ export default function AnalyticsConsentManager() {
               </h2>
             </div>
             <p className="mt-1 text-[13px] leading-relaxed text-slate-700 hyphens-none">
-              Mit Ihrer Einwilligung analysieren wir Nutzung und Reichweite unserer Website, messen den Erfolg unserer Werbung und können Anzeigen relevanter ausspielen.{" "}
+              Wir verwenden notwendige Technologien für den Betrieb unserer Website. Mit Ihrer Zustimmung verwenden wir außerdem Cookies und ähnliche Technologien, um die Nutzung unserer Website zu verstehen, den Erfolg unserer Angebote zu messen und Ihre Website-Erfahrung kontinuierlich zu verbessern.{" "}
               <Link
                 href="/datenschutz"
                 className="font-medium text-[#173838] underline decoration-slate-300 underline-offset-2 hover:text-[#1b4343]"
