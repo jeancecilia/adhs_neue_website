@@ -3,7 +3,7 @@ export const ANALYTICS_CONSENT_STORAGE_KEY =
   "adhs-praxis.analytics-consent.v1";
 export const OPEN_CONSENT_SETTINGS_EVENT = "analytics-consent:open";
 
-export type AnalyticsConsent = "granted" | "denied";
+export type AnalyticsConsent = "analytics" | "granted" | "denied";
 
 type Gtag = (...args: unknown[]) => void;
 
@@ -23,7 +23,11 @@ export function readAnalyticsConsent(): AnalyticsConsent | null {
 
   try {
     const stored = window.localStorage.getItem(ANALYTICS_CONSENT_STORAGE_KEY);
-    return stored === "granted" || stored === "denied" ? stored : null;
+    return stored === "analytics" ||
+      stored === "granted" ||
+      stored === "denied"
+      ? stored
+      : null;
   } catch {
     return null;
   }
@@ -64,6 +68,7 @@ export function setDefaultConsent(): void {
     ad_personalization: "denied",
     functionality_storage: "granted",
     security_storage: "granted",
+    wait_for_update: 500,
   });
   gtag("set", "ads_data_redaction", true);
 }
@@ -79,12 +84,17 @@ export function updateAnalyticsConsent(consent: AnalyticsConsent): void {
   const gtag = ensureGtag();
   if (!gtag) return;
 
+  const analyticsStorage = consent === "denied" ? "denied" : "granted";
+  const advertisingStorage = consent === "granted" ? "granted" : "denied";
+
   setAnalyticsDisabled(consent === "denied");
   gtag("consent", "update", {
-    analytics_storage: consent,
-    ad_storage: consent,
-    ad_user_data: consent,
-    ad_personalization: consent,
+    analytics_storage: analyticsStorage,
+    ad_storage: advertisingStorage,
+    ad_user_data: advertisingStorage,
+    // The practice concerns sensitive health services. Conversion measurement
+    // is allowed after acceptance, but visitor-based ad personalization is not.
+    ad_personalization: "denied",
   });
 
   if (consent === "denied") clearGoogleAnalyticsCookies();
@@ -105,8 +115,8 @@ export function loadGoogleAnalytics(): void {
 
   gtag("js", new Date());
   gtag("config", GA_MEASUREMENT_ID, {
-    allow_ad_personalization_signals: true,
-    allow_google_signals: true,
+    allow_ad_personalization_signals: false,
+    allow_google_signals: false,
     anonymize_ip: true,
     send_page_view: false,
   });

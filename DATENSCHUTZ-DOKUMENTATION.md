@@ -42,7 +42,7 @@ Dokumentierte Schutzmaßnahmen:
 - Hinweis zur Datenminimierung unmittelbar am Formular
 - Cloudflare Web Analytics ohne Analyse-Cookies oder Local Storage
 - Google Consent Mode v2 mit standardmäßig gewährtem `analytics_storage`; Werbesignale bleiben bis „Alle akzeptieren“ verweigert
-- Google Signals, Werbespeicher, Anzeigenpersonalisierung und nutzerbereitgestellte Werbedaten nur nach „Alle akzeptieren“
+- Google-Ads-Speicher und Messsignale nur nach „Alle akzeptieren“; Google Signals, besucherbasierte Zielgruppen und Anzeigenpersonalisierung bleiben deaktiviert
 - Analytics-Ereignisse ohne Formularinhalte, Kontaktdaten oder ausgewählte Gesundheitsanliegen
 
 ## Regelmäßige Kontrolle

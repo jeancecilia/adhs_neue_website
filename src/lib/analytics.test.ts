@@ -28,7 +28,7 @@ describe("privacy-first Google Analytics", () => {
     ];
   });
 
-  it("enables analytics storage by default while denying advertising signals", () => {
+  it("enables analytics while denying advertising storage by default", () => {
     setDefaultConsent();
 
     expect(dataLayerCommands()[0]).toEqual([
@@ -39,6 +39,7 @@ describe("privacy-first Google Analytics", () => {
         ad_storage: "denied",
         ad_user_data: "denied",
         ad_personalization: "denied",
+        wait_for_update: 500,
       }),
     ]);
   });
@@ -48,6 +49,9 @@ describe("privacy-first Google Analytics", () => {
 
     writeAnalyticsConsent("granted");
     expect(readAnalyticsConsent()).toBe("granted");
+
+    writeAnalyticsConsent("analytics");
+    expect(readAnalyticsConsent()).toBe("analytics");
 
     window.localStorage.setItem(ANALYTICS_CONSENT_STORAGE_KEY, "invalid");
     expect(readAnalyticsConsent()).toBeNull();
@@ -88,6 +92,15 @@ describe("privacy-first Google Analytics", () => {
     expect(document.querySelector("script[data-ga-id]")?.getAttribute("src")).toBe(
       `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`,
     );
+    expect(dataLayerCommands()).toContainEqual([
+      "config",
+      GA_MEASUREMENT_ID,
+      expect.objectContaining({
+        allow_ad_personalization_signals: false,
+        allow_google_signals: false,
+        send_page_view: false,
+      }),
+    ]);
     expect(trackAnalyticsEvent("generate_lead", { method: "contact_form" })).toBe(
       true,
     );
@@ -109,7 +122,25 @@ describe("privacy-first Google Analytics", () => {
         analytics_storage: "granted",
         ad_storage: "granted",
         ad_user_data: "granted",
-        ad_personalization: "granted",
+        ad_personalization: "denied",
+      },
+    ]);
+  });
+
+  it("keeps analytics active without granting advertising measurement", () => {
+    setDefaultConsent();
+    writeAnalyticsConsent("analytics");
+    updateAnalyticsConsent("analytics");
+
+    expect(trackAnalyticsEvent("page_view")).toBe(true);
+    expect(dataLayerCommands()).toContainEqual([
+      "consent",
+      "update",
+      {
+        analytics_storage: "granted",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
       },
     ]);
   });

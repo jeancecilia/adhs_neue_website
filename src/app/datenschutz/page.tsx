@@ -23,7 +23,7 @@ export default function DatenschutzPage() {
           </nav>
           <p className="eyebrow mb-3">Datenschutz & DSGVO</p>
           <h1 className="text-[32px] leading-[1.15] text-[#173838] sm:text-[46px]">Datenschutzerklärung</h1>
-          <p className="mt-4 text-[14px] text-slate-600">Stand: 17. August 2026</p>
+          <p className="mt-4 text-[14px] text-slate-600">Stand: 18. August 2026</p>
         </div>
       </section>
 
@@ -86,7 +86,7 @@ export default function DatenschutzPage() {
               Google Analytics verarbeitet insbesondere pseudonyme Online-Kennungen, gekürzte beziehungsweise von Google nicht dauerhaft protokollierte IP-Informationen, Geräte- und Browsermerkmale, aufgerufene Seiten, Referrer, ungefähre Region, Zeitpunkt und Dauer der Nutzung sowie Interaktionen mit der Website. Wir messen erfolgreiche Kontaktformularübermittlungen als Ereignis <code>generate_lead</code> und Klicks auf den externen WhatsApp-Link als <code>whatsapp_click</code>. Formularinhalte, Namen, E-Mail-Adressen, Nachrichten, ausgewählte Anliegen und andere Gesundheitsangaben werden nicht an Google Analytics oder Google Ads gesendet.
             </p>
             <p className="mt-3">
-              Wir verwenden Consent Mode v2. <code>analytics_storage</code> ist standardmäßig gewährt. <code>ad_storage</code>, <code>ad_user_data</code> und <code>ad_personalization</code> sind zunächst verweigert und werden erst über „Alle akzeptieren“ gewährt. Dann können Google Signals, Google-Ads-Konversionsmessung, Zielgruppenfunktionen und Anzeigenpersonalisierung eingesetzt werden. Die standardmäßige Reichweitenmessung stützen wir auf Art. 6 Abs. 1 lit. f DSGVO; unser Interesse liegt in der Messung und Verbesserung unseres Online-Angebots. Soweit eine Einwilligung erforderlich ist, erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TDDDG. Die Werbefunktionen beruhen auf Ihrer Einwilligung.
+              Wir verwenden Consent Mode v2. <code>analytics_storage</code> ist standardmäßig gewährt. <code>ad_storage</code> und <code>ad_user_data</code> sind zunächst verweigert und werden erst über „Alle akzeptieren“ für die Google-Ads-Konversionsmessung gewährt. <code>ad_personalization</code> bleibt verweigert. Google Signals, besucherbasierte Werbezielgruppen und Anzeigenpersonalisierung verwenden wir wegen des sensiblen Gesundheitsbezugs unseres Angebots nicht. Die standardmäßige Reichweitenmessung stützen wir auf Art. 6 Abs. 1 lit. f DSGVO; unser Interesse liegt in der Messung und Verbesserung unseres Online-Angebots. Soweit eine Einwilligung erforderlich ist, erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TDDDG. Die Google-Ads-Konversionsmessung beruht auf Ihrer Einwilligung.
             </p>
             <p className="mt-3">
               Ihre Entscheidung wird unter dem Schlüssel <code>adhs-praxis.analytics-consent.v1</code> im Local Storage Ihres Browsers gespeichert. Google Analytics kann insbesondere die Cookies <code>_ga</code> und <code>_ga_*</code> setzen. Sie können Ihre Entscheidung jederzeit über „Statistik-Einstellungen“ im Seitenfuß ändern. Bei Auswahl von „Nur notwendige“ werden weitere Analytics- und Werbemessungen deaktiviert und die für unsere Domain erreichbaren Google-Analytics-Cookies gelöscht. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt unberührt. Weitere Informationen finden Sie in der <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className={externalLinkClass}>Datenschutzerklärung von Google</a> und den <a href="https://support.google.com/analytics/answer/12017362" target="_blank" rel="noreferrer" className={externalLinkClass}>Datenschutzhinweisen zu Google Analytics</a>.
@@ -129,7 +129,7 @@ export default function DatenschutzPage() {
           <div>
             <h2 className="mb-3 text-[22px] font-bold text-[#173838]">10. Cookies und lokale Speicherung</h2>
             <p>
-              Analyse-Cookies sind beim ersten Besuch standardmäßig aktiviert, sofern keine frühere Ablehnung gespeichert ist. Marketing-Cookies, Google Signals und personalisierte Werbefunktionen werden erst nach „Alle akzeptieren“ aktiviert. Cloudflare kann in besonderen Sicherheitsfällen technisch notwendige Cookies verwenden, etwa nach einer Sicherheitsprüfung oder Challenge. Die im Local Storage gespeicherte Auswahl ist erforderlich, um Ihre Entscheidung bei weiteren Seitenaufrufen zu beachten.
+              Analyse-Cookies sind beim ersten Besuch standardmäßig aktiviert, sofern keine frühere Ablehnung gespeichert ist. Cookies und Signale für die Google-Ads-Konversionsmessung werden erst nach „Alle akzeptieren“ aktiviert. Google Signals, besucherbasierte Werbezielgruppen und Anzeigenpersonalisierung bleiben deaktiviert. Cloudflare kann in besonderen Sicherheitsfällen technisch notwendige Cookies verwenden, etwa nach einer Sicherheitsprüfung oder Challenge. Die im Local Storage gespeicherte Auswahl ist erforderlich, um Ihre Entscheidung bei weiteren Seitenaufrufen zu beachten.
             </p>
           </div>
 
@@ -138,11 +138,11 @@ export default function DatenschutzPage() {
             <p>Personenbezogene Daten erhalten nur Stellen, die sie für die genannten Zwecke benötigen:</p>
             <ul className="mt-3 list-disc space-y-1 pl-6">
               <li>Cloudflare, Inc. für Hosting, DNS, CDN, Sicherheit, Formularzustellung, E-Mail-Routing und Webanalyse,</li>
-              <li>Google Ireland Limited und gegebenenfalls Google LLC für das empfangende E-Mail-Postfach, Google Analytics 4 sowie – nach „Alle akzeptieren“ – für Google-Ads-Messung und Werbefunktionen,</li>
+              <li>Google Ireland Limited und gegebenenfalls Google LLC für das empfangende E-Mail-Postfach, Google Analytics 4 sowie – nach „Alle akzeptieren“ – für die Google-Ads-Konversionsmessung,</li>
               <li>WhatsApp Ireland Limited und Unternehmen der Meta-Gruppe nur, wenn Sie den WhatsApp-Link nutzen,</li>
               <li>Behörden, Gerichte, Steuerberatung oder sonstige Berufsgeheimnisträger, soweit eine gesetzliche Pflicht besteht oder dies zur Rechtsverteidigung erforderlich ist.</li>
             </ul>
-            <p className="mt-3">Eine Verarbeitung für Google-Ads-Messung, Zielgruppen und Anzeigenpersonalisierung findet nur nach „Alle akzeptieren“ statt.</p>
+            <p className="mt-3">Eine Verarbeitung für die Google-Ads-Konversionsmessung findet nur nach „Alle akzeptieren“ statt. Besucherbasierte Zielgruppen und Anzeigenpersonalisierung verwenden wir nicht.</p>
           </div>
 
           <div>
@@ -159,7 +159,7 @@ export default function DatenschutzPage() {
               <li><strong>E-Mails:</strong> entsprechend dem Zweck der Anfrage; behandlungsrelevante Inhalte werden gegebenenfalls in die Behandlungsdokumentation übernommen.</li>
               <li><strong>Behandlungsdokumentation:</strong> grundsätzlich zehn Jahre nach Abschluss der Behandlung, soweit keine längere gesetzliche Frist greift.</li>
               <li><strong>Cloudflare Web Analytics:</strong> nicht aggregierte Messdaten sieben Tage; aggregierte Auswertungen bis zu sechs Monate.</li>
-              <li><strong>Google Analytics 4:</strong> Ereignisdaten zwei Monate und pseudonyme Nutzerdaten bis zu 14 Monate nach den Einstellungen der Analytics-Property; die Einwilligungsentscheidung bleibt lokal gespeichert, bis Sie sie ändern oder den Browserspeicher löschen.</li>
+              <li><strong>Google Analytics 4:</strong> Ereignis- und pseudonyme Nutzerdaten bis zu 14 Monate nach den Einstellungen der Analytics-Property; die Einwilligungsentscheidung bleibt lokal gespeichert, bis Sie sie ändern oder den Browserspeicher löschen.</li>
               <li><strong>Sicherheits- und Netzwerkprotokolle:</strong> zweckgebunden nach den vertraglichen Cloudflare-Löschregeln; keine Übernahme in ein eigenes dauerhaftes Besucherarchiv.</li>
               <li><strong>Steuer- und handelsrechtlich relevante Unterlagen:</strong> entsprechend der jeweils geltenden gesetzlichen Aufbewahrungsfrist.</li>
             </ul>
