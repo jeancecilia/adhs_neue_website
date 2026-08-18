@@ -47,11 +47,13 @@ export function ensureGtag(): Gtag | null {
   if (typeof window === "undefined") return null;
 
   window.dataLayer = window.dataLayer ?? [];
-  window.gtag =
-    window.gtag ??
-    ((...args: unknown[]) => {
-      window.dataLayer?.push(args);
-    });
+  if (!window.gtag) {
+    // Google's canonical gtag snippet pushes the function's `arguments`
+    // object. gtag.js does not reliably process plain nested arrays here.
+    window.gtag = function () {
+      window.dataLayer?.push(arguments);
+    };
+  }
 
   return window.gtag;
 }

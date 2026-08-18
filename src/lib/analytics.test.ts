@@ -13,7 +13,9 @@ import {
 } from "./analytics";
 
 function dataLayerCommands(): unknown[][] {
-  return (window.dataLayer ?? []) as unknown[][];
+  return (window.dataLayer ?? []).map((command) =>
+    Array.from(command as ArrayLike<unknown>),
+  );
 }
 
 describe("privacy-first Google Analytics", () => {
@@ -42,6 +44,16 @@ describe("privacy-first Google Analytics", () => {
         wait_for_update: 500,
       }),
     ]);
+  });
+
+  it("queues commands in the canonical gtag arguments format", () => {
+    setDefaultConsent();
+
+    const firstCommand = window.dataLayer?.[0];
+    expect(Array.isArray(firstCommand)).toBe(false);
+    expect(Object.prototype.toString.call(firstCommand)).toBe(
+      "[object Arguments]",
+    );
   });
 
   it("persists only an explicit valid consent choice", () => {
