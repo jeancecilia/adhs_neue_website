@@ -105,6 +105,12 @@ export default function AdhsTestPage() {
             >
               Ablauf & Kosten ansehen →
             </Link>
+            <Link
+              href="/adhs-selbsttest-erwachsene"
+              className="inline-flex min-h-[50px] items-center justify-center rounded-full border border-[rgba(47,79,79,0.25)] bg-white px-7 py-3.5 text-[14px] font-semibold text-[#173838] hover:bg-slate-50"
+            >
+              Kostenloser ADHS-Selbsttest
+            </Link>
           </div>
 
           <div className="mt-6 flex flex-wrap items-center gap-4 text-[13px] text-slate-600">

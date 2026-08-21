@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { siteConfig } from "@/config/site";
 
 const psychotherapyItems = [
+  { href: "/adhs-selbsttest-erwachsene", label: "ADHS-Selbsttest" },
   { href: "/adhs-therapie-muenchen", label: "ADHS-Therapie" },
   { href: "/adhs-beratung-muenchen", label: "ADHS-Beratung" },
   { href: "/soziale-angst-muenchen", label: "Soziale Angst" },

@@ -6,6 +6,7 @@ const routes = [
   '/ablauf-kosten',
   '/adhs-erwachsene-muenchen',
   '/adhs-beratung-muenchen',
+  '/adhs-selbsttest-erwachsene',
   '/adhs-test-muenchen',
   '/adhs-therapie-muenchen',
   '/adhs-wissen',

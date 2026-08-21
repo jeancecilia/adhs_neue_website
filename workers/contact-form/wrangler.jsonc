@@ -9,9 +9,16 @@
       "destination_address": "neurofeedback.praxis.muenchen@gmail.com"
     }
   ],
+  "triggers": {
+    "crons": ["17 3 * * 0"]
+  },
   "routes": [
     {
       "pattern": "neurofeedback-praxis-muenchen.de/api/contact*",
+      "zone_name": "neurofeedback-praxis-muenchen.de"
+    },
+    {
+      "pattern": "neurofeedback-praxis-muenchen.de/api/selftest*",
       "zone_name": "neurofeedback-praxis-muenchen.de"
     }
   ]

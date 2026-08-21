@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { trackAnalyticsEvent } from "@/lib/analytics";
+import { SELFTEST_LINK_KEY } from "@/lib/adhsSelftest";
 
 function BookingFormInner() {
   const searchParams = useSearchParams();
@@ -26,6 +27,16 @@ function BookingFormInner() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [linkedResponseId, setLinkedResponseId] = useState("");
+  const [linkTestResult, setLinkTestResult] = useState(true);
+
+  useEffect(() => {
+    try {
+      setLinkedResponseId(window.sessionStorage.getItem(SELFTEST_LINK_KEY) ?? "");
+    } catch {
+      setLinkedResponseId("");
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +57,16 @@ function BookingFormInner() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, service, timeslot, message, healthDataConsent, website }),
+        body: JSON.stringify({
+          name,
+          email,
+          service,
+          timeslot,
+          message,
+          healthDataConsent,
+          website,
+          linkedResponseId: linkTestResult && linkedResponseId ? linkedResponseId : null,
+        }),
       });
 
       if (!response.ok) {
@@ -54,6 +74,13 @@ function BookingFormInner() {
       }
 
       trackAnalyticsEvent("generate_lead", { method: "contact_form" });
+      if (linkedResponseId) {
+        try {
+          window.sessionStorage.removeItem(SELFTEST_LINK_KEY);
+        } catch {
+          // The form submission remains successful without browser storage.
+        }
+      }
       setSubmitted(true);
     } catch {
       setError("Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es später erneut oder nutzen Sie WhatsApp.");
@@ -202,6 +229,23 @@ function BookingFormInner() {
             Bitte tragen Sie hier keine Diagnosen, Befunde, Medikamentenangaben oder ausführlichen Gesundheitsinformationen ein. Für die erste Kontaktaufnahme reichen organisatorische Angaben.
           </p>
         </div>
+
+        {linkedResponseId && (
+          <div className="rounded-xl border border-[#dec77f] bg-[#fffaf0] p-4">
+            <label htmlFor="form-link-selftest" className="flex cursor-pointer items-start gap-3 text-[13px] leading-relaxed text-slate-700">
+              <input
+                id="form-link-selftest"
+                type="checkbox"
+                checked={linkTestResult}
+                onChange={(event) => setLinkTestResult(event.target.checked)}
+                className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300 text-[#173838] focus:ring-[#173838]"
+              />
+              <span>
+                Mein zuvor erstelltes ADHS-Selbsttest-Ergebnis mit dieser Anfrage verknüpfen. Ohne Auswahl bleiben Selbsttest und Kontaktdaten getrennt.
+              </span>
+            </label>
+          </div>
+        )}
 
         <div className="rounded-xl border border-[#dec77f] bg-[#fffaf0] p-4">
           <label htmlFor="form-health-data-consent" className="flex cursor-pointer items-start gap-3 text-[13px] leading-relaxed text-slate-700">

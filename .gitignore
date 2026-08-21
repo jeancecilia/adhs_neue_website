@@ -42,3 +42,4 @@ screenshot_*.jpg
 
 /scripts/*
 !/scripts/strip-homepage-runtime.mjs
+/workers/contact-form/wrangler.generated.json

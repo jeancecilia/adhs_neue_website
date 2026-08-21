@@ -23,7 +23,7 @@ export default function DatenschutzPage() {
           </nav>
           <p className="eyebrow mb-3">Datenschutz & DSGVO</p>
           <h1 className="text-[32px] leading-[1.15] text-[#173838] sm:text-[46px]">Datenschutzerklärung</h1>
-          <p className="mt-4 text-[14px] text-slate-600">Stand: 18. August 2026</p>
+          <p className="mt-4 text-[14px] text-slate-600">Stand: 21. August 2026</p>
         </div>
       </section>
 
@@ -86,6 +86,9 @@ export default function DatenschutzPage() {
               Google Analytics verarbeitet insbesondere pseudonyme Online-Kennungen, gekürzte beziehungsweise von Google nicht dauerhaft protokollierte IP-Informationen, Geräte- und Browsermerkmale, aufgerufene Seiten, Referrer, ungefähre Region, Zeitpunkt und Dauer der Nutzung sowie Interaktionen mit der Website. Wir messen erfolgreiche Kontaktformularübermittlungen als Ereignis <code>generate_lead</code>, Klicks auf den externen WhatsApp-Link als <code>whatsapp_click</code> und Klicks auf E-Mail-Links als <code>email_click</code>. Formularinhalte, Namen, E-Mail-Adressen, Nachrichten, ausgewählte Anliegen und andere Gesundheitsangaben werden nicht an Google Analytics oder Google Ads gesendet.
             </p>
             <p className="mt-3">
+              Beim ADHS-Selbsttest messen wir nach Ihrer gesonderten Statistik-Einwilligung ausschließlich neutrale Nutzungsschritte wie Seitenaufruf, Teststart, ausgewählte Fortschrittsmarken, Abschluss und Klick auf den Diagnostik-Link. Antworten, Antwort-ID, Profilwerte, bestehende Diagnosen, Medikation und Ergebnistext werden nicht an Google Analytics oder Google Ads übermittelt.
+            </p>
+            <p className="mt-3">
               Wir verwenden Consent Mode v2. Im Einstellungsdialog können Sie die Zwecke <strong>„Statistik & Reichweite“</strong> und <strong>„Marketing & Personalisierung“</strong> unabhängig voneinander auswählen. Statistik aktiviert <code>analytics_storage</code> für Google Analytics 4. Marketing aktiviert <code>ad_storage</code>, <code>ad_user_data</code> und <code>ad_personalization</code> für Google Ads, Conversion-Messung, Google Signals und personalisierte Werbung. „Alle akzeptieren“ aktiviert beide Zwecke; „Nur notwendige“ deaktiviert beide. Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TDDDG.
             </p>
             <p className="mt-3">
@@ -93,8 +96,27 @@ export default function DatenschutzPage() {
             </p>
           </div>
 
+          <div id="adhs-selbsttest" className="scroll-mt-24">
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">7. ADHS-Selbsttest für Erwachsene</h2>
+            <p>
+              Der freiwillige ADHS-Selbsttest verarbeitet Angaben zur psychischen Gesundheit. Verarbeitet werden eine zufällig im Browser erzeugte Antwort-ID, Instrument- und Einwilligungsversion, Einwilligungszeitpunkt, die 26 Testantworten, daraus berechnete Bereichswerte sowie freiwillige Angaben zu Alter, Geschlecht, bestehender ADHS-Diagnose, Diagnosequelle und aktueller ADHS-Medikation. Für den Test werden weder Name noch E-Mail-Adresse oder Telefonnummer abgefragt. IP-Adresse und User-Agent werden nicht als Forschungs-ID oder Bestandteil des Testdatensatzes gespeichert.
+            </p>
+            <p className="mt-3">
+              Zwecke sind die unmittelbare Erstellung Ihres persönlichen Antwortprofils sowie die pseudonymisierte statistische Prüfung und Weiterentwicklung des Fragebogens. Rechtsgrundlagen sind Ihre ausdrückliche Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO und für Gesundheitsdaten Art. 9 Abs. 2 lit. a DSGVO. Die Einwilligung ist freiwillig, nicht vorausgewählt und wird zusammen mit Version und Zeitpunkt dokumentiert. Ohne Einwilligung kann der Selbsttest nicht durchgeführt werden; die übrige Website und die Kontaktmöglichkeiten bleiben nutzbar.
+            </p>
+            <p className="mt-3">
+              Die pseudonymisierten Testdaten werden in einer Cloudflare-D1-Datenbank mit auf die Europäische Union beschränkter Datenlokalisierung gespeichert. Cloudflare verarbeitet die Daten als Auftragsverarbeiter. Während der Durchführung kann der aktuelle Zwischenstand nach der Einwilligung im Session Storage Ihres Browsers gespeichert werden, damit ein versehentliches Neuladen nicht sofort zum Verlust der Antworten führt. Dieser lokale Zwischenstand wird beim Neustart des Tests oder spätestens beim Ende der Browsersitzung entfernt.
+            </p>
+            <p className="mt-3">
+              Testantworten werden für die psychometrische Prüfung der jeweiligen Instrumentversion bis zu fünf Jahre nach Abschluss gespeichert und anschließend gelöscht oder irreversibel anonymisiert, sofern keine vorrangige gesetzliche Pflicht entgegensteht. Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen. Da wir keine Kontaktdaten zum Test speichern, benötigen wir für Auskunft, Widerruf oder Löschung die im Ergebnis angezeigte Antwort-ID. Richten Sie Ihre Anfrage mit dieser ID an <a href={siteConfig.emailHref} className={externalLinkClass}>{siteConfig.email}</a>.
+            </p>
+            <p className="mt-3">
+              Selbsttest und Kontaktanfrage bleiben grundsätzlich getrennt. Nur wenn Sie nach dem Ergebnis die Option zur Verknüpfung aktiv auswählen und anschließend das Anfrageformular absenden, wird die Antwort-ID der Anfrage beigefügt. Das Testergebnis ist keine Diagnose und führt zu keiner automatisierten Entscheidung mit rechtlicher oder vergleichbar erheblicher Wirkung.
+            </p>
+          </div>
+
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">7. Kontakt- und Terminanfrage</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">8. Kontakt- und Terminanfrage</h2>
             <p>
               Bei Nutzung des Formulars verarbeiten wir Ihren Namen, Ihre E-Mail-Adresse, das gewählte Anliegen, den gewünschten Terminzeitraum, Ihre freiwillige Nachricht sowie den Zeitpunkt Ihrer Einwilligung. Die Pflichtangaben sind für die Zuordnung und Beantwortung Ihrer Anfrage erforderlich. Die Nachricht und der Terminwunsch sind freiwillig.
             </p>
@@ -107,7 +129,7 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">8. E-Mail-Zustellung und E-Mail-Postfach</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">9. E-Mail-Zustellung und E-Mail-Postfach</h2>
             <p>
               Die technische Formularzustellung erfolgt über Cloudflare Email Sending beziehungsweise Email Routing. Eingehende Nachrichten an die Praxisdomain und Formularanfragen werden an ein dafür bestimmtes Gmail-Postfach weitergeleitet. Anbieter des Postfachdienstes ist für Nutzer im Europäischen Wirtschaftsraum grundsätzlich <strong>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland</strong>; verbundene Unternehmen und Systeme der Google LLC in den USA können in die Verarbeitung einbezogen sein.
             </p>
@@ -117,7 +139,7 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">9. WhatsApp-Link</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">10. WhatsApp-Link</h2>
             <p>
               Auf der Website befinden sich reine Links zu WhatsApp; es ist kein WhatsApp-Widget eingebettet. Erst wenn Sie einen solchen Link anklicken, verlassen Sie unsere Website und stellen eine direkte Verbindung zu WhatsApp her. Anbieter für Nutzer im Europäischen Wirtschaftsraum ist <strong>WhatsApp Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Irland</strong>, ein Unternehmen der Meta-Gruppe. Dabei können insbesondere Ihre IP-Adresse, Geräteinformationen und die Information, dass Sie von unserer Website zu WhatsApp gewechselt sind, verarbeitet und gegebenenfalls in Drittländer übermittelt werden.
             </p>
@@ -127,17 +149,17 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">10. Cookies und lokale Speicherung</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">11. Cookies und lokale Speicherung</h2>
             <p>
-              Optionale Analyse- und Marketing-Cookies sind beim ersten Besuch deaktiviert. Sie können „Statistik & Reichweite“ und „Marketing & Personalisierung“ getrennt aktivieren. Cloudflare kann in besonderen Sicherheitsfällen technisch notwendige Cookies verwenden, etwa nach einer Sicherheitsprüfung oder Challenge. Die im Local Storage gespeicherte Auswahl ist erforderlich, um Ihre Entscheidung bei weiteren Seitenaufrufen zu beachten.
+              Optionale Analyse- und Marketing-Cookies sind beim ersten Besuch deaktiviert. Sie können „Statistik & Reichweite“ und „Marketing & Personalisierung“ getrennt aktivieren. Cloudflare kann in besonderen Sicherheitsfällen technisch notwendige Cookies verwenden, etwa nach einer Sicherheitsprüfung oder Challenge. Die im Local Storage gespeicherte Auswahl ist erforderlich, um Ihre Entscheidung bei weiteren Seitenaufrufen zu beachten. Nach Einwilligung in den ADHS-Selbsttest kann dessen aktueller Zwischenstand vorübergehend im Session Storage gespeichert werden; diese Daten werden nicht für Werbung verwendet.
             </p>
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">11. Empfänger und Kategorien von Empfängern</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">12. Empfänger und Kategorien von Empfängern</h2>
             <p>Personenbezogene Daten erhalten nur Stellen, die sie für die genannten Zwecke benötigen:</p>
             <ul className="mt-3 list-disc space-y-1 pl-6">
-              <li>Cloudflare, Inc. für Hosting, DNS, CDN, Sicherheit, Formularzustellung, E-Mail-Routing und Webanalyse,</li>
+              <li>Cloudflare, Inc. für Hosting, DNS, CDN, Sicherheit, Formularzustellung, E-Mail-Routing, Webanalyse und die D1-Datenbank des pseudonymisierten ADHS-Selbsttests,</li>
               <li>Google Ireland Limited und gegebenenfalls Google LLC für das empfangende E-Mail-Postfach sowie nach Ihrer jeweiligen Auswahl für Google Analytics 4, Google Ads, Conversion-Messung, Google Signals und personalisierte Werbung,</li>
               <li>WhatsApp Ireland Limited und Unternehmen der Meta-Gruppe nur, wenn Sie den WhatsApp-Link nutzen,</li>
               <li>Behörden, Gerichte, Steuerberatung oder sonstige Berufsgeheimnisträger, soweit eine gesetzliche Pflicht besteht oder dies zur Rechtsverteidigung erforderlich ist.</li>
@@ -146,16 +168,17 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">12. Übermittlung in Drittländer</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">13. Übermittlung in Drittländer</h2>
             <p>
               Bei Cloudflare, Google und Meta kann eine Verarbeitung in den USA oder anderen Staaten außerhalb des Europäischen Wirtschaftsraums nicht vollständig ausgeschlossen werden. Soweit für ein Empfängerunternehmen eine gültige Zertifizierung nach dem EU-US Data Privacy Framework besteht, stützen die Anbieter die Übermittlung auf den Angemessenheitsbeschluss der Europäischen Kommission nach Art. 45 DSGVO. Ergänzend oder ersatzweise werden von den Anbietern Standardvertragsklauseln der Europäischen Kommission nach Art. 46 Abs. 2 lit. c DSGVO und zusätzliche Schutzmaßnahmen eingesetzt. Informationen zu Cloudflares Garantien enthält das <a href="https://www.cloudflare.com/en-gb/cloudflare-customer-dpa/" target="_blank" rel="noreferrer" className={externalLinkClass}>Cloudflare DPA</a>.
             </p>
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">13. Speicherdauer</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">14. Speicherdauer</h2>
             <ul className="list-disc space-y-2 pl-6">
               <li><strong>Kontakt- und Terminanfragen:</strong> grundsätzlich sechs Monate nach abschließender Bearbeitung; bei erforderlicher Rechtsverteidigung höchstens bis zum Ablauf der einschlägigen Verjährungsfrist.</li>
+              <li><strong>Pseudonymisierte ADHS-Selbsttestdaten:</strong> bis zu fünf Jahre nach Abschluss des Tests; anschließend Löschung oder irreversible Anonymisierung.</li>
               <li><strong>E-Mails:</strong> entsprechend dem Zweck der Anfrage; behandlungsrelevante Inhalte werden gegebenenfalls in die Behandlungsdokumentation übernommen.</li>
               <li><strong>Behandlungsdokumentation:</strong> grundsätzlich zehn Jahre nach Abschluss der Behandlung, soweit keine längere gesetzliche Frist greift.</li>
               <li><strong>Cloudflare Web Analytics:</strong> nicht aggregierte Messdaten sieben Tage; aggregierte Auswertungen bis zu sechs Monate.</li>
@@ -167,7 +190,7 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">14. Ihre Datenschutzrechte</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">15. Ihre Datenschutzrechte</h2>
             <p>Sie haben im Rahmen der gesetzlichen Voraussetzungen insbesondere das Recht auf:</p>
             <ul className="mt-3 list-disc space-y-1 pl-6">
               <li>Auskunft nach Art. 15 DSGVO,</li>
@@ -178,12 +201,12 @@ export default function DatenschutzPage() {
               <li>Widerspruch gegen Verarbeitungen auf Grundlage von Art. 6 Abs. 1 lit. e oder f DSGVO nach Art. 21 DSGVO.</li>
             </ul>
             <p className="mt-3">
-              Erteilte Einwilligungen können Sie jederzeit mit Wirkung für die Zukunft widerrufen. Die Verarbeitung bis zum Widerruf bleibt rechtmäßig. Zur Ausübung Ihrer Rechte genügt eine Nachricht an {siteConfig.email}. Gesetzliche Aufbewahrungs- und Dokumentationspflichten können einer sofortigen Löschung entgegenstehen.
+              Erteilte Einwilligungen können Sie jederzeit mit Wirkung für die Zukunft widerrufen. Die Verarbeitung bis zum Widerruf bleibt rechtmäßig. Zur Ausübung Ihrer Rechte genügt eine Nachricht an {siteConfig.email}. Für Rechte in Bezug auf einen pseudonymen Selbsttestdatensatz benötigen wir die beim Ergebnis angezeigte Antwort-ID. Gesetzliche Aufbewahrungs- und Dokumentationspflichten können einer sofortigen Löschung entgegenstehen.
             </p>
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">15. Beschwerderecht</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">16. Beschwerderecht</h2>
             <p>Sie haben nach Art. 77 DSGVO das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren. Für nichtöffentliche Stellen in Bayern ist grundsätzlich zuständig:</p>
             <p className="mt-3">
               <strong>Bayerisches Landesamt für Datenschutzaufsicht (BayLDA)</strong><br />
@@ -195,19 +218,19 @@ export default function DatenschutzPage() {
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">16. Pflicht oder Freiwilligkeit der Bereitstellung</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">17. Pflicht oder Freiwilligkeit der Bereitstellung</h2>
             <p>
-              Die Nutzung der Website ist ohne Angabe von Kontaktdaten möglich. Name, E-Mail-Adresse, Anliegen und die ausdrückliche Einwilligung sind erforderlich, wenn Sie das Kontaktformular verwenden möchten; ohne diese Angaben können wir die Anfrage nicht entgegennehmen und beantworten. Terminwunsch und Nachricht sind freiwillig. Gesetzlich oder vertraglich müssen Sie das Online-Formular nicht verwenden. Alternativ können Sie uns über die im Impressum genannten Kontaktwege erreichen.
+              Die Nutzung der Website ist ohne Angabe von Kontaktdaten möglich. Name, E-Mail-Adresse, Anliegen und die ausdrückliche Einwilligung sind erforderlich, wenn Sie das Kontaktformular verwenden möchten; ohne diese Angaben können wir die Anfrage nicht entgegennehmen und beantworten. Terminwunsch und Nachricht sind freiwillig. Für den ADHS-Selbsttest ist die ausdrückliche Einwilligung erforderlich; Alter, Geschlecht und Angaben zu bestehender Diagnose oder Medikation sind freiwillig. Gesetzlich oder vertraglich müssen Sie weder den Selbsttest noch das Online-Formular verwenden.
             </p>
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">17. Automatisierte Entscheidungen und Profiling</h2>
-            <p>Wir treffen keine ausschließlich automatisierten Entscheidungen mit rechtlicher oder vergleichbar erheblicher Wirkung und führen kein Profiling im Sinne von Art. 22 DSGVO durch. Das ausgewählte Anliegen dient ausschließlich der manuellen Zuordnung Ihrer Anfrage.</p>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">18. Automatisierte Entscheidungen und Profiling</h2>
+            <p>Wir treffen keine ausschließlich automatisierten Entscheidungen mit rechtlicher oder vergleichbar erheblicher Wirkung und führen kein Profiling im Sinne von Art. 22 DSGVO durch. Das ausgewählte Anliegen dient ausschließlich der manuellen Zuordnung Ihrer Anfrage. Das Antwortprofil des ADHS-Selbsttests wird automatisiert anhand der dokumentierten Antwortwerte berechnet, ist jedoch ausdrücklich keine Diagnose und entfaltet keine rechtliche oder vergleichbar erhebliche Wirkung.</p>
           </div>
 
           <div>
-            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">18. Datensicherheit und Aktualisierung</h2>
+            <h2 className="mb-3 text-[22px] font-bold text-[#173838]">19. Datensicherheit und Aktualisierung</h2>
             <p>
               Die Website wird verschlüsselt über HTTPS übertragen. Wir setzen technische und organisatorische Schutzmaßnahmen ein, darunter Transportverschlüsselung, Sicherheitsheader, Zugriffsbeschränkungen, Eingabevalidierung und datensparsame Formulargestaltung. Wir aktualisieren diese Erklärung, wenn sich Dienste, Rechtsgrundlagen oder Verarbeitungsvorgänge ändern. Maßgeblich ist die jeweils auf dieser Seite veröffentlichte Fassung.
             </p>

@@ -65,6 +65,9 @@ export default function Footer() {
               Weitere Bereiche
             </p>
             <nav className="mt-3 flex flex-col text-[14px] font-normal text-slate-200" aria-label="Weitere Bereiche">
+              <Link href="/adhs-selbsttest-erwachsene" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
+                ADHS-Selbsttest
+              </Link>
               <Link href="/adhs-test-muenchen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
                 ADHS-Diagnostik
               </Link>

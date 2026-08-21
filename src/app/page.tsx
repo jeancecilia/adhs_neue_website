@@ -296,12 +296,20 @@ export default function HomePage() {
             </p>
           </div>
           <div className="pt-2">
-            <Link
-              href="/adhs-test-muenchen"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#173838] px-8 py-3 text-[14px] font-semibold text-white shadow hover:opacity-95"
-            >
-              Zur ADHS-Diagnostik in München →
-            </Link>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/adhs-test-muenchen"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#173838] px-8 py-3 text-[14px] font-semibold text-white shadow hover:opacity-95"
+              >
+                Zur ADHS-Diagnostik in München →
+              </Link>
+              <Link
+                href="/adhs-selbsttest-erwachsene"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-[rgba(47,79,79,0.2)] bg-white px-8 py-3 text-[14px] font-semibold text-[#173838] hover:bg-slate-50"
+              >
+                Kostenlosen ADHS-Selbsttest starten
+              </Link>
+            </div>
           </div>
         </div>
       </section>
