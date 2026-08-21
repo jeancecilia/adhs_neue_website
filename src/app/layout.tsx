@@ -84,6 +84,11 @@ export default function RootLayout({
                       "name": "ADHS-Therapie für Erwachsene"
                     },
                     {
+                      "@type": "Service",
+                      "name": "ADHS-Beratung und Psychoedukation für Erwachsene",
+                      "url": "https://neurofeedback-praxis-muenchen.de/adhs-beratung-muenchen"
+                    },
+                    {
                       "@type": "MedicalTherapy",
                       "name": "Diagnostische Orientierung & ADHS-Screening"
                     },

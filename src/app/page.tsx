@@ -5,11 +5,20 @@ import { siteConfig, trustPoints, processSteps, homeContent } from "@/config/sit
 import FaqAccordion from "@/components/FaqAccordion";
 
 export const metadata: Metadata = {
-  title: "ADHS Praxis München | Diagnostik, Therapie & Neurofeedback",
+  title: "ADHS Praxis München | Beratung, Diagnostik & Therapie",
   description:
-    "Psychotherapie in München-Schwabing mit Schwerpunkt ADHS im Erwachsenenalter. Diagnostik, Neurofeedback sowie Hilfe bei Angst, Panik, Phobien und depressiven Beschwerden.",
+    "ADHS-Beratung, Diagnostik und Psychotherapie für Erwachsene in München-Schwabing. Konkrete Unterstützung für Alltag, Beruf, Studium und Beziehungen.",
   alternates: {
     canonical: "/",
+  },
+  openGraph: {
+    title: "ADHS Praxis München | Beratung, Diagnostik & Therapie",
+    description: "ADHS-Beratung, Diagnostik und Psychotherapie für Erwachsene in München-Schwabing – strukturiert, alltagsnah und fachlich fundiert.",
+    url: "/",
+  },
+  twitter: {
+    title: "ADHS Praxis München | Beratung, Diagnostik & Therapie",
+    description: "ADHS-Beratung, Diagnostik und Psychotherapie für Erwachsene in München-Schwabing.",
   },
 };
 
@@ -184,7 +193,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. DREI EINSTIEGSWEGE (TRIAGE) */}
+      {/* 3. VIER EINSTIEGSWEGE (TRIAGE) */}
       <section className="section-space">
         <div className="container-shell">
           <div className="mx-auto max-w-2xl text-center mb-12">
@@ -195,7 +204,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {homeContent.triage.cards.map((card) => (
               <div
                 key={card.title}

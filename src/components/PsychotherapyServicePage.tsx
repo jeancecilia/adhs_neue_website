@@ -16,6 +16,8 @@ export type ServiceFaq = {
 
 export type PsychotherapyServiceData = {
   slug: string;
+  kind?: "psychotherapy" | "counseling";
+  lastReviewed?: string;
   breadcrumb: string;
   eyebrow: string;
   h1: string;
@@ -48,6 +50,10 @@ export type PsychotherapyServiceData = {
 
 export default function PsychotherapyServicePage({ data }: { data: PsychotherapyServiceData }) {
   const pageUrl = `${siteConfig.baseUrl}/${data.slug}`;
+  const isCounseling = data.kind === "counseling";
+  const parentBreadcrumb = isCounseling
+    ? { name: "ADHS im Erwachsenenalter", path: "/adhs-erwachsene-muenchen" }
+    : { name: "Psychotherapie", path: "/adhs-therapie-muenchen" };
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -58,18 +64,23 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
         name: data.h1,
         description: data.subtitle,
         inLanguage: "de-DE",
-        lastReviewed: "2026-08-17",
+        lastReviewed: data.lastReviewed ?? "2026-08-17",
         reviewedBy: { "@id": `${siteConfig.baseUrl}/#therapeut` },
         about: { "@id": `${pageUrl}#leistung` },
         isPartOf: { "@id": `${siteConfig.baseUrl}/#website` },
       },
       {
-        "@type": "MedicalTherapy",
+        "@type": isCounseling ? "Service" : "MedicalTherapy",
         "@id": `${pageUrl}#leistung`,
         name: data.h1,
         description: data.subtitle,
         provider: { "@id": `${siteConfig.baseUrl}/#praxis` },
-        relevantSpecialty: "Psychotherapy",
+        ...(isCounseling
+          ? {
+              serviceType: "ADHS-Beratung und Psychoedukation für Erwachsene",
+              areaServed: { "@type": "City", name: "München" },
+            }
+          : { relevantSpecialty: "Psychotherapy" }),
       },
       {
         "@type": "FAQPage",
@@ -88,7 +99,7 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
       <BreadcrumbJsonLd
         items={[
           { name: "Startseite", path: "" },
-          { name: "Psychotherapie", path: "/adhs-therapie-muenchen" },
+          parentBreadcrumb,
           { name: data.breadcrumb, path: `/${data.slug}` },
         ]}
       />
@@ -102,7 +113,7 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
           <nav className="mb-6 flex flex-wrap items-center gap-2 text-[13px] text-slate-500" aria-label="Breadcrumb">
             <Link href="/" className="inline-flex min-h-[44px] items-center hover:text-[#173838]">Startseite</Link>
             <span>/</span>
-            <Link href="/adhs-therapie-muenchen" className="inline-flex min-h-[44px] items-center hover:text-[#173838]">Psychotherapie</Link>
+            <Link href={parentBreadcrumb.path} className="inline-flex min-h-[44px] items-center hover:text-[#173838]">{parentBreadcrumb.name}</Link>
             <span>/</span>
             <span className="font-medium text-[#173838]">{data.breadcrumb}</span>
           </nav>
@@ -148,7 +159,7 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
       <section className="section-space border-y border-[rgba(47,79,79,0.1)] bg-[#faf9f8]">
         <div className="container-shell max-w-5xl space-y-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="eyebrow mb-2">Beschwerden erkennen</p>
+            <p className="eyebrow mb-2">{isCounseling ? "Beratungsthemen" : "Beschwerden erkennen"}</p>
             <h2 className="text-[28px] leading-[1.2] text-[#173838] sm:text-[38px]">{data.symptomsHeading}</h2>
             <div className="mt-4 space-y-3 text-left text-[16px] leading-[1.75] text-slate-700 sm:text-center">
               {data.symptomsIntro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
@@ -168,7 +179,7 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
       <section className="section-space">
         <div className="container-shell max-w-4xl space-y-8">
           <div>
-            <p className="eyebrow mb-2">Therapeutische Arbeitsweise</p>
+            <p className="eyebrow mb-2">{isCounseling ? "Beratungsansatz" : "Therapeutische Arbeitsweise"}</p>
             <h2 className="text-[28px] leading-[1.2] text-[#173838] sm:text-[36px]">{data.approachHeading}</h2>
             <div className="mt-4 space-y-3 text-[16px] leading-[1.75] text-slate-700">
               {data.approachIntro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
@@ -192,8 +203,8 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
         <div className="container-shell max-w-4xl">
           <div className="rounded-2xl border border-[rgba(47,79,79,0.15)] bg-[#173838] p-7 text-white card-shadow sm:p-9">
             <p className="text-[12px] font-bold uppercase tracking-wider text-[#f0cc65]">Praxis München-Schwabing · Hildeboldstraße 1</p>
-            <h2 className="mt-2 text-[24px] font-bold leading-snug text-white">Psychotherapie in einem verlässlichen, geschützten Rahmen</h2>
-            <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-slate-200">Die Behandlung wird nachvollziehbar geplant, regelmäßig gemeinsam ausgewertet und an Ihre Belastbarkeit angepasst. Übungen zwischen den Sitzungen werden konkret vorbereitet; niemand wird unvorbereitet oder gegen den eigenen Willen mit schwierigen Situationen konfrontiert.</p>
+            <h2 className="mt-2 text-[24px] font-bold leading-snug text-white">{isCounseling ? "ADHS-Beratung in einem klaren, wertschätzenden Rahmen" : "Psychotherapie in einem verlässlichen, geschützten Rahmen"}</h2>
+            <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-slate-200">{isCounseling ? "Die Beratung orientiert sich an Ihrer konkreten Lebenssituation. Wir übersetzen Wissen über ADHS in kleine, überprüfbare Schritte und werten gemeinsam aus, welche Strategien in Ihrem Alltag tatsächlich funktionieren." : "Die Behandlung wird nachvollziehbar geplant, regelmäßig gemeinsam ausgewertet und an Ihre Belastbarkeit angepasst. Übungen zwischen den Sitzungen werden konkret vorbereitet; niemand wird unvorbereitet oder gegen den eigenen Willen mit schwierigen Situationen konfrontiert."}</p>
           </div>
         </div>
       </section>
@@ -202,7 +213,7 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
         <div className="container-shell max-w-4xl space-y-8">
           <div>
             <p className="eyebrow mb-2">Transparenter Ablauf</p>
-            <h2 className="text-[28px] leading-[1.2] text-[#173838] sm:text-[36px]">Vom Erstgespräch bis zur Stabilisierung</h2>
+            <h2 className="text-[28px] leading-[1.2] text-[#173838] sm:text-[36px]">{isCounseling ? "Vom Anliegen zum alltagstauglichen nächsten Schritt" : "Vom Erstgespräch bis zur Stabilisierung"}</h2>
             <p className="mt-4 text-[16px] leading-[1.75] text-slate-700">{data.processIntro}</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -249,11 +260,11 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-6 card-shadow">
               <h3 className="text-[17px] font-bold text-[#173838]">Honorar</h3>
-              <p className="mt-2 text-[14px] leading-relaxed text-slate-600">Eine psychotherapeutische Einzelsitzung dauert 60 Minuten und kostet 69 €. Die Abrechnung erfolgt transparent als Selbstzahlerleistung.</p>
+              <p className="mt-2 text-[14px] leading-relaxed text-slate-600">{isCounseling ? "Eine Beratungssitzung dauert 60 Minuten und kostet 69 €. Die Abrechnung erfolgt transparent als Selbstzahlerleistung." : "Eine psychotherapeutische Einzelsitzung dauert 60 Minuten und kostet 69 €. Die Abrechnung erfolgt transparent als Selbstzahlerleistung."}</p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-6 card-shadow">
               <h3 className="text-[17px] font-bold text-[#173838]">Kostenerstattung</h3>
-              <p className="mt-2 text-[14px] leading-relaxed text-slate-600">Private Versicherungen und Zusatzversicherungen erstatten je nach Tarif möglicherweise einen Teil der Kosten. Gesetzliche Krankenkassen übernehmen die Behandlung in der Regel nicht.</p>
+              <p className="mt-2 text-[14px] leading-relaxed text-slate-600">{isCounseling ? "ADHS-Beratung ist eine Selbstzahlerleistung. Ob eine private Versicherung Kosten übernimmt, muss vorab direkt mit dem eigenen Tarif geklärt werden." : "Private Versicherungen und Zusatzversicherungen erstatten je nach Tarif möglicherweise einen Teil der Kosten. Gesetzliche Krankenkassen übernehmen die Behandlung in der Regel nicht."}</p>
             </div>
           </div>
           <Link href="/ablauf-kosten" className="inline-flex min-h-[44px] items-center text-[14px] font-bold text-[#173838] hover:underline">Alle Preise und Hinweise zur Erstattung →</Link>
@@ -265,7 +276,7 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
           <div className="grid items-center gap-8 rounded-2xl border border-slate-200 bg-white p-8 card-shadow sm:grid-cols-[180px_1fr]">
             <Image src="/images/portrait-jean-maurice-hd.jpg" alt="Jean-Maurice Cecilia-Menzel, M.Sc." width={360} height={450} className="aspect-[4/5] rounded-xl object-cover" />
             <div className="space-y-3">
-              <p className="eyebrow mb-1">Ihr Therapeut in München</p>
+              <p className="eyebrow mb-1">{isCounseling ? "Ihr Ansprechpartner in München" : "Ihr Therapeut in München"}</p>
               <h2 className="text-[24px] font-bold text-[#173838] sm:text-[30px]">Jean-Maurice Cecilia-Menzel, M.Sc.</h2>
               <p className="text-[14px] font-semibold text-[#7a5600]">Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie · Ausbildung in KVT und Hypnosetherapie</p>
               <p className="text-[15px] leading-relaxed text-slate-600">{data.therapistText}</p>
@@ -289,14 +300,14 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
         <div className="container-shell max-w-4xl">
           <div className="grid gap-8 sm:grid-cols-2">
             <div>
-              <h2 className="text-[24px] font-bold text-[#173838]">Weitere psychotherapeutische Schwerpunkte</h2>
+              <h2 className="text-[24px] font-bold text-[#173838]">{isCounseling ? "Passende weitere Angebote" : "Weitere psychotherapeutische Schwerpunkte"}</h2>
               <nav className="mt-4 flex flex-col" aria-label="Verwandte Leistungen">
                 {data.related.map((item) => <Link key={item.href} href={item.href} className="inline-flex min-h-[44px] items-center border-b border-slate-200 text-[14px] font-semibold text-[#173838] hover:underline">{item.label} →</Link>)}
               </nav>
             </div>
             <div>
               <h2 className="text-[24px] font-bold text-[#173838]">Fachliche Grundlage</h2>
-              <p className="mt-3 text-[13px] leading-relaxed text-slate-600">Die Inhalte dienen der allgemeinen Information und ersetzen keine persönliche Diagnostik. Maßgeblich für die Behandlung ist die individuelle fachliche Einschätzung.</p>
+              <p className="mt-3 text-[13px] leading-relaxed text-slate-600">Die Inhalte dienen der allgemeinen Information und ersetzen keine persönliche Diagnostik. Maßgeblich für {isCounseling ? "Beratung und weitere Versorgung" : "die Behandlung"} ist die individuelle fachliche Einschätzung.</p>
               <ul className="mt-3 space-y-2 text-[13px] text-slate-700">
                 {data.sources.map((source) => <li key={source.href}><a href={source.href} rel="noopener noreferrer" className="font-semibold text-[#173838] underline underline-offset-2">{source.label}</a></li>)}
               </ul>

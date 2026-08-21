@@ -35,11 +35,14 @@ export default function Footer() {
           {/* Psychotherapie */}
           <div>
             <p className="text-[13px] font-bold uppercase tracking-[0.08em] text-white">
-              Psychotherapie
+              Leistungen
             </p>
             <nav className="mt-3 flex flex-col text-[14px] font-normal text-slate-200" aria-label="Footer Navigation">
               <Link href="/adhs-therapie-muenchen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
                 ADHS-Therapie
+              </Link>
+              <Link href="/adhs-beratung-muenchen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
+                ADHS-Beratung
               </Link>
               <Link href="/soziale-angst-muenchen" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white hover:underline hover:underline-offset-4">
                 Soziale Angst

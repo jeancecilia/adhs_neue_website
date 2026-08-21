@@ -6,6 +6,7 @@ import { siteConfig } from "@/config/site";
 
 const psychotherapyItems = [
   { href: "/adhs-therapie-muenchen", label: "ADHS-Therapie" },
+  { href: "/adhs-beratung-muenchen", label: "ADHS-Beratung" },
   { href: "/soziale-angst-muenchen", label: "Soziale Angst" },
   { href: "/panikattacken-muenchen", label: "Panikattacken" },
   { href: "/spezifische-phobien-muenchen", label: "Spezifische Phobien" },
@@ -74,7 +75,7 @@ export default function Header() {
         <nav className="hidden items-center gap-3 lg:flex xl:gap-4" aria-label="Hauptnavigation">
           <details ref={(node) => { menuRefs.current[0] = node; }} className="group relative">
             <summary className="inline-flex min-h-[44px] cursor-pointer list-none items-center gap-1.5 px-1.5 text-[13.5px] text-slate-700 transition-colors hover:text-[#173838] [&::-webkit-details-marker]:hidden">
-              Psychotherapie
+              Leistungen
               <span aria-hidden="true" className="text-[10px] transition-transform group-open:rotate-180">▼</span>
             </summary>
             <div className="absolute left-0 top-[calc(100%+0.35rem)] w-64 rounded-2xl border border-[rgba(47,79,79,0.12)] bg-white p-2 shadow-[0_20px_45px_rgba(23,56,56,0.14)]">
@@ -103,12 +104,12 @@ export default function Header() {
               <span className="hidden text-xl leading-none group-open:inline" aria-hidden="true">✕</span>
             </summary>
 
-            <nav className="fixed inset-x-0 top-16 border-t border-[rgba(47,79,79,0.08)] bg-[#fdfbf7] shadow-xl sm:top-20" aria-label="Mobile Navigation">
+            <nav className="fixed inset-x-0 top-16 max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-[rgba(47,79,79,0.08)] bg-[#fdfbf7] shadow-xl sm:top-20 sm:max-h-[calc(100dvh-5rem)]" aria-label="Mobile Navigation">
               <div className="container-shell flex flex-col py-3">
                 <Link href="/" prefetch={false} className="inline-flex min-h-[44px] items-center border-b border-slate-100 py-2.5 text-[16px] font-medium text-slate-800 hover:text-[#173838]">
                   Startseite
                 </Link>
-                <p className="mb-0 mt-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#7a5600]">Psychotherapie</p>
+                <p className="mb-0 mt-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#7a5600]">Leistungen</p>
                 {psychotherapyItems.map((item) => (
                   <Link key={item.href} href={item.href} prefetch={false} className="inline-flex min-h-[44px] items-center border-b border-slate-100 py-2.5 pl-3 text-[15px] font-medium text-slate-800 hover:text-[#173838]">
                     {item.label}

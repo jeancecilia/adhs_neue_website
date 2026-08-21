@@ -46,7 +46,7 @@ export const siteConfig = {
     scope: "Deutschland / EU",
   },
   description:
-    "Psychotherapie, ADHS-Diagnostik und Neurofeedback für Erwachsene in München. Schwerpunkt ADHS sowie ausgewählte Angststörungen und depressive Beschwerden.",
+    "Psychotherapie, ADHS-Beratung, ADHS-Diagnostik und Neurofeedback für Erwachsene in München. Schwerpunkt ADHS sowie ausgewählte Angststörungen und depressive Beschwerden.",
   neighborhoods: ["Schwabing", "Schwabing-West", "Maxvorstadt", "Milbertshofen", "Neuhausen", "Altstadt-Lehel"],
   openingHours: "Mo-Fr 08:00-19:00 Uhr (Sa/So nach Vereinbarung)",
   geo: {
@@ -88,13 +88,14 @@ export const processSteps = [
 
 export const homeContent = {
   hero: {
-    eyebrow: "ADHS PRAXIS MÜNCHEN · DIAGNOSTIK · PSYCHOTHERAPIE · NEUROFEEDBACK",
+    eyebrow: "ADHS PRAXIS MÜNCHEN · BERATUNG · DIAGNOSTIK · PSYCHOTHERAPIE · NEUROFEEDBACK",
     h1: "ADHS Praxis München für Erwachsene",
-    subtitle: "ADHS-Diagnostik, Psychotherapie und Neurofeedback für Erwachsene.",
+    subtitle: "ADHS-Beratung, Diagnostik, Psychotherapie und Neurofeedback für Erwachsene.",
     description:
       "Psychotherapeutische Begleitung mit Schwerpunkt ADHS – von der diagnostischen Abklärung bis zur individuellen Behandlung.",
     bulletPoints: [
       "Strukturierte ADHS-Diagnostik bei Verdacht",
+      "ADHS-Beratung & Psychoedukation für den Alltag",
       "Psychotherapie & Alltagsstrategien für Erwachsene",
       "Ergänzendes Neurofeedback-Training",
     ],
@@ -123,6 +124,14 @@ export const homeContent = {
         text: "Sie haben bereits eine Diagnose und suchen konkrete Alltagsstrategien, emotionale Entlastung und psychotherapeutische Begleitung für Beruf und Beziehungen.",
         linkText: "ADHS-Therapie kennenlernen →",
         href: "/adhs-therapie-muenchen",
+        featured: false,
+      },
+      {
+        tag: "Orientierung & Alltag",
+        title: "ADHS-Beratung",
+        text: "Sie möchten ADHS besser verstehen und ein konkretes Alltagsthema strukturiert angehen – etwa Organisation, Zeitmanagement, Beruf oder Beziehungen.",
+        linkText: "ADHS-Beratung kennenlernen →",
+        href: "/adhs-beratung-muenchen",
         featured: false,
       },
       {
