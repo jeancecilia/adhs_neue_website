@@ -52,7 +52,7 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
   const pageUrl = `${siteConfig.baseUrl}/${data.slug}`;
   const isCounseling = data.kind === "counseling";
   const parentBreadcrumb = isCounseling
-    ? { name: "ADHS im Erwachsenenalter", path: "/adhs-erwachsene-muenchen" }
+    ? { name: "Leistungen", path: "/#leistungen" }
     : { name: "Psychotherapie", path: "/adhs-therapie-muenchen" };
   const structuredData = {
     "@context": "https://schema.org",

@@ -194,7 +194,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. VIER EINSTIEGSWEGE (TRIAGE) */}
-      <section className="section-space">
+      <section id="leistungen" className="section-space scroll-mt-24">
         <div className="container-shell">
           <div className="mx-auto max-w-2xl text-center mb-12">
             <p className="eyebrow mb-3">{homeContent.triage.eyebrow}</p>
