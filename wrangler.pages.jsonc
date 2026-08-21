@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "neurofeedback-praxis-muenchen",
+  "pages_build_output_dir": "./out",
+  "compatibility_date": "2026-08-16",
+  "d1_databases": [
+    {
+      "binding": "SELFTEST_DB",
+      "database_name": "adhs-selftest-responses",
+      "database_id": "8357bac2-e86b-46c6-8c1b-c3ba87914903"
+    }
+  ]
+}
