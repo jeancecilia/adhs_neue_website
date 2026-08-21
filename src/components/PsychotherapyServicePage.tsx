@@ -14,6 +14,18 @@ export type ServiceFaq = {
   answer: string;
 };
 
+export type ServiceCredential = {
+  label: string;
+  detail: string;
+};
+
+export type ServiceEditorialSection = {
+  eyebrow: string;
+  heading: string;
+  paragraphs: string[];
+  bullets?: string[];
+};
+
 export type PsychotherapyServiceData = {
   slug: string;
   kind?: "psychotherapy" | "counseling";
@@ -23,6 +35,8 @@ export type PsychotherapyServiceData = {
   h1: string;
   subtitle: string;
   intro: string[];
+  heroFacts?: string[];
+  credentials?: ServiceCredential[];
   proofPoints: string[];
   situationsHeading: string;
   situationsIntro: string;
@@ -33,6 +47,7 @@ export type PsychotherapyServiceData = {
   approachHeading: string;
   approachIntro: string[];
   approach: ServiceCard[];
+  editorialSections?: ServiceEditorialSection[];
   processIntro: string;
   process: ServiceCard[];
   differentiationHeading: string;
@@ -67,6 +82,9 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
         lastReviewed: data.lastReviewed ?? "2026-08-17",
         reviewedBy: { "@id": `${siteConfig.baseUrl}/#therapeut` },
         about: { "@id": `${pageUrl}#leistung` },
+        mainEntity: { "@id": `${pageUrl}#leistung` },
+        breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+        hasPart: { "@id": `${pageUrl}#faq` },
         isPartOf: { "@id": `${siteConfig.baseUrl}/#website` },
       },
       {
@@ -74,17 +92,49 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
         "@id": `${pageUrl}#leistung`,
         name: data.h1,
         description: data.subtitle,
-        provider: { "@id": `${siteConfig.baseUrl}/#praxis` },
+        url: pageUrl,
+        provider: isCounseling
+          ? [
+              { "@id": `${siteConfig.baseUrl}/#praxis` },
+              { "@id": `${siteConfig.baseUrl}/#therapeut` },
+            ]
+          : { "@id": `${siteConfig.baseUrl}/#praxis` },
         ...(isCounseling
           ? {
               serviceType: "ADHS-Beratung und Psychoedukation für Erwachsene",
               areaServed: { "@type": "City", name: "München" },
+              audience: {
+                "@type": "PeopleAudience",
+                audienceType: "Erwachsene mit ADHS oder begründetem ADHS-Verdacht",
+                requiredMinAge: 18,
+              },
+              availableChannel: {
+                "@type": "ServiceChannel",
+                serviceLocation: { "@id": `${siteConfig.baseUrl}/#praxis` },
+              },
+              offers: { "@id": `${pageUrl}#angebot` },
             }
           : { relevantSpecialty: "Psychotherapy" }),
       },
+      ...(isCounseling
+        ? [
+            {
+              "@type": "Offer",
+              "@id": `${pageUrl}#angebot`,
+              url: pageUrl,
+              price: "69.00",
+              priceCurrency: "EUR",
+              category: "Selbstzahlerleistung",
+              description: "60 Minuten ADHS-Beratung und Psychoedukation für Erwachsene in München-Schwabing",
+              seller: { "@id": `${siteConfig.baseUrl}/#praxis` },
+              itemOffered: { "@id": `${pageUrl}#leistung` },
+            },
+          ]
+        : []),
       {
         "@type": "FAQPage",
         "@id": `${pageUrl}#faq`,
+        isPartOf: { "@id": `${pageUrl}#webpage` },
         mainEntity: data.faqs.map((faq) => ({
           "@type": "Question",
           name: faq.question,
@@ -93,6 +143,23 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
       },
     ],
   };
+
+  const practitionerSection = (
+    <section className="section-space">
+      <div className="container-shell max-w-4xl">
+        <div className="grid items-center gap-8 rounded-2xl border border-slate-200 bg-white p-8 card-shadow sm:grid-cols-[180px_1fr]">
+          <Image src="/images/portrait-jean-maurice-hd.jpg" alt="Jean-Maurice Cecilia-Menzel, M.Sc." width={360} height={450} className="aspect-[4/5] rounded-xl object-cover" />
+          <div className="space-y-3">
+            <p className="eyebrow mb-1">{isCounseling ? "Ihr Ansprechpartner in München" : "Ihr Therapeut in München"}</p>
+            <h2 className="text-[24px] font-bold text-[#173838] sm:text-[30px]">Jean-Maurice Cecilia-Menzel, M.Sc.</h2>
+            <p className="text-[14px] font-semibold text-[#7a5600]">Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie · Ausbildung in KVT und Hypnosetherapie</p>
+            <p className="text-[15px] leading-relaxed text-slate-600">{data.therapistText}</p>
+            <Link href="/ueber-mich" className="inline-flex min-h-[44px] items-center text-[14px] font-bold text-[#173838] hover:underline">Qualifikationen & Arbeitsweise →</Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 
   return (
     <div className="w-full">
@@ -120,9 +187,21 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
           <p className="eyebrow mb-3">{data.eyebrow}</p>
           <h1 className="text-[32px] leading-[1.15] text-[#173838] sm:text-[46px] md:text-[50px]">{data.h1}</h1>
           <p className="mt-4 text-[18px] font-semibold leading-[1.4] text-[#7a5600] sm:text-[22px]">{data.subtitle}</p>
-          <div className="mt-5 space-y-3 text-[16px] leading-[1.75] text-slate-700 sm:text-[18px]">
-            {data.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-          </div>
+          {(!data.heroFacts || data.heroFacts.length === 0) && (
+            <div className="mt-5 space-y-3 text-[16px] leading-[1.75] text-slate-700 sm:text-[18px]">
+              {data.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </div>
+          )}
+          {data.heroFacts && data.heroFacts.length > 0 && (
+            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 border-y border-[rgba(47,79,79,0.14)] py-4 text-[15px] font-bold text-[#173838]" aria-label="Rahmendaten der Leistung">
+              {data.heroFacts.map((fact, index) => (
+                <span key={fact} className="inline-flex items-center gap-3">
+                  {index > 0 && <span className="hidden text-[#b68a18] sm:inline" aria-hidden="true">·</span>}
+                  {fact}
+                </span>
+              ))}
+            </div>
+          )}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
             <Link href="/termin?anliegen=therapie" className="inline-flex min-h-[50px] items-center justify-center rounded-full bg-[#173838] px-8 py-3.5 text-[15px] font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5">
               Erstgespräch anfragen
@@ -131,9 +210,31 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
               Ablauf & Kosten →
             </Link>
           </div>
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] font-medium text-[#173838]">
-            {data.proofPoints.map((point) => <span key={point}><span className="mr-1.5 text-[#7a5600]">✓</span>{point}</span>)}
-          </div>
+          {data.credentials && data.credentials.length > 0 && (
+            <div className="mt-6 flex flex-wrap gap-2" aria-label="Qualifikationen von Jean-Maurice Cecilia-Menzel">
+              {data.credentials.map((credential) => (
+                <Link
+                  key={credential.label}
+                  href="/ueber-mich"
+                  title={credential.detail}
+                  aria-label={`${credential.label}: ${credential.detail}`}
+                  className="inline-flex min-h-[36px] items-center rounded-full border border-[rgba(47,79,79,0.16)] bg-white px-4 py-2 text-[12px] font-semibold text-[#173838] hover:border-[#173838]"
+                >
+                  <span className="mr-1.5 text-[#b68a18]" aria-hidden="true">✓</span>{credential.label}
+                </Link>
+              ))}
+            </div>
+          )}
+          {data.heroFacts && data.heroFacts.length > 0 && (
+            <div className="mt-6 max-w-3xl space-y-3 text-[16px] leading-[1.75] text-slate-700 sm:text-[18px]">
+              {data.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </div>
+          )}
+          {data.proofPoints.length > 0 && (
+            <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] font-medium text-[#173838]">
+              {data.proofPoints.map((point) => <span key={point}><span className="mr-1.5 text-[#7a5600]">✓</span>{point}</span>)}
+            </div>
+          )}
         </div>
       </section>
 
@@ -155,6 +256,34 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
           </div>
         </div>
       </section>
+
+      {data.editorialSections && data.editorialSections.length > 0 && (
+        <section className="section-space border-y border-[rgba(47,79,79,0.1)] bg-white">
+          <div className="container-shell max-w-4xl divide-y divide-slate-200">
+            {data.editorialSections.map((section) => (
+              <article key={section.heading} className="grid gap-5 py-10 first:pt-0 last:pb-0 lg:grid-cols-[0.85fr_1.35fr] lg:gap-12">
+                <div>
+                  <p className="eyebrow mb-2">{section.eyebrow}</p>
+                  <h2 className="text-[27px] leading-[1.2] text-[#173838] sm:text-[34px]">{section.heading}</h2>
+                </div>
+                <div className="space-y-4 text-[16px] leading-[1.75] text-slate-700">
+                  {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                  {section.bullets && section.bullets.length > 0 && (
+                    <ul className="space-y-2 pt-1">
+                      {section.bullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-3">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#b68a18]" aria-hidden="true" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="section-space border-y border-[rgba(47,79,79,0.1)] bg-[#faf9f8]">
         <div className="container-shell max-w-5xl space-y-8">
@@ -208,6 +337,8 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
           </div>
         </div>
       </section>
+
+      {isCounseling && practitionerSection}
 
       <section className="section-space border-y border-[rgba(47,79,79,0.1)] bg-[#faf9f8]">
         <div className="container-shell max-w-4xl space-y-8">
@@ -271,20 +402,7 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
         </div>
       </section>
 
-      <section className="section-space">
-        <div className="container-shell max-w-4xl">
-          <div className="grid items-center gap-8 rounded-2xl border border-slate-200 bg-white p-8 card-shadow sm:grid-cols-[180px_1fr]">
-            <Image src="/images/portrait-jean-maurice-hd.jpg" alt="Jean-Maurice Cecilia-Menzel, M.Sc." width={360} height={450} className="aspect-[4/5] rounded-xl object-cover" />
-            <div className="space-y-3">
-              <p className="eyebrow mb-1">{isCounseling ? "Ihr Ansprechpartner in München" : "Ihr Therapeut in München"}</p>
-              <h2 className="text-[24px] font-bold text-[#173838] sm:text-[30px]">Jean-Maurice Cecilia-Menzel, M.Sc.</h2>
-              <p className="text-[14px] font-semibold text-[#7a5600]">Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie · Ausbildung in KVT und Hypnosetherapie</p>
-              <p className="text-[15px] leading-relaxed text-slate-600">{data.therapistText}</p>
-              <Link href="/ueber-mich" className="inline-flex min-h-[44px] items-center text-[14px] font-bold text-[#173838] hover:underline">Qualifikationen & Arbeitsweise →</Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {!isCounseling && practitionerSection}
 
       <section className="section-space border-t border-[rgba(47,79,79,0.1)] bg-[#faf9f8]">
         <div className="container-shell max-w-3xl">
@@ -321,6 +439,15 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
           <p className="mb-2 text-[12px] font-bold uppercase tracking-wider text-[#f0cc65]">Erstgespräch anfragen</p>
           <h2 className="text-[30px] text-white sm:text-[40px]">Gemeinsam klären, was Sie konkret entlastet</h2>
           <p className="mx-auto mb-8 mt-3 max-w-xl text-[16px] text-slate-200">Im Erstgespräch ordnen wir Ihre aktuelle Situation ein, besprechen Ihre Ziele und prüfen transparent, ob das Angebot der Praxis zu Ihrem Anliegen passt.</p>
+          {data.credentials && data.credentials.length > 0 && (
+            <div className="mx-auto mb-7 flex max-w-2xl flex-wrap justify-center gap-x-4 gap-y-2 text-[12px] font-semibold text-slate-100" aria-label="Qualifikationen">
+              {data.credentials.map((credential) => (
+                <span key={credential.label} title={credential.detail} className="inline-flex items-center gap-1.5">
+                  <span className="text-[#f0cc65]" aria-hidden="true">✓</span>{credential.label}
+                </span>
+              ))}
+            </div>
+          )}
           <div className="flex flex-col justify-center gap-3 sm:flex-row">
             <Link href="/termin?anliegen=therapie" className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#f0cc65] px-8 py-3.5 text-[14px] font-bold text-[#173838] shadow-lg transition-transform hover:-translate-y-0.5">Erstgespräch anfragen</Link>
             <Link href="/kontakt-anfahrt" className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/30 px-8 py-3.5 text-[14px] font-bold text-white hover:bg-white/10">Praxis & Anfahrt</Link>
