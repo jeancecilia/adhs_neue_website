@@ -26,10 +26,9 @@ const data: PsychotherapyServiceData = {
   ],
   heroFacts: ["60 Minuten", "69 €", "Selbstzahler", "München-Schwabing"],
   credentials: [
-    { label: "M.Sc. · akademischer Grad", detail: "Abgeschlossenes Masterstudium mit dem akademischen Grad Master of Science (M.Sc.). Die Fachrichtung wird auf dieser Website nicht als psychologischer oder klinischer Abschluss ausgewiesen." },
-    { label: "Heilpraktiker, beschränkt auf Psychotherapie", detail: "Amtliche Erlaubnis zur Ausübung der Heilkunde, beschränkt auf das Gebiet der Psychotherapie, nach dem Heilpraktikergesetz." },
+    { label: "Heilpraktiker Psychotherapie", detail: "Amtliche Erlaubnis zur Ausübung der Heilkunde auf dem Gebiet der Psychotherapie nach dem Heilpraktikergesetz." },
     { label: "Neurofeedback & Biofeedback", detail: "Fundierte Ausbildung im apparativen Neurofeedback und Biofeedback." },
-    { label: "KVT & Hypnosetherapie", detail: "Ausbildung in Methoden der kognitiven Verhaltenstherapie und lösungsorientierten Hypnosetherapie." },
+    { label: "Kognitive Verhaltenstherapie", detail: "Ausbildung in Methoden der kognitiven Verhaltenstherapie." },
   ],
   proofPoints: [],
   situationsHeading: "Wann kann eine ADHS-Beratung sinnvoll sein?",

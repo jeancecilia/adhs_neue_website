@@ -136,8 +136,7 @@ export default function RootLayout({
                     "ADHS-Psychoedukation",
                     "Kognitive Verhaltenstherapie",
                     "Neurofeedback",
-                    "Biofeedback",
-                    "Hypnosetherapie"
+                    "Biofeedback"
                   ],
                   "hasCredential": [
                     {
@@ -157,7 +156,7 @@ export default function RootLayout({
                     },
                     {
                       "@type": "EducationalOccupationalCredential",
-                      "name": "Ausbildung in kognitiver Verhaltenstherapie und Hypnosetherapie",
+                      "name": "Ausbildung in kognitiver Verhaltenstherapie",
                       "credentialCategory": "Fachausbildung"
                     }
                   ],
