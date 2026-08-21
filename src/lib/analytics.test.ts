@@ -172,7 +172,7 @@ describe("granular Google consent", () => {
 
   it("classifies only WhatsApp and email contact links", () => {
     expect(
-      getContactLinkAnalyticsEvent("https://wa.me/491743243387"),
+      getContactLinkAnalyticsEvent("https://wa.me/4917644252656"),
     ).toEqual({ eventName: "whatsapp_click", method: "whatsapp" });
     expect(
       getContactLinkAnalyticsEvent(

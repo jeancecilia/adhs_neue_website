@@ -20,7 +20,7 @@ export const siteConfig = {
     "https://www.youtube.com/@adhs-hilfe",
   ],
   whatsappDisplay: "+49 174 3243387",
-  whatsappHref: "https://wa.me/491743243387",
+  whatsappHref: "https://wa.me/4917644252656",
   email: "kontakt@neurofeedback-praxis-muenchen.de",
   emailHref: "mailto:kontakt@neurofeedback-praxis-muenchen.de",
   addressLine1: "Hildeboldstraße 1",
