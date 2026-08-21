@@ -398,14 +398,14 @@ export default function AdhsSelfTest() {
           <div
             role="region"
             aria-labelledby="selftest-consent-heading"
-            className="w-full max-w-2xl rounded-[24px] border border-[rgba(47,79,79,0.18)] bg-white/95 p-5 shadow-[0_28px_90px_rgba(23,56,56,0.22)] sm:p-8"
+            className="w-full max-w-2xl rounded-[24px] border border-[rgba(47,79,79,0.18)] bg-white/95 p-5 hyphens-none shadow-[0_28px_90px_rgba(23,56,56,0.22)] sm:p-8"
           >
             <div className="mb-5">
               <span className="inline-flex items-center gap-2 rounded-full bg-[#fff4cf] px-3 py-2 text-[11px] font-bold text-[#6b4c00]">
                 <span aria-hidden="true">🔒</span> Datenschutz
               </span>
             </div>
-            <h2 id="selftest-consent-heading" className="text-[28px] leading-[1.15] text-[#173838] sm:text-[36px]">
+            <h2 id="selftest-consent-heading" className="text-[28px] leading-[1.15] text-[#173838] hyphens-none sm:text-[36px]">
               Starten Sie Ihren ADHS-Selbsttest
             </h2>
             <p className="mt-4 text-[15px] leading-[1.7] text-slate-700 sm:text-[16px]">
