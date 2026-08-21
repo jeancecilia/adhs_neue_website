@@ -26,6 +26,7 @@ const data: PsychotherapyServiceData = {
   ],
   heroFacts: ["60 Minuten", "69 €", "Selbstzahler", "München-Schwabing"],
   credentials: [
+    { label: "M.Sc.", detail: "Abgeschlossenes Masterstudium mit dem akademischen Grad Master of Science (M.Sc.)." },
     { label: "Heilpraktiker Psychotherapie", detail: "Amtliche Erlaubnis zur Ausübung der Heilkunde auf dem Gebiet der Psychotherapie nach dem Heilpraktikergesetz." },
     { label: "Neurofeedback & Biofeedback", detail: "Fundierte Ausbildung im apparativen Neurofeedback und Biofeedback." },
     { label: "Kognitive Verhaltenstherapie", detail: "Ausbildung in Methoden der kognitiven Verhaltenstherapie." },
