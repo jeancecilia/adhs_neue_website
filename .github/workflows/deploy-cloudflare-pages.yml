@@ -46,3 +46,11 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy out --project-name=neurofeedback-praxis-muenchen --branch=main
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy contact and self-test API
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config workers/contact-form/wrangler.jsonc
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
