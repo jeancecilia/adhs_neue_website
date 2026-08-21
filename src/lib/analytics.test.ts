@@ -96,11 +96,14 @@ describe("granular Google consent", () => {
     );
   });
 
-  it("loads GA once and emits non-sensitive events after analytics consent", () => {
+  it("loads GA once and sends events explicitly to the Munich GA4 property", () => {
     setDefaultConsent();
     writeAnalyticsConsent("granted");
     updateAnalyticsConsent("granted");
-    loadGoogleAnalytics();
+
+    expect(trackAnalyticsEvent("generate_lead", { method: "contact_form" })).toBe(
+      true,
+    );
     loadGoogleAnalytics();
 
     expect(document.querySelectorAll("script[data-ga-id]")).toHaveLength(1);
@@ -116,13 +119,10 @@ describe("granular Google consent", () => {
         send_page_view: false,
       }),
     ]);
-    expect(trackAnalyticsEvent("generate_lead", { method: "contact_form" })).toBe(
-      true,
-    );
     expect(dataLayerCommands()).toContainEqual([
       "event",
       "generate_lead",
-      { method: "contact_form" },
+      { method: "contact_form", send_to: GA_MEASUREMENT_ID },
     ]);
     expect(trackAnalyticsEvent("whatsapp_click", { method: "whatsapp" })).toBe(
       true,
@@ -131,13 +131,43 @@ describe("granular Google consent", () => {
     expect(dataLayerCommands()).toContainEqual([
       "event",
       "whatsapp_click",
-      { method: "whatsapp" },
+      { method: "whatsapp", send_to: GA_MEASUREMENT_ID },
     ]);
     expect(dataLayerCommands()).toContainEqual([
       "event",
       "email_click",
-      { method: "email" },
+      { method: "email", send_to: GA_MEASUREMENT_ID },
     ]);
+  });
+
+  it("restores saved consent and queues GA before an event without manager timing", () => {
+    setDefaultConsent();
+    writeAnalyticsConsent("granted");
+
+    expect(trackAnalyticsEvent("generate_lead", { method: "contact_form" })).toBe(
+      true,
+    );
+
+    const commands = dataLayerCommands();
+    const consentUpdateIndex = commands.findIndex(
+      (command) => command[0] === "consent" && command[1] === "update",
+    );
+    const configIndex = commands.findIndex(
+      (command) => command[0] === "config" && command[1] === GA_MEASUREMENT_ID,
+    );
+    const eventIndex = commands.findIndex(
+      (command) => command[0] === "event" && command[1] === "generate_lead",
+    );
+
+    expect(consentUpdateIndex).toBeGreaterThan(-1);
+    expect(configIndex).toBeGreaterThan(consentUpdateIndex);
+    expect(eventIndex).toBeGreaterThan(configIndex);
+    expect(document.querySelectorAll("script[data-ga-id]")).toHaveLength(1);
+    expect(
+      (window as unknown as Record<string, unknown>)[
+        `ga-disable-${GA_MEASUREMENT_ID}`
+      ],
+    ).toBe(false);
   });
 
   it("classifies only WhatsApp and email contact links", () => {

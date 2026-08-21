@@ -152,10 +152,19 @@ export function trackAnalyticsEvent(
   const consent = readAnalyticsConsent();
   if (!consent || consent === "denied") return false;
 
+  // Do not depend on the consent manager's React effect having finished first.
+  // A successful form response can arrive while the analytics script is still
+  // loading, so apply the stored choice and queue the destination explicitly.
+  updateAnalyticsConsent(consent);
+  loadGoogleAnalytics();
+
   const gtag = ensureGtag();
   if (!gtag) return false;
 
-  gtag("event", eventName, parameters);
+  gtag("event", eventName, {
+    ...parameters,
+    send_to: GA_MEASUREMENT_ID,
+  });
   return true;
 }
 
