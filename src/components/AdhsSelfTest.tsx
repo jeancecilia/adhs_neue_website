@@ -400,23 +400,19 @@ export default function AdhsSelfTest() {
             aria-labelledby="selftest-consent-heading"
             className="w-full max-w-2xl rounded-[24px] border border-[rgba(47,79,79,0.18)] bg-white/95 p-5 shadow-[0_28px_90px_rgba(23,56,56,0.22)] sm:p-8"
           >
-            <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-              <span className="rounded-full bg-[#173838] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.13em] text-white">
-                ADHS-ST-0.2
-              </span>
+            <div className="mb-5">
               <span className="inline-flex items-center gap-2 rounded-full bg-[#fff4cf] px-3 py-2 text-[11px] font-bold text-[#6b4c00]">
-                <span aria-hidden="true">🔒</span> Vorschau gesperrt
+                <span aria-hidden="true">🔒</span> Datenschutz
               </span>
             </div>
-            <p className="eyebrow mb-2">Sicher und pseudonymisiert</p>
             <h2 id="selftest-consent-heading" className="text-[28px] leading-[1.15] text-[#173838] sm:text-[36px]">
-              Test nach Einwilligung freischalten
+              Starten Sie Ihren ADHS-Selbsttest
             </h2>
             <p className="mt-4 text-[15px] leading-[1.7] text-slate-700 sm:text-[16px]">
-              Im Hintergrund sehen Sie bereits den Selbsttest. Bedienbar wird er, sobald Sie der Verarbeitung Ihrer Gesundheitsangaben ausdrücklich zugestimmt haben.
+              Damit wir Ihre Antworten auswerten und Ihnen Ihr persönliches Ergebnis anzeigen können, benötigen wir Ihre Einwilligung zur Datenverarbeitung.
             </p>
             <p className="mt-3 text-[14px] leading-[1.7] text-slate-700 sm:text-[15px]">
-              Ihre Antworten werden <strong>ohne Namen, E-Mail-Adresse oder Telefonnummer</strong> unter einer zufällig erzeugten Kennung gespeichert und für Ihr Ergebnisprofil sowie die statistische Weiterentwicklung des Fragebogens verarbeitet.
+              Die Antworten werden pseudonymisiert und <strong>ohne Namen, E-Mail-Adresse oder Telefonnummer</strong> gespeichert. Sie dienen außerdem der statistischen Prüfung und Weiterentwicklung des Fragebogens.
             </p>
 
             <div className="mt-6 rounded-2xl border border-[#dec77f] bg-[#fffaf0] p-4 sm:p-5">
@@ -432,7 +428,7 @@ export default function AdhsSelfTest() {
                   className="mt-1 h-5 w-5 shrink-0 rounded border-slate-300 text-[#173838] focus:ring-[#173838]"
                 />
                 <span>
-                  Ich willige ausdrücklich ein, dass meine Angaben zur Durchführung und Auswertung dieses ADHS-Selbsttests sowie zur pseudonymisierten statistischen Prüfung und Weiterentwicklung des Fragebogens verarbeitet werden.
+                  Ich willige ausdrücklich ein, dass meine Antworten zur Durchführung und Auswertung des ADHS-Selbsttests sowie zur pseudonymisierten statistischen Prüfung und Weiterentwicklung des Fragebogens verarbeitet werden. Die Einwilligung ist freiwillig und kann jederzeit mit Wirkung für die Zukunft widerrufen werden.
                 </span>
               </label>
               <p className="mt-3 pl-9 text-[12px] leading-relaxed text-slate-600">
@@ -455,7 +451,7 @@ export default function AdhsSelfTest() {
               disabled={!consentChecked}
               className="mt-5 inline-flex min-h-[52px] w-full items-center justify-center rounded-full bg-[#173838] px-8 py-3.5 text-[15px] font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:translate-y-0"
             >
-              Einwilligung bestätigen & Test freischalten
+              Einwilligen & ADHS-Selbsttest starten
             </button>
             <p className="mt-3 text-center text-[12px] leading-relaxed text-slate-500">
               26 Fragen · ca. 5 Minuten · keine Registrierung · direktes Ergebnis

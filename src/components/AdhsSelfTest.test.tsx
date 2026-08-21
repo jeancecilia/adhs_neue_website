@@ -26,10 +26,10 @@ async function click(element: HTMLElement): Promise<void> {
 async function completeTest(answerValue: number): Promise<Record<string, unknown>> {
   const consent = document.querySelector<HTMLInputElement>("#selftest-consent");
   if (!consent) throw new Error("Consent checkbox not found");
-  const unlockButton = button("Einwilligung bestätigen & Test freischalten");
+  const unlockButton = button("Einwilligen & ADHS-Selbsttest starten");
   expect(unlockButton.disabled).toBe(true);
   expect(document.body.textContent).toContain("Frage 1 von 26");
-  expect(document.body.textContent).toContain("Vorschau gesperrt");
+  expect(document.body.textContent).toContain("Starten Sie Ihren ADHS-Selbsttest");
   await click(consent);
   expect(unlockButton.disabled).toBe(false);
   await click(unlockButton);
