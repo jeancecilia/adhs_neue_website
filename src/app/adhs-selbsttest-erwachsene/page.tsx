@@ -6,41 +6,42 @@ import FaqAccordion from "@/components/FaqAccordion";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "ADHS-Selbsttest für Erwachsene | Wissenschaftlich fundiert",
+  title: "ADHS-Selbsttest & ADHS-Test online für Erwachsene",
   description:
-    "Kostenloser ADHS-Selbsttest für Erwachsene: 26 strukturierte Fragen zu Aufmerksamkeit, Organisation, innerer Unruhe, Impulsivität und Alltagsbeeinträchtigung. Wissenschaftlich fundiert, direktes Ergebnis, keine E-Mail erforderlich.",
+    "ADHS-Selbsttest und ADHS-Test online für Erwachsene: 26 Fragen kostenlos beantworten, direktes Ergebnisprofil erhalten – ohne Anmeldung oder E-Mail.",
   keywords: [
+    "ADHS Selbsttest",
+    "ADHS Test online",
     "ADHS Selbsttest Erwachsene",
     "ADHS Test Erwachsene",
     "ADHS Online Test Erwachsene",
     "Habe ich ADHS Test",
     "ADHS Symptome Erwachsene Test",
     "ADHS Selbsttest kostenlos",
-    "ADHS Test online",
   ],
   alternates: { canonical: "/adhs-selbsttest-erwachsene" },
   openGraph: {
-    title: "ADHS-Selbsttest für Erwachsene | Wissenschaftlich fundiert",
+    title: "ADHS-Selbsttest & ADHS-Test online für Erwachsene",
     description:
-      "26 strukturierte Fragen, direktes persönliches Ergebnisprofil und keine E-Mail erforderlich.",
+      "Kostenloser ADHS-Test online: 26 Fragen für Erwachsene, direktes persönliches Ergebnisprofil und keine Anmeldung erforderlich.",
     url: "/adhs-selbsttest-erwachsene",
     type: "website",
     images: [],
   },
   twitter: {
     card: "summary",
-    title: "ADHS-Selbsttest für Erwachsene | Wissenschaftlich fundiert",
+    title: "ADHS-Selbsttest & ADHS-Test online für Erwachsene",
     description:
-      "26 strukturierte Fragen, direktes Ergebnis und keine Registrierung.",
+      "Kostenloser ADHS-Test online mit 26 Fragen, direktem Ergebnisprofil und ohne Registrierung.",
     images: [],
   },
 };
 
 const FAQS = [
   {
-    question: "Ist dieser ADHS-Selbsttest eine Diagnose?",
+    question: "Ist dieser ADHS-Test online eine Diagnose?",
     answer:
-      "Nein. Das Ergebnis zeigt, in welchen Bereichen Sie häufig ADHS-typische Schwierigkeiten angegeben haben. Eine ADHS-Diagnose erfordert eine umfassendere diagnostische Abklärung.",
+      "Nein. Der ADHS-Selbsttest zeigt, in welchen Bereichen Sie häufig ADHS-typische Schwierigkeiten angegeben haben. Eine ADHS-Diagnose erfordert eine umfassendere diagnostische Abklärung.",
   },
   {
     question: "Wie lange dauert der Test?",
@@ -178,7 +179,7 @@ export default function AdhsSelbsttestPage() {
         "@type": "WebPage",
         "@id": `${siteConfig.baseUrl}/adhs-selbsttest-erwachsene#webpage`,
         url: `${siteConfig.baseUrl}/adhs-selbsttest-erwachsene`,
-        name: "ADHS-Selbsttest für Erwachsene",
+        name: "ADHS-Selbsttest & ADHS-Test online für Erwachsene",
         description: metadata.description,
         inLanguage: "de-DE",
         isPartOf: { "@id": `${siteConfig.baseUrl}/#website` },
@@ -220,19 +221,19 @@ export default function AdhsSelbsttestPage() {
 
           <div className="grid gap-10 lg:grid-cols-[1fr_340px] lg:items-end">
             <div>
-              <p className="eyebrow mb-3">Wissenschaftlich fundierter ADHS-Selbsttest</p>
+              <p className="eyebrow mb-3">Kostenloser ADHS-Selbsttest für Erwachsene</p>
               <h1 className="max-w-3xl text-[38px] leading-[1.05] text-[#173838] sm:text-[58px]">
-                ADHS-Selbsttest für Erwachsene
+                ADHS-Selbsttest & ADHS-Test online für Erwachsene
               </h1>
               <p className="mt-5 max-w-3xl text-[20px] font-semibold leading-[1.4] text-[#7a5600] sm:text-[25px]">
                 Wie deutlich zeigen sich bei Ihnen typische ADHS-Muster?
               </p>
               <p className="mt-5 max-w-3xl text-[16px] leading-[1.75] text-slate-700 sm:text-[18px]">
-                Erhalten Sie in wenigen Minuten ein strukturiertes persönliches Profil zu Aufmerksamkeit, Organisation, innerer Unruhe, Impulsivität und Beeinträchtigung im Alltag – entwickelt auf Grundlage aktueller diagnostischer Standards, psychometrischer Forschung und öffentlich verfügbarer ADHS-Forschungsdaten.
+                Dieser kostenlose ADHS-Test online umfasst 26 strukturierte Fragen zu Aufmerksamkeit, Organisation, innerer Unruhe, Impulsivität und Beeinträchtigung im Alltag. Sie erhalten direkt ein persönliches Ergebnisprofil – ohne Anmeldung oder E-Mail-Adresse. Die Konzeption orientiert sich an aktuellen diagnostischen Standards, psychometrischer Forschung und öffentlich verfügbaren ADHS-Forschungsdaten.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a href="#selbsttest" className="inline-flex min-h-[52px] items-center justify-center rounded-full bg-[#173838] px-8 py-3.5 text-[15px] font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5">
-                  ADHS-Selbsttest starten
+                  Kostenlosen ADHS-Test online starten
                 </a>
                 <a href="#wissenschaft" className="inline-flex min-h-[52px] items-center justify-center rounded-full border border-[rgba(47,79,79,0.22)] bg-white px-8 py-3.5 text-[14px] font-bold text-[#173838] hover:bg-slate-50">
                   Wissenschaftliche Grundlagen
@@ -269,9 +270,9 @@ export default function AdhsSelbsttestPage() {
       <section id="selbsttest" className="scroll-mt-24 py-14 sm:py-20">
         <div className="container-shell max-w-4xl">
           <div className="mb-8 text-center">
-            <p className="eyebrow mb-3">Kostenlos · vertraulich · direktes Ergebnis</p>
-            <h2 className="text-[30px] text-[#173838] sm:text-[42px]">Starten Sie Ihr persönliches Antwortprofil</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-slate-600">Der Test ist direkt in diese Seite eingebettet. Ihre Antworten erscheinen weder in der URL noch werden sie an Werbeplattformen übertragen.</p>
+            <p className="eyebrow mb-3">ADHS-Test online · kostenlos · vertraulich</p>
+            <h2 className="text-[30px] text-[#173838] sm:text-[42px]">Kostenlosen ADHS-Selbsttest online starten</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-slate-600">Der ADHS-Test online ist direkt in diese Seite eingebettet. Ihre Antworten erscheinen weder in der URL noch werden sie an Werbeplattformen übertragen. Das persönliche Ergebnis wird unmittelbar nach Abschluss angezeigt.</p>
             <p className="mx-auto mt-3 max-w-2xl text-[13px] font-semibold leading-relaxed text-[#7a5600]">Wichtig: Der Selbsttest ist keine Diagnose und zeigt keine ADHS-Wahrscheinlichkeit an.</p>
           </div>
           <AdhsSelfTest />
@@ -282,8 +283,8 @@ export default function AdhsSelbsttestPage() {
         <div className="container-shell max-w-5xl">
           <div className="max-w-3xl">
             <p className="eyebrow mb-3">Entwicklung & Transparenz</p>
-            <h2 className="text-[30px] leading-[1.15] text-[#173838] sm:text-[42px]">Wie wurde dieser ADHS-Selbsttest entwickelt?</h2>
-            <p className="mt-5 text-[16px] leading-[1.75] text-slate-700">Dieser Selbsttest ist nicht als einfacher Online-Symptomcheck konzipiert.</p>
+            <h2 className="text-[30px] leading-[1.15] text-[#173838] sm:text-[42px]">Wie wurde dieser Online-ADHS-Selbsttest entwickelt?</h2>
+            <p className="mt-5 text-[16px] leading-[1.75] text-slate-700">Dieser ADHS-Test online ist nicht als einfacher Symptomcheck konzipiert.</p>
             <p className="mt-3 text-[16px] leading-[1.75] text-slate-700">Die Struktur und Auswahl der Fragen wurde auf Grundlage diagnostischer Kriterien, aktueller ADHS-Forschung und der statistischen Auswertung öffentlich zugänglicher Forschungsdaten entwickelt. Für die Entwicklung wurden mehrere Datensätze mit zusammen <strong>mehr als 4.700 Teilnehmerbeobachtungen</strong> ausgewertet.</p>
             <p className="mt-3 text-[16px] leading-[1.75] text-slate-700">Die Fragen wurden anschließend <strong>eigenständig formuliert</strong>. Geschützte Frageformulierungen kommerzieller Testverfahren werden nicht reproduziert.</p>
           </div>
@@ -381,7 +382,7 @@ export default function AdhsSelbsttestPage() {
         <div className="container-shell max-w-3xl">
           <div className="mb-10 text-center">
             <p className="eyebrow mb-3">Häufige Fragen</p>
-            <h2 className="text-[30px] text-[#173838] sm:text-[42px]">Fragen zum ADHS-Selbsttest</h2>
+            <h2 className="text-[30px] text-[#173838] sm:text-[42px]">Fragen zum ADHS-Selbsttest und ADHS-Test online</h2>
           </div>
           <FaqAccordion items={FAQS} />
         </div>
