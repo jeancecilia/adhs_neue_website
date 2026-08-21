@@ -26,8 +26,13 @@ async function click(element: HTMLElement): Promise<void> {
 async function completeTest(answerValue: number): Promise<Record<string, unknown>> {
   const consent = document.querySelector<HTMLInputElement>("#selftest-consent");
   if (!consent) throw new Error("Consent checkbox not found");
+  const unlockButton = button("Einwilligung bestätigen & Test freischalten");
+  expect(unlockButton.disabled).toBe(true);
+  expect(document.body.textContent).toContain("Frage 1 von 26");
+  expect(document.body.textContent).toContain("Vorschau gesperrt");
   await click(consent);
-  await click(button("Einwilligen & Selbsttest starten"));
+  expect(unlockButton.disabled).toBe(false);
+  await click(unlockButton);
 
   for (let index = 0; index < 26; index += 1) {
     const radios = Array.from(
