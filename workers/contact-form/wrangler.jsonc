@@ -9,6 +9,14 @@
       "destination_address": "neurofeedback.praxis.muenchen@gmail.com"
     }
   ],
+  "d1_databases": [
+    {
+      "binding": "SELFTEST_DB",
+      "database_name": "adhs-selftest-responses",
+      "database_id": "8357bac2-e86b-46c6-8c1b-c3ba87914903",
+      "migrations_dir": "migrations"
+    }
+  ],
   "triggers": {
     "crons": ["17 3 * * 0"]
   },
