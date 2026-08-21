@@ -36,4 +36,88 @@ describe("ADHS-ST-0.2 scoring", () => {
     expect(hasCompleteSelfTestAnswers({ A01: 4 })).toBe(false);
     expect(() => scoreSelfTest({ A01: 4 })).toThrow();
   });
+
+  it("returns an exact zero profile for exclusively minimal answers", () => {
+    const answers = Object.fromEntries(
+      SELFTEST_ITEMS.map((item) => [item.id, 0]),
+    );
+
+    expect(scoreSelfTest(answers)).toEqual({
+      meanAttention: 0,
+      meanActivation: 0,
+      meanImpulsivity: 0,
+      impairmentMean: 0,
+      compensationScore: 0,
+      frequentAttention: 0,
+      frequentActivation: 0,
+      frequentImpulsivity: 0,
+      attentionPercent: 0,
+      activationPercent: 0,
+      impulsivityPercent: 0,
+      impairmentPercent: 0,
+      hasHighImpairment: false,
+    });
+  });
+
+  it("returns an exact maximum profile for exclusively maximal answers", () => {
+    const answers = Object.fromEntries(
+      SELFTEST_ITEMS.map((item) => [item.id, 4]),
+    );
+
+    expect(scoreSelfTest(answers)).toEqual({
+      meanAttention: 4,
+      meanActivation: 4,
+      meanImpulsivity: 4,
+      impairmentMean: 4,
+      compensationScore: 4,
+      frequentAttention: 12,
+      frequentActivation: 4,
+      frequentImpulsivity: 5,
+      attentionPercent: 100,
+      activationPercent: 100,
+      impulsivityPercent: 100,
+      impairmentPercent: 100,
+      hasHighImpairment: true,
+    });
+  });
+
+  it("keeps domain scores separated in a deliberately mixed profile", () => {
+    const answers = Object.fromEntries(
+      SELFTEST_ITEMS.map((item) => [item.id, 0]),
+    );
+    for (const item of SELFTEST_ITEMS) {
+      if (item.domain === "attention") answers[item.id] = 4;
+      if (item.domain === "activation") answers[item.id] = 3;
+      if (item.domain === "impulsivity") answers[item.id] = 1;
+    }
+    Object.assign(answers, { D01: 3, D02: 2, D03: 1, D04: 0, D05: 4 });
+
+    expect(scoreSelfTest(answers)).toEqual({
+      meanAttention: 4,
+      meanActivation: 3,
+      meanImpulsivity: 1,
+      impairmentMean: 1.5,
+      compensationScore: 4,
+      frequentAttention: 12,
+      frequentActivation: 4,
+      frequentImpulsivity: 0,
+      attentionPercent: 100,
+      activationPercent: 75,
+      impulsivityPercent: 25,
+      impairmentPercent: 38,
+      hasHighImpairment: true,
+    });
+  });
+
+  it.each([-1, 1.5, 5, Number.NaN])(
+    "rejects the invalid answer value %s",
+    (invalidValue) => {
+      const answers = Object.fromEntries(
+        SELFTEST_ITEMS.map((item) => [item.id, 2]),
+      );
+      answers.A01 = invalidValue;
+      expect(hasCompleteSelfTestAnswers(answers)).toBe(false);
+      expect(() => scoreSelfTest(answers)).toThrow();
+    },
+  );
 });

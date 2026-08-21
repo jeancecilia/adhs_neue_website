@@ -35,15 +35,18 @@ function request(payload) {
   });
 }
 
+function databaseMock() {
+  const run = vi.fn().mockResolvedValue({ success: true });
+  const bind = vi.fn(() => ({ run }));
+  const prepare = vi.fn(() => ({ bind }));
+  return { env: { SELFTEST_DB: { prepare } }, prepare, bind, run };
+}
+
 describe("self-test Worker endpoint", () => {
   it("validates and stores a complete pseudonymous response", async () => {
-    const run = vi.fn().mockResolvedValue({ success: true });
-    const bind = vi.fn(() => ({ run }));
-    const prepare = vi.fn(() => ({ bind }));
+    const { env, prepare, bind, run } = databaseMock();
 
-    const response = await worker.fetch(request(validPayload()), {
-      SELFTEST_DB: { prepare },
-    });
+    const response = await worker.fetch(request(validPayload()), env);
 
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({
@@ -55,6 +58,38 @@ describe("self-test Worker endpoint", () => {
     expect(run).toHaveBeenCalledOnce();
   });
 
+  it.each([
+    ["minimal", 0, [0, 0, 0, 0, 0, 0, 0, 0]],
+    ["maximal", 4, [4, 4, 4, 4, 4, 12, 4, 5]],
+  ])("stores exact calculated values for a %s profile", async (_name, value, expected) => {
+    const payload = validPayload();
+    payload.answers = Object.fromEntries(ITEM_IDS.map((id) => [id, value]));
+    const { env, bind } = databaseMock();
+
+    const response = await worker.fetch(request(payload), env);
+
+    expect(response.status).toBe(200);
+    const bound = bind.mock.calls[0];
+    expect(bound.slice(13, 21)).toEqual(expected);
+  });
+
+  it("stores separated domain values for a mixed profile", async () => {
+    const payload = validPayload();
+    payload.answers = Object.fromEntries(ITEM_IDS.map((id) => [id, 0]));
+    for (const id of ITEM_IDS) {
+      if (id.startsWith("A")) payload.answers[id] = 4;
+      if (id.startsWith("B")) payload.answers[id] = 3;
+      if (id.startsWith("C")) payload.answers[id] = 1;
+    }
+    Object.assign(payload.answers, { D01: 3, D02: 2, D03: 1, D04: 0, D05: 4 });
+    const { env, bind } = databaseMock();
+
+    const response = await worker.fetch(request(payload), env);
+
+    expect(response.status).toBe(200);
+    expect(bind.mock.calls[0].slice(13, 21)).toEqual([4, 3, 1, 1.5, 4, 12, 4, 0]);
+  });
+
   it("rejects incomplete or manipulated answer data", async () => {
     const payload = validPayload();
     delete payload.answers.D05;
@@ -64,6 +99,79 @@ describe("self-test Worker endpoint", () => {
     });
 
     expect(response.status).toBe(400);
+  });
+
+  it.each([
+    ["wrong instrument", (payload) => { payload.instrumentVersion = "ADHS-ST-9.9"; }],
+    ["missing consent", (payload) => { payload.consent = false; }],
+    ["wrong consent version", (payload) => { payload.consentVersion = "CONSENT-9.9"; }],
+    ["stale consent", (payload) => { payload.consentAt = new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString(); }],
+    ["future consent", (payload) => { payload.consentAt = new Date(Date.now() + 6 * 60 * 1000).toISOString(); }],
+    ["invalid UUID", (payload) => { payload.responseId = "not-a-uuid"; }],
+    ["answer below scale", (payload) => { payload.answers.A01 = -1; }],
+    ["answer above scale", (payload) => { payload.answers.A01 = 5; }],
+    ["non-integer answer", (payload) => { payload.answers.A01 = 2.5; }],
+    ["extra answer", (payload) => { payload.answers.EXTRA = 2; }],
+    ["age below range", (payload) => { payload.age = 17; }],
+    ["age above range", (payload) => { payload.age = 100; }],
+    ["invalid gender", (payload) => { payload.gender = "other-value"; }],
+    ["diagnosis details without diagnosis", (payload) => { payload.diagnosisSource = "fachaerztlich"; }],
+  ])("rejects %s", async (_name, mutate) => {
+    const payload = validPayload();
+    mutate(payload);
+    const { env, run } = databaseMock();
+
+    const response = await worker.fetch(request(payload), env);
+
+    expect(response.status).toBe(400);
+    expect(run).not.toHaveBeenCalled();
+  });
+
+  it.each([18, 99])("accepts boundary age %s", async (age) => {
+    const payload = validPayload();
+    payload.age = age;
+    const { env } = databaseMock();
+    expect((await worker.fetch(request(payload), env)).status).toBe(200);
+  });
+
+  it("rejects requests from a foreign origin before storage", async () => {
+    const foreignRequest = new Request(
+      "https://neurofeedback-praxis-muenchen.de/api/selftest",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Origin: "https://evil.example" },
+        body: JSON.stringify(validPayload()),
+      },
+    );
+    const { env, run } = databaseMock();
+
+    const response = await worker.fetch(foreignRequest, env);
+
+    expect(response.status).toBe(403);
+    expect(run).not.toHaveBeenCalled();
+  });
+
+  it("returns 405 for unsupported methods", async () => {
+    const response = await worker.fetch(
+      new Request("https://neurofeedback-praxis-muenchen.de/api/selftest"),
+      {},
+    );
+    expect(response.status).toBe(405);
+  });
+
+  it("returns 502 and no success response when D1 fails", async () => {
+    const run = vi.fn().mockRejectedValue(new Error("synthetic D1 failure"));
+    const bind = vi.fn(() => ({ run }));
+    const prepare = vi.fn(() => ({ bind }));
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    const response = await worker.fetch(request(validPayload()), {
+      SELFTEST_DB: { prepare },
+    });
+
+    expect(response.status).toBe(502);
+    expect(await response.json()).toEqual({ error: "Storage failed" });
+    errorSpy.mockRestore();
   });
 
   it("does not accept health responses when the database binding is unavailable", async () => {
