@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import PsychotherapyServicePage, { type PsychotherapyServiceData } from "@/components/PsychotherapyServicePage";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Depressive Verstimmung – Psychotherapie München",
   description: "Psychotherapie bei depressiver Verstimmung in München-Schwabing: Aktivitätsaufbau, Tagesstruktur, kognitive Arbeit und Rückfallprophylaxe.",
-  alternates: { canonical: "/depressive-verstimmung-muenchen" },
-  openGraph: {
-    title: "Depressive Verstimmung – Psychotherapie in München",
-    description: "Unterstützung bei Antriebsmangel, Rückzug, Grübeln und Selbstabwertung – mit klarer Schweregrad- und Krisenabgrenzung.",
-    url: "/depressive-verstimmung-muenchen",
-  },
-};
+  path: "/depressive-verstimmung-muenchen",
+  openGraphTitle: "Depressive Verstimmung – Psychotherapie in München",
+  openGraphDescription: "Unterstützung bei Antriebsmangel, Rückzug, Grübeln und Selbstabwertung – mit klarer Schweregrad- und Krisenabgrenzung.",
+});
 
 const data: PsychotherapyServiceData = {
   slug: "depressive-verstimmung-muenchen",

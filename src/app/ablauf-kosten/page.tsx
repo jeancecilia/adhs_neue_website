@@ -1,16 +1,14 @@
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import FaqAccordion from "@/components/FaqAccordion";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Kosten Psychotherapie & ADHS-Diagnostik München",
   description:
     "Transparente Festpreise: ADHS-Diagnostik für Erwachsene 199 €, Psychotherapie / Einzeltherapie 69 € / 60 Min. und Neurofeedback 69 € in München-Schwabing.",
-  alternates: {
-    canonical: "/ablauf-kosten",
-  },
-};
+  path: "/ablauf-kosten",
+});
 
 const KOSTEN_FAQS = [
   {

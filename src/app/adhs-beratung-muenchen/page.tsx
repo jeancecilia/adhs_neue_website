@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import PsychotherapyServicePage, { type PsychotherapyServiceData } from "@/components/PsychotherapyServicePage";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ADHS-Beratung München für Erwachsene | ADHS Praxis",
   description: "Strukturierte ADHS-Beratung und Psychoedukation für Erwachsene in München-Schwabing: konkrete Strategien für Alltag, Beruf, Studium und Beziehungen.",
-  alternates: { canonical: "/adhs-beratung-muenchen" },
-  openGraph: {
-    title: "ADHS-Beratung für Erwachsene in München",
-    description: "ADHS besser verstehen und individuelle Strategien für Organisation, Zeitmanagement, Selbstregulation, Beruf und Beziehungen entwickeln.",
-    url: "/adhs-beratung-muenchen",
-  },
-};
+  path: "/adhs-beratung-muenchen",
+  openGraphTitle: "ADHS-Beratung für Erwachsene in München",
+  openGraphDescription: "ADHS besser verstehen und individuelle Strategien für Organisation, Zeitmanagement, Selbstregulation, Beruf und Beziehungen entwickeln.",
+});
 
 const data: PsychotherapyServiceData = {
   slug: "adhs-beratung-muenchen",
@@ -144,7 +141,7 @@ const data: PsychotherapyServiceData = {
   related: [
     { label: "ADHS-Diagnostik für Erwachsene", href: "/adhs-test-muenchen" },
     { label: "ADHS-Therapie für Erwachsene", href: "/adhs-therapie-muenchen" },
-    { label: "ADHS im Erwachsenenalter", href: "/adhs-erwachsene-muenchen" },
+    { label: "ADHS-Wissen für Erwachsene", href: "/adhs-wissen" },
     { label: "Neurofeedback bei ADHS", href: "/neurofeedback-muenchen" },
   ],
 };

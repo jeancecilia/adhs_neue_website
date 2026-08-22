@@ -1,17 +1,15 @@
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import BookingForm from "@/components/BookingForm";
 import { siteConfig } from "@/config/site";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Termin anfragen | ADHS Praxis München",
   description:
     "Fragen Sie zeitnah Ihren Termin für ADHS-Diagnostik, Psychotherapie oder Neurofeedback in unserer Praxis in München-Schwabing an. Einfach, diskret und datensparsam.",
-  alternates: {
-    canonical: "/termin",
-  },
-};
+  path: "/termin",
+});
 
 export default function TerminPage() {
   return (

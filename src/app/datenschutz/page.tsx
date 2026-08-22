@@ -1,12 +1,13 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Datenschutzerklärung | ADHS Praxis München",
+  description: "Datenschutzhinweise der ADHS Praxis München zur Website, Kontaktaufnahme, Analyse und Verarbeitung personenbezogener Daten.",
   robots: { index: false, follow: true },
-  alternates: { canonical: "/datenschutz" },
-};
+  path: "/datenschutz",
+});
 
 const externalLinkClass =
   "font-semibold text-[#173838] underline decoration-[#c99a1d] underline-offset-2 hover:text-[#7a5600]";

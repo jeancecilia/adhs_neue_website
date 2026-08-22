@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import ArticleTrust from "@/components/ArticleTrust";
 import MarkdownArticle from "@/components/MarkdownArticle";
 
@@ -10,14 +10,13 @@ const articleSource = readFileSync(
   "utf8",
 );
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ADHS und Beziehungen: Missverständnisse & emotionale Nähe",
   description:
     "Wie ADHS Beziehungen beeinflussen kann: typische Missverständnisse, Konfliktschleifen und konkrete Strategien für Kommunikation, Verlässlichkeit und Nähe.",
-  alternates: {
-    canonical: "/adhs-wissen/adhs-und-beziehungen",
-  },
-};
+  path: "/adhs-wissen/adhs-und-beziehungen",
+  openGraphType: "article",
+});
 
 export default function AdhsBeziehungenPage() {
   return (

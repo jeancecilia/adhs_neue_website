@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import ArticleTrust from "@/components/ArticleTrust";
 import MarkdownArticle from "@/components/MarkdownArticle";
 
@@ -10,14 +10,13 @@ const articleSource = readFileSync(
   "utf8",
 );
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ADHS im Beruf: Stärken entfalten & Überlastung vermeiden",
   description:
     "ADHS im Berufsleben: individuelle Stärken nutzen, Kompensation und Überlastung erkennen und Arbeit mit klaren Prioritäten, Fokuszeiten und Strukturen gestalten.",
-  alternates: {
-    canonical: "/adhs-wissen/adhs-im-beruf",
-  },
-};
+  path: "/adhs-wissen/adhs-im-beruf",
+  openGraphType: "article",
+});
 
 export default function AdhsImBerufPage() {
   return (
@@ -56,7 +55,7 @@ export default function AdhsImBerufPage() {
               },
               {
                 label: "S3-Leitlinie ADHS (AWMF)",
-                href: "https://register.awmf.org/assets/guidelines/028-045l_S3_KF_Aufmerksamkeitsdefizit-Hyperaktivitaetsstoerung-ADHS-Kinder-Jugendliche-Erwachsene_205-05.pdf",
+                href: "https://register.awmf.org/de/leitlinien/detail/028-045",
               },
             ]}
           />

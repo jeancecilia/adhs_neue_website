@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import AdhsSelfTest from "@/components/AdhsSelfTest";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 import FaqAccordion from "@/components/FaqAccordion";
 import { siteConfig } from "@/config/site";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ADHS-Selbsttest & ADHS-Test online für Erwachsene",
   description:
     "ADHS-Selbsttest und ADHS-Test online für Erwachsene: 26 Fragen kostenlos beantworten, direktes Ergebnisprofil erhalten – ohne Anmeldung oder E-Mail.",
@@ -19,23 +19,12 @@ export const metadata: Metadata = {
     "ADHS Symptome Erwachsene Test",
     "ADHS Selbsttest kostenlos",
   ],
-  alternates: { canonical: "/adhs-selbsttest-erwachsene" },
-  openGraph: {
-    title: "ADHS-Selbsttest & ADHS-Test online für Erwachsene",
-    description:
-      "Kostenloser ADHS-Test online: 26 Fragen für Erwachsene, direktes persönliches Ergebnisprofil und keine Anmeldung erforderlich.",
-    url: "/adhs-selbsttest-erwachsene",
-    type: "website",
-    images: [],
-  },
-  twitter: {
-    card: "summary",
-    title: "ADHS-Selbsttest & ADHS-Test online für Erwachsene",
-    description:
-      "Kostenloser ADHS-Test online mit 26 Fragen, direktem Ergebnisprofil und ohne Registrierung.",
-    images: [],
-  },
-};
+  path: "/adhs-selbsttest-erwachsene",
+  openGraphDescription:
+    "Kostenloser ADHS-Test online: 26 Fragen für Erwachsene, direktes persönliches Ergebnisprofil und keine Anmeldung erforderlich.",
+  twitterDescription:
+    "Kostenloser ADHS-Test online mit 26 Fragen, direktem Ergebnisprofil und ohne Registrierung.",
+});
 
 const FAQS = [
   {

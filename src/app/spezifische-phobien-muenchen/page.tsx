@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import PsychotherapyServicePage, { type PsychotherapyServiceData } from "@/components/PsychotherapyServicePage";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Spezifische Phobien behandeln – Psychotherapie München",
   description: "Psychotherapie bei spezifischen Phobien in München-Schwabing: Flugangst, Tier-, Höhen-, Spritzen- oder Raumangst mit KVT und Exposition behandeln.",
-  alternates: { canonical: "/spezifische-phobien-muenchen" },
-  openGraph: {
-    title: "Spezifische Phobien behandeln – Psychotherapie in München",
-    description: "Strukturierte kognitive Verhaltenstherapie und individuell geplante Exposition bei klar umschriebenen Ängsten.",
-    url: "/spezifische-phobien-muenchen",
-  },
-};
+  path: "/spezifische-phobien-muenchen",
+  openGraphTitle: "Spezifische Phobien behandeln – Psychotherapie in München",
+  openGraphDescription: "Strukturierte kognitive Verhaltenstherapie und individuell geplante Exposition bei klar umschriebenen Ängsten.",
+});
 
 const data: PsychotherapyServiceData = {
   slug: "spezifische-phobien-muenchen",

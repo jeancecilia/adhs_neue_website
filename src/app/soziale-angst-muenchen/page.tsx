@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import PsychotherapyServicePage, { type PsychotherapyServiceData } from "@/components/PsychotherapyServicePage";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Soziale Angst & soziale Phobie – Psychotherapie München",
   description: "Psychotherapie bei sozialer Angst und sozialer Phobie in München-Schwabing: Bewertungsangst, Vermeidung und Grübeln mit KVT und Exposition behandeln.",
-  alternates: { canonical: "/soziale-angst-muenchen" },
-  openGraph: {
-    title: "Soziale Angst & soziale Phobie – Psychotherapie in München",
-    description: "Verhaltenstherapeutische Unterstützung bei Bewertungsangst, Vermeidung und belastendem Grübeln nach sozialen Situationen.",
-    url: "/soziale-angst-muenchen",
-  },
-};
+  path: "/soziale-angst-muenchen",
+  openGraphTitle: "Soziale Angst & soziale Phobie – Psychotherapie in München",
+  openGraphDescription: "Verhaltenstherapeutische Unterstützung bei Bewertungsangst, Vermeidung und belastendem Grübeln nach sozialen Situationen.",
+});
 
 const data: PsychotherapyServiceData = {
   slug: "soziale-angst-muenchen",

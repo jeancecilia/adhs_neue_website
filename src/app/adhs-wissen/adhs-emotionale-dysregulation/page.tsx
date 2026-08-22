@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import ArticleTrust from "@/components/ArticleTrust";
 import MarkdownArticle from "@/components/MarkdownArticle";
 
@@ -10,14 +10,13 @@ const articleSource = readFileSync(
   "utf8",
 );
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ADHS und emotionale Dysregulation: Wenn Gefühle überfluten",
   description:
     "Wie emotionale Dysregulation bei ADHS erlebt wird, wie RSD fachlich einzuordnen ist und welche Strategien helfen können, intensive Reaktionen besser zu regulieren.",
-  alternates: {
-    canonical: "/adhs-wissen/adhs-emotionale-dysregulation",
-  },
-};
+  path: "/adhs-wissen/adhs-emotionale-dysregulation",
+  openGraphType: "article",
+});
 
 export default function AdhsEmotionaleDysregulationPage() {
   return (

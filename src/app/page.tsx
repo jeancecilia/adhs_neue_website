@@ -1,26 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import { siteConfig, trustPoints, processSteps, homeContent } from "@/config/site";
 import FaqAccordion from "@/components/FaqAccordion";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ADHS Praxis München | Beratung, Diagnostik & Therapie",
   description:
     "ADHS-Beratung, Diagnostik und Psychotherapie für Erwachsene in München-Schwabing. Konkrete Unterstützung für Alltag, Beruf, Studium und Beziehungen.",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "ADHS Praxis München | Beratung, Diagnostik & Therapie",
-    description: "ADHS-Beratung, Diagnostik und Psychotherapie für Erwachsene in München-Schwabing – strukturiert, alltagsnah und fachlich fundiert.",
-    url: "/",
-  },
-  twitter: {
-    title: "ADHS Praxis München | Beratung, Diagnostik & Therapie",
-    description: "ADHS-Beratung, Diagnostik und Psychotherapie für Erwachsene in München-Schwabing.",
-  },
-};
+  path: "/",
+  openGraphDescription:
+    "ADHS-Beratung, Diagnostik und Psychotherapie für Erwachsene in München-Schwabing – strukturiert, alltagsnah und fachlich fundiert.",
+  twitterDescription:
+    "ADHS-Beratung, Diagnostik und Psychotherapie für Erwachsene in München-Schwabing.",
+});
 
 const HOMEPAGE_FAQS = [
   {

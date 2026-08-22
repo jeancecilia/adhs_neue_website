@@ -1,17 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/config/site";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Kontakt & Anfahrt | ADHS Praxis München",
   description:
     "Praxisadresse, Anfahrt mit ÖPNV & Kontaktmöglichkeiten der ADHS Praxis München von Jean-Maurice Cecilia-Menzel in Schwabing.",
-  alternates: {
-    canonical: "/kontakt-anfahrt",
-  },
-};
+  path: "/kontakt-anfahrt",
+});
 
 export default function KontaktAnfahrtPage() {
   return (

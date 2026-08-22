@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import PsychotherapyServicePage, { type PsychotherapyServiceData } from "@/components/PsychotherapyServicePage";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Panikattacken & Panikstörung – Psychotherapie München",
   description: "Psychotherapie bei Panikattacken und Panikstörung in München-Schwabing: Angst vor der Angst, Körperscanning und Vermeidung mit KVT und Exposition bearbeiten.",
-  alternates: { canonical: "/panikattacken-muenchen" },
-  openGraph: {
-    title: "Panikattacken & Panikstörung – Psychotherapie in München",
-    description: "Verhaltenstherapeutische Hilfe bei wiederkehrenden Panikattacken, Erwartungsangst und Vermeidung.",
-    url: "/panikattacken-muenchen",
-  },
-};
+  path: "/panikattacken-muenchen",
+  openGraphTitle: "Panikattacken & Panikstörung – Psychotherapie in München",
+  openGraphDescription: "Verhaltenstherapeutische Hilfe bei wiederkehrenden Panikattacken, Erwartungsangst und Vermeidung.",
+});
 
 const data: PsychotherapyServiceData = {
   slug: "panikattacken-muenchen",

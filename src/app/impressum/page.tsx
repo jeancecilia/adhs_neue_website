@@ -1,17 +1,16 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Impressum | ADHS Praxis München | Jean-Maurice Cecilia-Menzel",
+  description: "Impressum und Anbieterkennzeichnung der ADHS Praxis München von Jean-Maurice Cecilia-Menzel.",
   robots: {
     index: false,
     follow: true,
   },
-  alternates: {
-    canonical: "/impressum",
-  },
-};
+  path: "/impressum",
+});
 
 export default function ImpressumPage() {
   return (

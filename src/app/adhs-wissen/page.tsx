@@ -1,15 +1,13 @@
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ADHS-Wissen | Ratgeber für Erwachsene | ADHS Praxis München",
   description:
     "Fundiertes Fachwissen zu ADHS im Erwachsenenalter: Prokrastination, emotionale Dysregulation, Beruf, Beziehungen, Frauen und Schlaf.",
-  alternates: {
-    canonical: "/adhs-wissen",
-  },
-};
+  path: "/adhs-wissen",
+});
 
 const ARTICLES = [
   {

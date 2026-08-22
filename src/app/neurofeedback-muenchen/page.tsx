@@ -1,17 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import FaqAccordion from "@/components/FaqAccordion";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Neurofeedback München bei ADHS | ADHS Praxis",
   description:
     "Ergänzendes apparatives Neurofeedback bei ADHS für Erwachsene in München-Schwabing. Gezieltes Training von Aufmerksamkeit & Selbstregulation. Wissenschaftlich fundiert.",
-  alternates: {
-    canonical: "/neurofeedback-muenchen",
-  },
-};
+  path: "/neurofeedback-muenchen",
+});
 
 const NEUROFEEDBACK_FAQS = [
   {

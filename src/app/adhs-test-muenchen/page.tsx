@@ -1,17 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import FaqAccordion from "@/components/FaqAccordion";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ADHS-Diagnostik München für Erwachsene | ADHS Praxis",
   description:
     "Strukturierte ADHS-Diagnostik für Erwachsene in München-Schwabing. Detaillierter Ablauf, validierte Testverfahren (DIVA-5, ASRS, WURS-k), schriftlicher Befundbericht & 199 € Festpreis.",
-  alternates: {
-    canonical: "/adhs-test-muenchen",
-  },
-};
+  path: "/adhs-test-muenchen",
+});
 
 const DIAGNOSTIK_FAQS = [
   {

@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import ArticleTrust from "@/components/ArticleTrust";
 import MarkdownArticle from "@/components/MarkdownArticle";
 
@@ -10,14 +10,13 @@ const articleSource = readFileSync(
   "utf8",
 );
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ADHS und Schlafstörungen: Gedankenkarussell stoppen",
   description:
     "Warum Schlafprobleme bei Erwachsenen mit ADHS häufig sind und welche Routinen, CBT-I-Ansätze und medizinischen Abklärungen helfen können.",
-  alternates: {
-    canonical: "/adhs-wissen/adhs-und-schlaf",
-  },
-};
+  path: "/adhs-wissen/adhs-und-schlaf",
+  openGraphType: "article",
+});
 
 export default function AdhsSchlafPage() {
   return (
@@ -56,7 +55,7 @@ export default function AdhsSchlafPage() {
               },
               {
                 label: "S3-Leitlinie ADHS (AWMF)",
-                href: "https://register.awmf.org/assets/guidelines/028-045l_S3_KF_Aufmerksamkeitsdefizit-Hyperaktivitaetsstoerung-ADHS-Kinder-Jugendliche-Erwachsene_205-05.pdf",
+                href: "https://register.awmf.org/de/leitlinien/detail/028-045",
               },
             ]}
           />

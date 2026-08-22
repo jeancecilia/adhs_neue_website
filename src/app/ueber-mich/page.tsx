@@ -1,17 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/config/site";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Über mich | Jean-Maurice Cecilia-Menzel | ADHS Praxis München",
   description:
     "Erfahren Sie mehr über Jean-Maurice Cecilia-Menzel, M.Sc., Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie mit Schwerpunkt ADHS im Erwachsenenalter in München-Schwabing.",
-  alternates: {
-    canonical: "/ueber-mich",
-  },
-};
+  path: "/ueber-mich",
+});
 
 const SCHWERPUNKTE = [
   "Strukturierte ADHS-Diagnostik bei Erwachsenen",

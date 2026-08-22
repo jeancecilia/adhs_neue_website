@@ -1,17 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 import FaqAccordion from "@/components/FaqAccordion";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ADHS-Therapie München für Erwachsene | ADHS Praxis",
   description:
     "Spezialisierte ADHS-Therapie & Psychotherapie für Erwachsene in München-Schwabing. Konkrete Alltagsstrategien gegen Prokrastination, emotionale Überlastung & Chaos.",
-  alternates: {
-    canonical: "/adhs-therapie-muenchen",
-  },
-};
+  path: "/adhs-therapie-muenchen",
+});
 
 const THERAPIE_FAQS = [
   {
