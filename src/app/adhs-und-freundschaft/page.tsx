@@ -18,12 +18,14 @@ export default function AdhsUndFreundschaftPage() {
     title="ADHS und Freundschaft bei Erwachsenen"
     breadcrumb="ADHS und Freundschaft"
     eyebrow="Soziales & Verbundenheit"
-    readTime="ca. 12 Min. Lesezeit"
+    readTime="ca. 18 Min. Lesezeit"
     intro="Vergessene Nachrichten, wechselnde Kontaktintensität oder impulsive Reaktionen können Freundschaften belasten. Sie bedeuten jedoch weder Desinteresse noch fehlende Empathie – und viele dieser Muster lassen sich konkret verändern."
     path="/adhs-und-freundschaft"
     source={source}
     sources={[
       { label: "Social Cognition in Adult ADHD – systematische Übersichtsarbeit (PMC)", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9311421/" },
+      { label: "Interpersonelle Beziehungen und Online-Communitys bei Erwachsenen mit ADHS (PMC)", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10399076/" },
+      { label: "Interpersonal Problems of Young Adults With and Without ADHD (PubMed)", href: "https://pubmed.ncbi.nlm.nih.gov/30614417/" },
       { label: "Adult ADHD: evidence base, uncertainties and controversies (PMC)", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12434367/" },
       { label: "NICE-Leitlinie NG87: ADHS – Diagnostik und Behandlung", href: "https://www.nice.org.uk/guidance/ng87/" },
     ]}

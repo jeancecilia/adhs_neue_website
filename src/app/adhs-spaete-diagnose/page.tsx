@@ -18,7 +18,7 @@ export default function AdhsSpaeteDiagnosePage() {
     title="ADHS-Spätdiagnose bei Erwachsenen"
     breadcrumb="ADHS-Spätdiagnose"
     eyebrow="Diagnostik & Einordnung"
-    readTime="ca. 13 Min. Lesezeit"
+    readTime="ca. 19 Min. Lesezeit"
     intro="Eine Diagnose im Erwachsenenalter kann frühere Schwierigkeiten verständlicher machen – und zugleich Trauer, Zweifel oder Wut auslösen. Eine gute Diagnostik prüft deshalb nicht nur Symptome, sondern die gesamte Entwicklung und mögliche Alternativerklärungen."
     path="/adhs-spaete-diagnose"
     source={source}
@@ -27,6 +27,7 @@ export default function AdhsSpaeteDiagnosePage() {
       { label: "Lived Experiences of Receiving an ADHD Diagnosis in Adulthood (PubMed)", href: "https://pubmed.ncbi.nlm.nih.gov/42216788/" },
       { label: "Miss. Diagnosis: ADHD in Adult Women – systematische Übersicht (PubMed)", href: "https://pubmed.ncbi.nlm.nih.gov/36995125/" },
       { label: "Adult-Onset ADHD: Critical Analysis and Alternative Explanations (PubMed)", href: "https://pubmed.ncbi.nlm.nih.gov/33738692/" },
+      { label: "Europäischer Konsens zu Diagnostik und Behandlung von Erwachsenen-ADHS (PubMed)", href: "https://pubmed.ncbi.nlm.nih.gov/30453134/" },
     ]}
     ctaTitle="ADHS-Verdacht im Erwachsenenalter fundiert abklären"
     ctaDescription="Eine strukturierte Diagnostik verbindet biografische Entwicklung, aktuelle Beeinträchtigungen, standardisierte Verfahren und eine sorgfältige differentialdiagnostische Einordnung."

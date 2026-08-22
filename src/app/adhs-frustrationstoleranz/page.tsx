@@ -18,7 +18,7 @@ export default function AdhsFrustrationstoleranzPage() {
     title="ADHS und Frustrationstoleranz"
     breadcrumb="ADHS und Frustrationstoleranz"
     eyebrow="Emotionen & Selbststeuerung"
-    readTime="ca. 12 Min. Lesezeit"
+    readTime="ca. 18 Min. Lesezeit"
     intro="Wenn Technik nicht funktioniert, Pläne sich ändern oder Fortschritt ausbleibt, kann Frust bei ADHS sehr schnell eskalieren. Entscheidend ist nicht, Gefühle zu unterdrücken, sondern früher wieder handlungsfähig zu werden."
     path="/adhs-frustrationstoleranz"
     source={source}
@@ -26,6 +26,7 @@ export default function AdhsFrustrationstoleranzPage() {
       { label: "Evidence of emotion dysregulation as a core symptom of adult ADHD (PMC)", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9821724/" },
       { label: "Identifying patterns of emotion dysregulation in adult ADHD (PMC)", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10519076/" },
       { label: "Adult ADHD: clinical presentation and treatment perspectives (PMC)", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12652008/" },
+      { label: "CBT bei Erwachsenen mit ADHS – Meta-Analyse randomisierter Studien (PubMed)", href: "https://pubmed.ncbi.nlm.nih.gov/36794797/" },
       { label: "NICE-Leitlinie NG87: ADHS – Diagnostik und Behandlung", href: "https://www.nice.org.uk/guidance/ng87/" },
     ]}
     ctaTitle="Frust früher erkennen und gezielter regulieren"

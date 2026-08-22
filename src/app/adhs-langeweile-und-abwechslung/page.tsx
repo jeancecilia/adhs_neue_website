@@ -18,13 +18,15 @@ export default function AdhsLangeweileUndAbwechslungPage() {
     title="ADHS und Langeweile: Warum Abwechslung so wichtig erscheint"
     breadcrumb="ADHS und Langeweile"
     eyebrow="Motivation & Stimulation"
-    readTime="ca. 11 Min. Lesezeit"
+    readTime="ca. 17 Min. Lesezeit"
     intro="Langeweile kann bei ADHS schnell körperlich unangenehm werden und zu ständigem Wechsel, Aufschieben oder impulsiver Ablenkung führen. Dahinter steckt nicht einfach mangelnde Disziplin."
     path="/adhs-langeweile-und-abwechslung"
     source={source}
     sources={[
       { label: "Why Are Individuals With ADHD More Prone to Boredom? (PubMed)", href: "https://pubmed.ncbi.nlm.nih.gov/40730822/" },
+      { label: "The Boredom-ADHD Nexus – Meta-Analyse mit 22.365 Personen (PubMed)", href: "https://pubmed.ncbi.nlm.nih.gov/41811543/" },
       { label: "Exploring the relationship between boredom and sustained attention (PubMed)", href: "https://pubmed.ncbi.nlm.nih.gov/22729457/" },
+      { label: "Reinforcement and Compensatory Mechanisms in ADHD – systematische Übersicht (PubMed)", href: "https://pubmed.ncbi.nlm.nih.gov/33833929/" },
       { label: "NICE-Leitlinie NG87: ADHS – Diagnostik und Behandlung", href: "https://www.nice.org.uk/guidance/ng87/" },
     ]}
     ctaTitle="Motivation so gestalten, dass sie im echten Alltag funktioniert"
