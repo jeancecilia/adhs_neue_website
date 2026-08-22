@@ -5,11 +5,39 @@ import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
 export const metadata = createPageMetadata({
   title: "ADHS-Wissen | Ratgeber für Erwachsene | ADHS Praxis München",
   description:
-    "Fundiertes Fachwissen zu ADHS im Erwachsenenalter: Prokrastination, emotionale Dysregulation, Beruf, Beziehungen, Frauen und Schlaf.",
+    "Fundiertes ADHS-Wissen für Erwachsene: Freundschaft, Langeweile, Frustrationstoleranz, Spätdiagnose, Prokrastination, Beziehungen, Beruf und Schlaf.",
   path: "/adhs-wissen",
 });
 
 const ARTICLES = [
+  {
+    href: "/adhs-und-freundschaft",
+    category: "Soziales & Verbundenheit",
+    title: "ADHS und Freundschaft",
+    description: "Warum Kontakt manchmal aus dem Blick gerät und wie Erwachsene mit ADHS Verbindlichkeit, Nähe und Konflikte alltagstauglich gestalten können.",
+    readTime: "12 Min. Lesezeit",
+  },
+  {
+    href: "/adhs-langeweile-und-abwechslung",
+    category: "Motivation & Stimulation",
+    title: "ADHS und Langeweile",
+    description: "Warum monotone Aufgaben so schnell unerträglich werden können und wie passende Stimulation, sichtbarer Fortschritt und klare Arbeitsblöcke helfen.",
+    readTime: "11 Min. Lesezeit",
+  },
+  {
+    href: "/adhs-frustrationstoleranz",
+    category: "Emotionen & Selbststeuerung",
+    title: "ADHS und Frustrationstoleranz",
+    description: "Typische Auslöser, körperliche Frühwarnzeichen und konkrete Strategien, um bei Blockaden und Rückschlägen wieder handlungsfähig zu werden.",
+    readTime: "12 Min. Lesezeit",
+  },
+  {
+    href: "/adhs-spaete-diagnose",
+    category: "Diagnostik & Einordnung",
+    title: "ADHS-Spätdiagnose bei Erwachsenen",
+    description: "Warum ADHS manchmal erst spät erkannt wird, wie eine fundierte Diagnostik aufgebaut ist und was die Diagnose emotional auslösen kann.",
+    readTime: "13 Min. Lesezeit",
+  },
   {
     href: "/adhs-wissen/adhs-prokrastination",
     category: "Alltag & Handeln",

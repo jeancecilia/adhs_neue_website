@@ -7,18 +7,22 @@ export default function ArticleTrust({
   title,
   path,
   sources,
+  datePublished = "2026-08-15",
+  dateModified = "2026-08-16",
 }: {
   title: string;
   path: string;
   sources: Source[];
+  datePublished?: string;
+  dateModified?: string;
 }) {
   const url = `${siteConfig.baseUrl}${path}`;
   const article = {
     "@type": "Article",
     headline: title,
     mainEntityOfPage: url,
-    datePublished: "2026-08-15",
-    dateModified: "2026-08-16",
+    datePublished,
+    dateModified,
     inLanguage: "de-DE",
     author: {
       "@type": "Person",
@@ -51,7 +55,10 @@ export default function ArticleTrust({
         <strong className="text-[#173838]">Redaktionell verantwortlich:</strong>{" "}
         <Link href="/ueber-mich" className="underline underline-offset-4">{siteConfig.practitioner}</Link>, {siteConfig.credentials[0]}
       </p>
-      <p className="mt-1">Veröffentlicht am 15. August 2026 · Inhaltlich aktualisiert am 16. August 2026</p>
+      <p className="mt-1">
+        Veröffentlicht am {new Intl.DateTimeFormat("de-DE", { dateStyle: "long", timeZone: "UTC" }).format(new Date(datePublished))}
+        {" · "}Inhaltlich aktualisiert am {new Intl.DateTimeFormat("de-DE", { dateStyle: "long", timeZone: "UTC" }).format(new Date(dateModified))}
+      </p>
       <div className="mt-4">
         <p className="font-bold text-[#173838]">Fachliche Quellen</p>
         <ul className="mt-1 list-disc space-y-1 pl-5">
