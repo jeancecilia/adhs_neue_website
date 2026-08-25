@@ -121,6 +121,43 @@ export default function Footer() {
           </div>
         </div>
 
+        <div className="mt-10 rounded-2xl border border-white/15 bg-white/[0.05] p-5 sm:p-6">
+          <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+            <div>
+              <p className="text-[12px] font-bold uppercase tracking-[0.12em] text-[#f0cc65]">
+                Verbundene Praxisangebote
+              </p>
+              <p className="mt-2 max-w-xl text-[14px] leading-[1.65] text-slate-200">
+                Ergänzende Angebote von Jean-Maurice Cecilia-Menzel am Praxisstandort München-Schwabing.
+              </p>
+            </div>
+            <nav className="grid gap-3 sm:grid-cols-2" aria-label="Verbundene Praxisangebote">
+              <a
+                href="https://hypnose-praxis-muenchen.com/"
+                className="group rounded-xl border border-white/15 bg-white/[0.06] px-4 py-3 transition-colors hover:border-white/30 hover:bg-white/[0.1]"
+              >
+                <span className="block text-[14px] font-bold text-white group-hover:underline group-hover:underline-offset-4">
+                  Hypnosetherapie München
+                </span>
+                <span className="mt-1 block text-[12px] leading-relaxed text-slate-300">
+                  Wissenschaftlich fundierte Hypnose und psychotherapeutische Begleitung
+                </span>
+              </a>
+              <Link
+                href="/neurofeedback-muenchen"
+                className="group rounded-xl border border-white/15 bg-white/[0.06] px-4 py-3 transition-colors hover:border-white/30 hover:bg-white/[0.1]"
+              >
+                <span className="block text-[14px] font-bold text-white group-hover:underline group-hover:underline-offset-4">
+                  Neurofeedback München
+                </span>
+                <span className="mt-1 block text-[12px] leading-relaxed text-slate-300">
+                  EEG-basiertes Training als ergänzendes Praxisangebot
+                </span>
+              </Link>
+            </nav>
+          </div>
+        </div>
+
         {/* Footer Bottom */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[rgba(255,255,255,0.22)] pt-6 text-[14px] font-normal text-slate-300 sm:flex-row">
           <span>&copy; {new Date().getFullYear()} {siteConfig.name} – Praxis für Psychotherapie nach dem HeilprG</span>
