@@ -1,0 +1,37 @@
+Action,Customer ID,Negative keyword list name,Negative keyword,Keyword or list,Match type
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,kostenlos,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,gratis,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,kassenplatz,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,gesetzliche krankenkasse,Keyword,Phrase match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,kassentherapeut,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,kassenärztlich,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,ausbildung,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,studium,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,job,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,stellenangebot,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,praktikum,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,gehalt,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,selbsttest,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,online test,Keyword,Phrase match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,diagnostik,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,diagnose,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,kinder,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,jugendliche,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,medikamente,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,rezept,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,verschreiben,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,klinik,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,stationär,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,notfall,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,akut,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,suizid,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,suizidgedanken,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,hotline,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,definition,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,was ist,Keyword,Phrase match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,wiki,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,pdf,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,buch,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,neurofeedback,Keyword,Broad match
+Add,413-003-0542,Praxis München | Gemeinsame Ausschlüsse,neurofeedbackgerät,Keyword,Broad match
+Add,413-003-0542,Praxis München | Psychotherapie Routing,adhs,Keyword,Broad match
