@@ -3,6 +3,7 @@ import Image from "next/image";
 import { createPageMetadata } from "@/lib/metadata";
 import FaqAccordion from "@/components/FaqAccordion";
 import BreadcrumbJsonLd from "@/components/BreadcrumbJsonLd";
+import BookingForm from "@/components/BookingForm";
 
 export const metadata = createPageMetadata({
   title: "ADHS-Diagnostik München für Erwachsene | ADHS Praxis",
@@ -92,7 +93,7 @@ export default function AdhsTestPage() {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
             <Link
-              href="/termin?anliegen=screening"
+              href="#diagnostik-anfrage"
               className="inline-flex min-h-[50px] items-center justify-center rounded-full bg-[#173838] px-8 py-3.5 text-[15px] font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5"
             >
               ADHS-Diagnostik anfragen
@@ -585,7 +586,7 @@ export default function AdhsTestPage() {
               <p className="eyebrow mb-1">Ihr Diagnostiker & Therapeut in München</p>
               <h3 className="text-[24px] font-bold text-[#173838]">Jean-Maurice Cecilia-Menzel, M.Sc.</h3>
               <p className="text-[14px] font-semibold text-[#7a5600] mb-3">
-                Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie
+                Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie · Neurofeedback-Trainer
               </p>
               <p className="text-[14px] leading-relaxed text-slate-700 mb-4">
                 Fachlicher Schwerpunkt sind die strukturierte Diagnostik und psychotherapeutische Behandlung von ADHS im Erwachsenenalter. In unserer Schwabinger Praxis verbinden wir fundierte leitlinienbasierte Testinstrumente (DIVA-5) mit einer empathischen und entlastenden Atmosphäre.
@@ -601,7 +602,46 @@ export default function AdhsTestPage() {
         </div>
       </section>
 
-      {/* 12. FAQ ACCORDION */}
+      {/* 12. DIREKTE TERMINANFRAGE */}
+      <section
+        id="diagnostik-anfrage"
+        className="scroll-mt-24 border-y border-[rgba(47,79,79,0.1)] bg-[#faf9f8] section-space"
+      >
+        <div className="container-shell grid max-w-5xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div className="lg:sticky lg:top-28">
+            <p className="eyebrow mb-2">Unverbindlich anfragen</p>
+            <h2 className="text-[28px] leading-[1.2] text-[#173838] sm:text-[36px]">
+              ADHS-Diagnostik direkt anfragen
+            </h2>
+            <p className="mt-4 text-[16px] leading-[1.7] text-slate-700">
+              Senden Sie Ihre Terminwünsche direkt von dieser Seite. Für die erste Kontaktaufnahme genügen Name, E-Mail-Adresse und Ihr bevorzugter Zeitraum.
+            </p>
+            <div className="mt-6 rounded-2xl border border-[rgba(47,79,79,0.14)] bg-white p-6 card-shadow">
+              <ul className="space-y-3 text-[14px] leading-relaxed text-slate-700">
+                <li className="flex gap-2">
+                  <span className="font-bold text-[#7a5600]">✓</span>
+                  <span><strong>199 € Festpreis</strong> für den vollständigen Diagnostikprozess</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="font-bold text-[#7a5600]">✓</span>
+                  <span>Ca. 2,5 Stunden Gesamtumfang inklusive Auswertung</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="font-bold text-[#7a5600]">✓</span>
+                  <span>Schriftlicher Befundbericht und persönliche Besprechung</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="font-bold text-[#7a5600]">✓</span>
+                  <span>Rückmeldung in der Regel innerhalb von 24–48 Stunden an Werktagen</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <BookingForm />
+        </div>
+      </section>
+
+      {/* 13. FAQ ACCORDION */}
       <section className="section-space">
         <div className="container-shell max-w-3xl">
           <div className="text-center mb-10">
@@ -614,7 +654,7 @@ export default function AdhsTestPage() {
         </div>
       </section>
 
-      {/* 13. ABSCHLUSS-CTA */}
+      {/* 14. ABSCHLUSS-CTA */}
       <section className="bg-[#173838] py-16 text-white text-center">
         <div className="container-shell max-w-3xl">
           <p className="text-[12px] font-bold uppercase tracking-wider text-[#f0cc65] mb-2">Endlich Klarheit schaffen</p>
@@ -626,7 +666,7 @@ export default function AdhsTestPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href="/termin?anliegen=screening"
+              href="#diagnostik-anfrage"
               className="inline-flex min-h-[50px] items-center justify-center rounded-full bg-[#f0cc65] px-8 py-3.5 text-[15px] font-bold text-[#173838] shadow-lg transition-transform hover:-translate-y-0.5"
             >
               Diagnostik-Termin anfragen
