@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 import { SELFTEST_LINK_KEY } from "@/lib/adhsSelftest";
+import { isAcceptedContactSubmission } from "@/lib/contactSubmission";
 
 function BookingFormInner() {
   const searchParams = useSearchParams();
@@ -69,7 +70,7 @@ function BookingFormInner() {
         }),
       });
 
-      if (!response.ok) {
+      if (!(await isAcceptedContactSubmission(response))) {
         throw new Error("Die Anfrage konnte nicht übermittelt werden.");
       }
 

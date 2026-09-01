@@ -197,7 +197,11 @@ export default {
 
     if (pathname === "/api/selftest") return storeSelftest(body, env);
 
-    if (clean(body.website, 200)) return json({ ok: true });
+    // Keep the honeypot response non-descriptive, but make its acceptance
+    // state explicit so the frontend never reports it as a real lead.
+    if (clean(body.website, 200)) {
+      return json({ ok: true, accepted: false });
+    }
 
     const name = clean(body.name, 120);
     const email = clean(body.email, 254).toLowerCase();
@@ -243,7 +247,7 @@ export default {
       return json({ error: "Delivery failed" }, 502);
     }
 
-    return json({ ok: true }, 200);
+    return json({ ok: true, accepted: true }, 200);
   },
 
   async scheduled(_controller, env) {

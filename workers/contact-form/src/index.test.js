@@ -35,6 +35,30 @@ function request(payload) {
   });
 }
 
+function validContactPayload() {
+  return {
+    name: "Erika Beispiel",
+    email: "erika@example.com",
+    service: "adhs-diagnostik",
+    timeslot: "vormittags",
+    message: "Bitte um Rückruf.",
+    healthDataConsent: true,
+    website: "",
+    linkedResponseId: null,
+  };
+}
+
+function contactRequest(payload) {
+  return new Request("https://neurofeedback-praxis-muenchen.de/api/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Origin: "https://neurofeedback-praxis-muenchen.de",
+    },
+    body: JSON.stringify(payload),
+  });
+}
+
 function databaseMock() {
   const run = vi.fn().mockResolvedValue({ success: true });
   const bind = vi.fn(() => ({ run }));
@@ -177,5 +201,46 @@ describe("self-test Worker endpoint", () => {
   it("does not accept health responses when the database binding is unavailable", async () => {
     const response = await worker.fetch(request(validPayload()), {});
     expect(response.status).toBe(503);
+  });
+});
+
+describe("contact-form Worker endpoint", () => {
+  it("marks a successfully handed-off email as an accepted lead", async () => {
+    const send = vi.fn().mockResolvedValue(undefined);
+
+    const response = await worker.fetch(contactRequest(validContactPayload()), {
+      EMAIL: { send },
+    });
+
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ ok: true, accepted: true });
+    expect(send).toHaveBeenCalledOnce();
+  });
+
+  it("silently rejects the honeypot without accepting or emailing a lead", async () => {
+    const send = vi.fn().mockResolvedValue(undefined);
+    const payload = validContactPayload();
+    payload.website = "https://spam.example";
+
+    const response = await worker.fetch(contactRequest(payload), {
+      EMAIL: { send },
+    });
+
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ ok: true, accepted: false });
+    expect(send).not.toHaveBeenCalled();
+  });
+
+  it("does not accept a lead when email handoff fails", async () => {
+    const send = vi.fn().mockRejectedValue(new Error("synthetic email failure"));
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    const response = await worker.fetch(contactRequest(validContactPayload()), {
+      EMAIL: { send },
+    });
+
+    expect(response.status).toBe(502);
+    expect(await response.json()).toEqual({ error: "Delivery failed" });
+    errorSpy.mockRestore();
   });
 });
