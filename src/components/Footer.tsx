@@ -143,17 +143,17 @@ export default function Footer() {
                   Wissenschaftlich fundierte Hypnose und psychotherapeutische Begleitung
                 </span>
               </a>
-              <Link
-                href="/neurofeedback-muenchen"
+              <a
+                href="https://psychotherapie-praxis-in-muenchen.de/"
                 className="group rounded-xl border border-white/15 bg-white/[0.06] px-4 py-3 transition-colors hover:border-white/30 hover:bg-white/[0.1]"
               >
                 <span className="block text-[14px] font-bold text-white group-hover:underline group-hover:underline-offset-4">
-                  Neurofeedback München
+                  Psychotherapie Praxis München
                 </span>
                 <span className="mt-1 block text-[12px] leading-relaxed text-slate-300">
-                  EEG-basiertes Training als ergänzendes Praxisangebot
+                  Psychotherapeutische Begleitung in München-Schwabing und online
                 </span>
-              </Link>
+              </a>
             </nav>
           </div>
         </div>
