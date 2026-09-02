@@ -1,5 +1,11 @@
 const ALLOWED_ORIGIN = "https://neurofeedback-praxis-muenchen.de";
 const DESTINATION = "neurofeedback.praxis.muenchen@gmail.com";
+// The account is on Workers Free. Cloudflare permits free sends to verified
+// destination addresses only when the sender belongs to an active Email
+// Routing domain in the same account. The ADHS domain keeps its Google MX
+// records, so the practice's active psychotherapy routing domain is used only
+// as the technical envelope sender. Replies still go directly to the lead.
+const SENDER = "formular@psychotherapie-praxis-in-muenchen.de";
 const SELFTEST_INSTRUMENT_VERSION = "ADHS-ST-0.2";
 const SELFTEST_CONSENT_VERSION = "CONSENT-0.1";
 const SELFTEST_ITEM_IDS = [
@@ -234,14 +240,18 @@ export default {
     const html = `<h2>Neue Terminanfrage</h2><table cellpadding="6" style="border-collapse:collapse"><tr><th align="left">Name</th><td>${escapeHtml(name)}</td></tr><tr><th align="left">E-Mail</th><td>${escapeHtml(email)}</td></tr><tr><th align="left">Anliegen</th><td>${escapeHtml(serviceNames[service])}</td></tr><tr><th align="left">Terminwunsch</th><td>${escapeHtml(timeslotNames[timeslot] || "–")}</td></tr><tr><th align="left">Nachricht</th><td>${escapeHtml(message || "–")}</td></tr><tr><th align="left">Verknüpfte Selbsttest-Antwort-ID</th><td>${escapeHtml(linkedResponseId || "nicht freigegeben")}</td></tr><tr><th align="left">Datenschutzeinwilligung</th><td>Ausdrücklich erteilt</td></tr><tr><th align="left">Einwilligungszeitpunkt</th><td>${escapeHtml(consentTimestamp)}</td></tr></table>`;
 
     try {
-      await env.EMAIL.send({
+      const receipt = await env.EMAIL.send({
         to: DESTINATION,
-        from: { email: "formular@neurofeedback-praxis-muenchen.de", name: "ADHS Praxis München" },
+        from: { email: SENDER, name: "ADHS Praxis München" },
         replyTo: email,
         subject,
         text,
         html,
       });
+
+      if (!clean(receipt?.messageId, 998)) {
+        throw new Error("Email provider returned no message receipt");
+      }
     } catch (error) {
       console.error("Contact email failed", error);
       return json({ error: "Delivery failed" }, 502);

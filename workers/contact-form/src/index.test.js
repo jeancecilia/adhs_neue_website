@@ -206,7 +206,7 @@ describe("self-test Worker endpoint", () => {
 
 describe("contact-form Worker endpoint", () => {
   it("marks a successfully handed-off email as an accepted lead", async () => {
-    const send = vi.fn().mockResolvedValue(undefined);
+    const send = vi.fn().mockResolvedValue({ messageId: "contact-message-id" });
 
     const response = await worker.fetch(contactRequest(validContactPayload()), {
       EMAIL: { send },
@@ -215,6 +215,13 @@ describe("contact-form Worker endpoint", () => {
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({ ok: true, accepted: true });
     expect(send).toHaveBeenCalledOnce();
+    expect(send).toHaveBeenCalledWith(expect.objectContaining({
+      to: "neurofeedback.praxis.muenchen@gmail.com",
+      from: {
+        email: "formular@psychotherapie-praxis-in-muenchen.de",
+        name: "ADHS Praxis München",
+      },
+    }));
   });
 
   it("silently rejects the honeypot without accepting or emailing a lead", async () => {
@@ -233,6 +240,19 @@ describe("contact-form Worker endpoint", () => {
 
   it("does not accept a lead when email handoff fails", async () => {
     const send = vi.fn().mockRejectedValue(new Error("synthetic email failure"));
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    const response = await worker.fetch(contactRequest(validContactPayload()), {
+      EMAIL: { send },
+    });
+
+    expect(response.status).toBe(502);
+    expect(await response.json()).toEqual({ error: "Delivery failed" });
+    errorSpy.mockRestore();
+  });
+
+  it("does not accept a lead without a provider message receipt", async () => {
+    const send = vi.fn().mockResolvedValue(undefined);
     const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
     const response = await worker.fetch(contactRequest(validContactPayload()), {
