@@ -1,9 +1,9 @@
-const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
 const apiToken = process.env.CLOUDFLARE_API_TOKEN;
 const domain = "neurofeedback-praxis-muenchen.de";
+const zoneId = "9edf4a960e6478788dbc83168a57ab72";
 
-if (!accountId || !apiToken) {
-  throw new Error("CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN are required.");
+if (!apiToken) {
+  throw new Error("CLOUDFLARE_API_TOKEN is required.");
 }
 
 const headers = {
@@ -27,12 +27,6 @@ async function cloudflare(path, options = {}) {
   return payload.result;
 }
 
-const zones = await cloudflare(`/zones?name=${encodeURIComponent(domain)}&account.id=${accountId}`);
-if (zones.length !== 1) {
-  throw new Error(`Expected exactly one Cloudflare zone for ${domain}, found ${zones.length}.`);
-}
-
-const zoneId = zones[0].id;
 let sendingDomains = await cloudflare(`/zones/${zoneId}/email/sending/subdomains`);
 let sendingDomain = sendingDomains.find((entry) => entry.name === domain);
 
