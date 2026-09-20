@@ -152,7 +152,7 @@ describe("granular Google consent", () => {
     ).toEqual({ eventName: "whatsapp_click", method: "whatsapp" });
     expect(
       getContactLinkAnalyticsEvent(
-        "mailto:kontakt@neurofeedback-praxis-muenchen.de",
+        "mailto:info@neurofeedback-praxis-muenchen.de",
       ),
     ).toEqual({ eventName: "email_click", method: "email" });
     expect(getContactLinkAnalyticsEvent("/termin")).toBeNull();

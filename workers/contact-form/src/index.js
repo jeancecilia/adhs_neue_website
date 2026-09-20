@@ -1,11 +1,12 @@
 import { normalizeAttribution, attributionText } from "./attribution.js";
 const ALLOWED_ORIGIN = "https://neurofeedback-praxis-muenchen.de";
-const DESTINATION = "neurofeedback.praxis.muenchen@gmail.com";
+const DESTINATION = "info@neurofeedback-praxis-muenchen.de";
 // The account is on Workers Free. Cloudflare permits free sends to verified
 // destination addresses only when the sender belongs to an active Email
-// Routing domain in the same account. The ADHS domain keeps its Google MX
-// records, so the practice's active psychotherapy routing domain is used only
-// as the technical envelope sender. Replies still go directly to the lead.
+// Routing domain in the same account. The ADHS domain uses Google Workspace,
+// so the active psychotherapy routing domain is used only as the technical
+// envelope sender. Delivery goes to the ADHS practice mailbox and replies
+// still go directly to the lead.
 const SENDER = "formular@psychotherapie-praxis-in-muenchen.de";
 const SELFTEST_INSTRUMENT_VERSION = "ADHS-ST-0.2";
 const SELFTEST_CONSENT_VERSION = "CONSENT-0.2";

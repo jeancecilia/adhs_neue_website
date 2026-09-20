@@ -1,6 +1,6 @@
 # Datenschutz-Dokumentation der Website
 
-Stand der Prüfung: 18. August 2026
+Stand der Prüfung: 20. September 2026
 
 ## Cloudflare-Auftragsverarbeitung
 
@@ -13,7 +13,7 @@ Eingesetzte Dienste:
 - DNS, Proxy/CDN, TLS und Sicherheitsfunktionen
 - Cloudflare Pages für die statische Website
 - Cloudflare Workers und Email Sending für das Kontaktformular
-- Cloudflare Email Routing für eingehende Praxis-E-Mails
+- Google Workspace für das Praxispostfach `info@neurofeedback-praxis-muenchen.de`; eingehende E-Mails werden über Google-MX zugestellt und nicht an ein privates Gmail-Postfach weitergeleitet
 - Cloudflare Web Analytics und Real User Measurement
 - Google Analytics 4 und Google-Marketingdienste erst nach einer Einwilligung in den jeweiligen Zweck
 
@@ -47,6 +47,14 @@ Dokumentierte Schutzmaßnahmen:
 - Google Ireland Limited wird in den Details beider Zwecke mit vollständiger Anschrift benannt
 - Analytics-Ereignisse ohne Formularinhalte, Kontaktdaten oder ausgewählte Gesundheitsanliegen
 
+## Google-Workspace-Auftragsverarbeitung
+
+- Das Kontaktformular wird an das dedizierte Praxispostfach `info@neurofeedback-praxis-muenchen.de` zugestellt.
+- Der technische Maildienst ist Google Workspace; die Praxisdomain verwendet Google-MX-Einträge.
+- Das Google Workspace Cloud Data Processing Addendum ist im Admin-/Vertragskonto zu prüfen und der Annahme- beziehungsweise Vertragsnachweis intern abzulegen.
+- Vertragsquelle: https://workspace.google.com/terms/dpa_terms.html
+- Administrativer Nachweis: siehe `compliance/AVV-UND-DIENSTLEISTER-NACHWEISE.md`.
+
 ## Regelmäßige Kontrolle
 
 Mindestens jährlich sowie bei Änderungen der eingesetzten Dienste sind folgende Punkte zu prüfen und das Prüfdatum zu aktualisieren:
@@ -61,11 +69,6 @@ Mindestens jährlich sowie bei Änderungen der eingesetzten Dienste sind folgend
 - Empfänger und Löschfristen von Kontaktanfragen
 - Übereinstimmung der Datenschutzerklärung mit der realen Verarbeitung
 
-## Noch organisatorisch zu dokumentieren
+## Organisatorische Nachweise
 
-Die folgenden Unterlagen liegen nicht öffentlich auf der Website und müssen vom Praxisinhaber intern aktuell gehalten werden:
-
-- Verzeichnis der Verarbeitungstätigkeiten
-- Lösch- und Berechtigungskonzept für E-Mail und Behandlungsdokumentation
-- Nachweis der eingesetzten E-Mail-Vertragsform und gegebenenfalls Auftragsverarbeitungsvereinbarung
-- Verfahren für Auskunft, Löschung, Berichtigung, Widerspruch und Datenschutzvorfälle
+Die internen Arbeitsunterlagen liegen im Ordner `compliance/`. Sie müssen durch den Praxisinhaber regelmäßig geprüft, tatsächlich gelebt und um Vertrags-, Schulungs- und Prüfbelege ergänzt werden. Eine Vorlage ist kein Nachweis einer noch nicht durchgeführten Maßnahme.

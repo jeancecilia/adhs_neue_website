@@ -74,7 +74,9 @@ export default function ImpressumPage() {
           <div>
             <h2 className="text-[20px] font-bold text-[#173838] mb-2">Berufshaftpflichtversicherung</h2>
             <p>
-              Geltungsbereich: Bundesrepublik Deutschland & Europäische Union.
+              {siteConfig.insurance.name}<br />
+              {siteConfig.insurance.address}<br />
+              Räumlicher Geltungsbereich: {siteConfig.insurance.scope}.
             </p>
           </div>
 

@@ -55,7 +55,7 @@ export default function RootLayout({
                   "name": "ADHS Praxis München - Jean-Maurice Cecilia-Menzel",
                   "alternateName": "Praxis für Psychotherapie mit Schwerpunkt ADHS im Erwachsenenalter",
                   "url": "https://neurofeedback-praxis-muenchen.de/",
-                  "email": "kontakt@neurofeedback-praxis-muenchen.de",
+                  "email": siteConfig.email,
                   "image": "https://neurofeedback-praxis-muenchen.de/images/portrait-jean-maurice-hd.jpg",
                   "logo": {
                     "@type": "ImageObject",

@@ -6,7 +6,7 @@
   "send_email": [
     {
       "name": "EMAIL",
-      "destination_address": "neurofeedback.praxis.muenchen@gmail.com"
+      "destination_address": "info@neurofeedback-praxis-muenchen.de"
     }
   ],
   "d1_databases": [

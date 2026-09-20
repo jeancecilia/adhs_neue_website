@@ -144,10 +144,10 @@ export default function DatenschutzPage() {
           <div>
             <h2 className="mb-3 text-[22px] font-bold text-[#173838]">9. E-Mail-Zustellung und E-Mail-Postfach</h2>
             <p>
-              Die technische Formularzustellung erfolgt über Cloudflare Email Sending beziehungsweise Email Routing. Eingehende Nachrichten an die Praxisdomain und Formularanfragen werden an ein dafür bestimmtes Gmail-Postfach weitergeleitet. Anbieter des Postfachdienstes ist für Nutzer im Europäischen Wirtschaftsraum grundsätzlich <strong>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland</strong>; verbundene Unternehmen und Systeme der Google LLC in den USA können in die Verarbeitung einbezogen sein.
+              Die technische Formularverarbeitung und -zustellung erfolgt über einen Cloudflare Worker und Cloudflare Email Sending an das Praxispostfach <strong>{siteConfig.email}</strong>. Direkte E-Mails an diese Adresse werden über Google Workspace empfangen; eine Weiterleitung an ein privates Gmail-Postfach findet nicht statt. Anbieter des Postfachdienstes ist für Nutzer im Europäischen Wirtschaftsraum grundsätzlich <strong>Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland</strong>; verbundene Unternehmen und Systeme der Google LLC in den USA können in die Verarbeitung einbezogen sein.
             </p>
             <p className="mt-3">
-              Verarbeitet werden Absender- und Empfängerdaten, Betreff, Nachrichteninhalt, Versandzeitpunkt und technische Zustellinformationen. Rechtsgrundlagen sind Art. 6 Abs. 1 lit. b DSGVO und, soweit freiwillig Gesundheitsdaten enthalten sind, Art. 9 Abs. 2 lit. a DSGVO. Unser ergänzendes berechtigtes Interesse an zuverlässiger Kommunikation beruht auf Art. 6 Abs. 1 lit. f DSGVO. E-Mails werden nach denselben Fristen wie Kontaktanfragen beziehungsweise – bei Übernahme in die Behandlungsdokumentation – nach den dafür geltenden Fristen gelöscht. Informationen zur Verarbeitung durch Google finden Sie in der <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className={externalLinkClass}>Datenschutzerklärung von Google</a>.
+              Verarbeitet werden Absender- und Empfängerdaten, Betreff, Nachrichteninhalt, Versandzeitpunkt und technische Zustellinformationen. Rechtsgrundlagen sind Art. 6 Abs. 1 lit. b DSGVO und, soweit freiwillig Gesundheitsdaten enthalten sind, Art. 9 Abs. 2 lit. a DSGVO. Unser ergänzendes berechtigtes Interesse an zuverlässiger Kommunikation beruht auf Art. 6 Abs. 1 lit. f DSGVO. E-Mails werden nach denselben Fristen wie Kontaktanfragen beziehungsweise – bei Übernahme in die Behandlungsdokumentation – nach den dafür geltenden Fristen gelöscht. Informationen zur Verarbeitung durch Google finden Sie in der <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" className={externalLinkClass}>Datenschutzerklärung von Google</a> und im <a href="https://workspace.google.com/terms/dpa_terms.html" target="_blank" rel="noreferrer" className={externalLinkClass}>Google Workspace Cloud Data Processing Addendum</a>.
             </p>
           </div>
 
@@ -172,8 +172,8 @@ export default function DatenschutzPage() {
             <h2 className="mb-3 text-[22px] font-bold text-[#173838]">12. Empfänger und Kategorien von Empfängern</h2>
             <p>Personenbezogene Daten erhalten nur Stellen, die sie für die genannten Zwecke benötigen:</p>
             <ul className="mt-3 list-disc space-y-1 pl-6">
-              <li>Cloudflare, Inc. für Hosting, DNS, CDN, Sicherheit, Formularzustellung, E-Mail-Routing, Webanalyse und die D1-Datenbank des pseudonymisierten ADHS-Selbsttests,</li>
-              <li>Google Ireland Limited und gegebenenfalls Google LLC für das empfangende E-Mail-Postfach sowie nach Ihrer jeweiligen Auswahl für Google Analytics 4, Google Ads, Conversion-Messung, Google Signals und personalisierte Werbung,</li>
+              <li>Cloudflare, Inc. für Hosting, DNS, CDN, Sicherheit, Formularverarbeitung und -zustellung, Webanalyse und die D1-Datenbank des pseudonymisierten ADHS-Selbsttests,</li>
+              <li>Google Ireland Limited und gegebenenfalls Google LLC für das Google-Workspace-Praxispostfach sowie nach Ihrer jeweiligen Auswahl für Google Analytics 4, Google Ads, Conversion-Messung, Google Signals und personalisierte Werbung,</li>
               <li>WhatsApp Ireland Limited und Unternehmen der Meta-Gruppe nur, wenn Sie den WhatsApp-Link nutzen,</li>
               <li>Behörden, Gerichte, Steuerberatung oder sonstige Berufsgeheimnisträger, soweit eine gesetzliche Pflicht besteht oder dies zur Rechtsverteidigung erforderlich ist.</li>
             </ul>

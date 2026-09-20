@@ -228,7 +228,7 @@ describe("contact-form Worker endpoint", () => {
     expect(await response.json()).toEqual({ ok: true, accepted: true });
     expect(send).toHaveBeenCalledOnce();
     expect(send).toHaveBeenCalledWith(expect.objectContaining({
-      to: "neurofeedback.praxis.muenchen@gmail.com",
+      to: "info@neurofeedback-praxis-muenchen.de",
       from: {
         email: "formular@psychotherapie-praxis-in-muenchen.de",
         name: "ADHS Praxis München",

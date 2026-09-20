@@ -21,8 +21,8 @@ export const siteConfig = {
   ],
   whatsappDisplay: "+49 174 3243387",
   whatsappHref: "https://wa.me/4917644252656",
-  email: "kontakt@neurofeedback-praxis-muenchen.de",
-  emailHref: "mailto:kontakt@neurofeedback-praxis-muenchen.de",
+  email: "info@neurofeedback-praxis-muenchen.de",
+  emailHref: "mailto:info@neurofeedback-praxis-muenchen.de",
   addressLine1: "Hildeboldstraße 1",
   postalCity: "80797 München",
   practitioner: "Jean-Maurice Cecilia-Menzel",
@@ -48,8 +48,8 @@ export const siteConfig = {
     },
   ],
   insurance: {
-    name: "Berufshaftpflichtversicherung für Heilpraktiker für Psychotherapie",
-    address: "Deutschland",
+    name: "Hiscox SA, Niederlassung für Deutschland",
+    address: "Bernhard-Wicki-Str. 3, 80636 München",
     scope: "Deutschland / EU",
   },
   description:
