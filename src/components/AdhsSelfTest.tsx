@@ -31,8 +31,10 @@ type Demographics = {
 
 type PersistedSession = {
   instrumentVersion: string;
+  consentVersion: string;
   responseId: string;
   consentAt: string;
+  researchConsent: boolean;
   stage: TestStage;
   currentIndex: number;
   answers: SelfTestAnswers;
@@ -132,9 +134,12 @@ function readPersistedSession(): PersistedSession | null {
     const parsed = JSON.parse(raw) as PersistedSession;
     if (
       parsed.instrumentVersion !== SELFTEST_INSTRUMENT_VERSION ||
+      parsed.consentVersion !== SELFTEST_CONSENT_VERSION ||
       !parsed.responseId ||
-      !parsed.consentAt
+      !parsed.consentAt ||
+      typeof parsed.researchConsent !== "boolean"
     ) {
+      window.sessionStorage.removeItem(SELFTEST_SESSION_KEY);
       return null;
     }
     return parsed;
@@ -146,6 +151,7 @@ function readPersistedSession(): PersistedSession | null {
 export default function AdhsSelfTest() {
   const [stage, setStage] = useState<TestStage>("consent");
   const [consentChecked, setConsentChecked] = useState(false);
+  const [researchConsentChecked, setResearchConsentChecked] = useState(false);
   const [responseId, setResponseId] = useState("");
   const [consentAt, setConsentAt] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -167,6 +173,7 @@ export default function AdhsSelfTest() {
       setStage(persisted.stage);
       setResponseId(persisted.responseId);
       setConsentAt(persisted.consentAt);
+      setResearchConsentChecked(persisted.researchConsent);
       setCurrentIndex(
         Math.min(Math.max(persisted.currentIndex, 0), SELFTEST_ITEMS.length - 1),
       );
@@ -183,8 +190,10 @@ export default function AdhsSelfTest() {
     if (!hydrated || !responseId || stage === "consent") return;
     const persisted: PersistedSession = {
       instrumentVersion: SELFTEST_INSTRUMENT_VERSION,
+      consentVersion: SELFTEST_CONSENT_VERSION,
       responseId,
       consentAt,
+      researchConsent: researchConsentChecked,
       stage,
       currentIndex,
       answers,
@@ -206,6 +215,7 @@ export default function AdhsSelfTest() {
     demographics,
     hydrated,
     responseId,
+    researchConsentChecked,
     stage,
     submitted,
   ]);
@@ -263,7 +273,12 @@ export default function AdhsSelfTest() {
     }
 
     if (currentIndex === SELFTEST_ITEMS.length - 1) {
-      setStage("details");
+      if (researchConsentChecked) {
+        setStage("details");
+      } else {
+        setStage("result");
+        trackAnalyticsEvent("selftest_complete");
+      }
       setFormError("");
       return;
     }
@@ -289,7 +304,7 @@ export default function AdhsSelfTest() {
   };
 
   const saveResponse = async () => {
-    if (!scores || submitted) return;
+    if (!scores || submitted || !researchConsentChecked) return;
     setStorageStatus("saving");
 
     try {
@@ -299,7 +314,7 @@ export default function AdhsSelfTest() {
         body: JSON.stringify({
           responseId,
           instrumentVersion: SELFTEST_INSTRUMENT_VERSION,
-          consent: true,
+          storageConsent: true,
           consentVersion: SELFTEST_CONSENT_VERSION,
           consentAt,
           age: demographics.age ? Number(demographics.age) : null,
@@ -355,6 +370,7 @@ export default function AdhsSelfTest() {
     setConsentChecked(false);
     setResponseId("");
     setConsentAt("");
+    setResearchConsentChecked(false);
     setCurrentIndex(0);
     setAnswers({});
     setDemographics(EMPTY_DEMOGRAPHICS);
@@ -409,10 +425,10 @@ export default function AdhsSelfTest() {
               Starten Sie Ihren ADHS-Selbsttest
             </h2>
             <p className="mt-4 text-[15px] leading-[1.7] text-slate-700 sm:text-[16px]">
-              Damit wir Ihre Antworten auswerten und Ihnen Ihr persönliches Ergebnis anzeigen können, benötigen wir Ihre Einwilligung zur Datenverarbeitung.
+              Damit wir Ihre Antworten auswerten und Ihnen Ihr persönliches Ergebnis anzeigen können, benötigen wir Ihre ausdrückliche Einwilligung zur Verarbeitung der Testangaben.
             </p>
             <p className="mt-3 text-[14px] leading-[1.7] text-slate-700 sm:text-[15px]">
-              Die Antworten werden pseudonymisiert und <strong>ohne Namen, E-Mail-Adresse oder Telefonnummer</strong> gespeichert. Sie dienen außerdem der statistischen Prüfung und Weiterentwicklung des Fragebogens.
+              Das Ergebnis wird direkt im Browser berechnet. Eine dauerhafte pseudonymisierte Speicherung <strong>ohne Namen, E-Mail-Adresse oder Telefonnummer</strong> erfolgt nur, wenn Sie ihr unten separat zustimmen.
             </p>
 
             <div className="mt-6 rounded-2xl border border-[#dec77f] bg-[#fffaf0] p-4 sm:p-5">
@@ -428,7 +444,7 @@ export default function AdhsSelfTest() {
                   className="mt-1 h-5 w-5 shrink-0 rounded border-slate-300 text-[#173838] focus:ring-[#173838]"
                 />
                 <span>
-                  Ich willige ausdrücklich ein, dass meine Antworten zur Durchführung und Auswertung des ADHS-Selbsttests sowie zur pseudonymisierten statistischen Prüfung und Weiterentwicklung des Fragebogens verarbeitet werden. Die Einwilligung ist freiwillig und kann jederzeit mit Wirkung für die Zukunft widerrufen werden.
+                  Ich willige ausdrücklich ein, dass meine Gesundheitsangaben zur Durchführung und unmittelbaren Auswertung des ADHS-Selbsttests verarbeitet werden. Ohne diese Einwilligung kann der Test nicht ausgewertet werden. Die Einwilligung ist freiwillig und kann jederzeit mit Wirkung für die Zukunft widerrufen werden.
                 </span>
               </label>
               <p className="mt-3 pl-9 text-[12px] leading-relaxed text-slate-600">
@@ -437,6 +453,21 @@ export default function AdhsSelfTest() {
                   Datenschutzhinweisen
                 </Link>.
               </p>
+            </div>
+
+            <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+              <label className="flex cursor-pointer items-start gap-4 text-[14px] leading-[1.6] text-slate-700" htmlFor="selftest-research-consent">
+                <input
+                  id="selftest-research-consent"
+                  type="checkbox"
+                  checked={researchConsentChecked}
+                  onChange={(event) => setResearchConsentChecked(event.target.checked)}
+                  className="mt-1 h-5 w-5 shrink-0 rounded border-slate-300 text-[#173838] focus:ring-[#173838]"
+                />
+                <span>
+                  <strong>Optional:</strong> Ich willige zusätzlich ein, dass meine pseudonymisierten Antworten und freiwilligen Zusatzangaben bis zu fünf Jahre zur statistischen Prüfung und Weiterentwicklung des Fragebogens gespeichert werden. Der Test funktioniert auch ohne diese Zustimmung.
+                </span>
+              </label>
             </div>
 
             {formError && (
@@ -567,7 +598,11 @@ export default function AdhsSelfTest() {
               disabled={answers[currentItem.id] === undefined}
               className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#173838] px-6 py-3 text-[13px] font-bold text-white shadow transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-45 sm:px-8"
             >
-              {currentIndex === SELFTEST_ITEMS.length - 1 ? "Weiter zu den Zusatzangaben" : "Weiter →"}
+              {currentIndex === SELFTEST_ITEMS.length - 1
+                ? researchConsentChecked
+                  ? "Weiter zu den Zusatzangaben"
+                  : "Persönliches Ergebnis anzeigen"
+                : "Weiter →"}
             </button>
           </div>
         </div>
@@ -815,17 +850,21 @@ export default function AdhsSelfTest() {
               {storageStatus === "saving" && "Ihre Antworten werden pseudonymisiert gespeichert …"}
               {storageStatus === "saved" && "Ihre pseudonymisierte Antwort wurde gespeichert."}
               {storageStatus === "failed" && "Die Speicherung konnte gerade nicht bestätigt werden. Ihr Ergebnis bleibt vollständig sichtbar."}
-              {storageStatus === "idle" && "Ihr Ergebnis ist bereit."}
+              {storageStatus === "idle" && (researchConsentChecked ? "Ihr Ergebnis ist bereit." : "Ihr Ergebnis wurde nicht dauerhaft gespeichert.")}
             </p>
-            <div className="mt-2 flex flex-wrap items-center gap-3 text-[12px] text-slate-600">
-              <span>Ihre Antwort-ID: <code className="break-all font-semibold text-[#173838]">{responseId}</code></span>
-              <button type="button" onClick={copyResponseId} className="min-h-[44px] font-bold text-[#173838] underline underline-offset-2">
-                {copied ? "Kopiert" : "ID kopieren"}
-              </button>
-            </div>
-            <p className="mt-2 text-[11px] leading-relaxed text-slate-500">
-              Bewahren Sie die ID auf, wenn Sie später Auskunft oder Löschung dieser pseudonymen Antwort wünschen.
-            </p>
+            {researchConsentChecked && (
+              <>
+                <div className="mt-2 flex flex-wrap items-center gap-3 text-[12px] text-slate-600">
+                  <span>Ihre Antwort-ID: <code className="break-all font-semibold text-[#173838]">{responseId}</code></span>
+                  <button type="button" onClick={copyResponseId} className="min-h-[44px] font-bold text-[#173838] underline underline-offset-2">
+                    {copied ? "Kopiert" : "ID kopieren"}
+                  </button>
+                </div>
+                <p className="mt-2 text-[11px] leading-relaxed text-slate-500">
+                  Bewahren Sie die ID auf, wenn Sie später Auskunft oder Löschung dieser pseudonymen Antwort wünschen.
+                </p>
+              </>
+            )}
           </div>
         </div>
 
@@ -838,16 +877,18 @@ export default function AdhsSelfTest() {
             Ein Selbsttest kann Hinweise geben, aber keine vollständige diagnostische Abklärung ersetzen. Wenn Sie Klarheit möchten, können Sie bei uns eine strukturierte ADHS-Diagnostik für Erwachsene anfragen.
           </p>
           <p className="mt-4 text-[17px] font-bold text-[#f0cc65]">ADHS-Diagnostik für Erwachsene – 199 €</p>
-          <label className="mt-6 flex max-w-2xl cursor-pointer items-start gap-3 rounded-xl border border-white/20 bg-white/10 p-4 text-[13px] leading-relaxed text-slate-100" htmlFor="link-selftest-result">
-            <input
-              id="link-selftest-result"
-              type="checkbox"
-              checked={linkResult}
-              onChange={(event) => setLinkResult(event.target.checked)}
-              className="mt-1 h-4 w-4 shrink-0 rounded border-white/40 text-[#f0cc65] focus:ring-[#f0cc65]"
-            />
-            <span>Mein Ergebnis aus dem ADHS-Selbsttest an meine anschließende Anfrage anhängen. Ohne diese Auswahl bleibt die Testantwort von der Kontaktanfrage getrennt.</span>
-          </label>
+          {researchConsentChecked && (
+            <label className="mt-6 flex max-w-2xl cursor-pointer items-start gap-3 rounded-xl border border-white/20 bg-white/10 p-4 text-[13px] leading-relaxed text-slate-100" htmlFor="link-selftest-result">
+              <input
+                id="link-selftest-result"
+                type="checkbox"
+                checked={linkResult}
+                onChange={(event) => setLinkResult(event.target.checked)}
+                className="mt-1 h-4 w-4 shrink-0 rounded border-white/40 text-[#f0cc65] focus:ring-[#f0cc65]"
+              />
+              <span>Meine gespeicherte Antwort-ID an meine anschließende Anfrage anhängen. Ohne diese Auswahl bleibt die Testantwort von der Kontaktanfrage getrennt.</span>
+            </label>
+          )}
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/termin?anliegen=screening"

@@ -1,4 +1,6 @@
 "use client";
+import SourceQuestion from "@/components/SourceQuestion";
+import { getAttribution } from "@/lib/attribution";
 
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
@@ -41,6 +43,7 @@ function BookingFormInner() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const reportedSource = new FormData(e.currentTarget as HTMLFormElement).get("reportedSource") || "unknown";
     if (!name || !email || !service) {
       setError("Bitte füllen Sie alle erforderlichen Felder aus.");
       return;
@@ -59,6 +62,8 @@ function BookingFormInner() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          attribution: getAttribution(),
+          reportedSource,
           name,
           email,
           service,
@@ -260,7 +265,7 @@ function BookingFormInner() {
               className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300 text-[#173838] focus:ring-[#173838]"
             />
             <span>
-              Ich willige ausdrücklich ein, dass die von mir im Formular freiwillig übermittelten Gesundheitsdaten zum Zweck der Bearbeitung meiner Anfrage verarbeitet werden. Ich kann diese Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen. Weitere Informationen finde ich in der{" "}
+              Ich willige ausdrücklich ein, dass mein ausgewähltes Anliegen und etwaige freiwillige Gesundheitsangaben zum Zweck der Bearbeitung meiner Anfrage verarbeitet werden. Ich kann diese Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen. Weitere Informationen finde ich in der{" "}
               <Link href="/datenschutz" className="font-semibold text-[#173838] underline decoration-[#c99a1d] underline-offset-2 hover:text-[#7a5600]">
                 Datenschutzerklärung
               </Link>.
@@ -288,9 +293,10 @@ function BookingFormInner() {
         )}
 
         <p className="text-[12px] leading-relaxed text-slate-600">
-          Ihre Angaben werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet. Bitte beachten Sie den obigen Hinweis und übermitteln Sie im Formular nur die dafür notwendigen Informationen.
+          Ihre Kontakt- und Gesundheitsangaben werden zur Bearbeitung Ihrer Anfrage verwendet. Freiwillige Herkunftsangaben dienen der internen Erfolgskontrolle. Bitte beachten Sie den obigen Hinweis und übermitteln Sie im Formular nur die dafür notwendigen Informationen.
         </p>
 
+        <SourceQuestion />
         <button
           type="submit"
           disabled={submitting}

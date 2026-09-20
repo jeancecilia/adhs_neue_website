@@ -137,7 +137,7 @@ export default function Footer() {
                 className="group rounded-xl border border-white/15 bg-white/[0.06] px-4 py-3 transition-colors hover:border-white/30 hover:bg-white/[0.1]"
               >
                 <span className="block text-[14px] font-bold text-white group-hover:underline group-hover:underline-offset-4">
-                  Hypnosetherapie München
+                  Hypnose Praxis München
                 </span>
                 <span className="mt-1 block text-[12px] leading-relaxed text-slate-300">
                   Wissenschaftlich fundierte Hypnose und psychotherapeutische Begleitung

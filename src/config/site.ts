@@ -29,7 +29,14 @@ export const siteConfig = {
   credentials: [
     "Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie",
   ],
-  regulatoryAuthority: "Referat für Gesundheit und Umwelt der Landeshauptstadt München",
+  regulatoryAuthority: {
+    name: "Landeshauptstadt München – Gesundheitsreferat",
+    department:
+      "Geschäftsbereich Recht und Kreisverwaltungsaufgaben, SG Infektionsschutz-Heilkunde-Gefahrenabwehr",
+    address: "Schwanthalerstraße 69, 80336 München",
+    email: "heilpraktiker.gsr@muenchen.de",
+    url: "https://stadt.muenchen.de/service/info/geschaftsbereich-recht-und-kreisverwaltungsaufgaben/10308612/",
+  },
   professionalRegulations: [
     {
       name: "Heilpraktikergesetz (HeilprG)",

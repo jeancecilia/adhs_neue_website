@@ -34,7 +34,7 @@ const KOSTEN_FAQS = [
   {
     question: "Wie lange im Voraus kann ich einen Termin kostenfrei absagen?",
     answer:
-      "Da wir als reine Bestellpraxis arbeiten und feste Termine exklusiv für Sie reservieren, bitten wir Sie, Termine im Verhinderungsfall mindestens 48 Stunden (werktags) vorher abzusagen. Bei späteren Absagen oder Nichterscheinen kann ein entsprechendes Ausfallhonorar in Rechnung gestellt werden.",
+      "Da wir als reine Bestellpraxis arbeiten und feste Termine exklusiv reservieren, bitten wir um eine Absage mindestens 48 Stunden (werktags) vor dem Termin. Ob bei einer späteren Absage oder einem Nichterscheinen ein Ausfallhonorar anfällt, wird vor der verbindlichen Terminvereinbarung transparent mitgeteilt. Ein Ausfallhonorar wird nur verlangt, soweit der Termin nicht anderweitig vergeben werden konnte und die Absage in Ihren Verantwortungsbereich fällt; Sie können jederzeit nachweisen, dass kein oder ein wesentlich geringerer Ausfall entstanden ist.",
   },
 ];
 

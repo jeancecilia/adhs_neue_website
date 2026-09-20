@@ -25,12 +25,17 @@ async function click(element: HTMLElement): Promise<void> {
 
 async function completeTest(answerValue: number): Promise<Record<string, unknown>> {
   const consent = document.querySelector<HTMLInputElement>("#selftest-consent");
+  const researchConsent = document.querySelector<HTMLInputElement>(
+    "#selftest-research-consent",
+  );
   if (!consent) throw new Error("Consent checkbox not found");
+  if (!researchConsent) throw new Error("Research consent checkbox not found");
   const unlockButton = button("Einwilligen & ADHS-Selbsttest starten");
   expect(unlockButton.disabled).toBe(true);
   expect(document.body.textContent).toContain("Frage 1 von 26");
   expect(document.body.textContent).toContain("Starten Sie Ihren ADHS-Selbsttest");
   await click(consent);
+  await click(researchConsent);
   expect(unlockButton.disabled).toBe(false);
   await click(unlockButton);
 
@@ -114,5 +119,28 @@ describe("ADHS self-test result flow", () => {
     expect(Object.values(payload.answers as Record<string, number>)).toEqual(
       Array(26).fill(4),
     );
+  });
+
+  it("shows a result without transmitting it when optional storage is refused", async () => {
+    const consent = document.querySelector<HTMLInputElement>("#selftest-consent");
+    if (!consent) throw new Error("Consent checkbox not found");
+    await click(consent);
+    await click(button("Einwilligen & ADHS-Selbsttest starten"));
+
+    for (let index = 0; index < 26; index += 1) {
+      const radios = Array.from(
+        document.querySelectorAll<HTMLInputElement>('input[type="radio"]'),
+      );
+      await click(radios[0]);
+      await click(
+        button(index === 25 ? "Persönliches Ergebnis anzeigen" : "Weiter →"),
+      );
+    }
+
+    expect(document.body.textContent).toContain(
+      "Ihr Ergebnis wurde nicht dauerhaft gespeichert.",
+    );
+    expect(document.body.textContent).not.toContain("Ihre Antwort-ID:");
+    expect(vi.mocked(global.fetch)).not.toHaveBeenCalled();
   });
 });

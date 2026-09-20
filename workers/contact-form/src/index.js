@@ -1,3 +1,4 @@
+import { normalizeAttribution, attributionText } from "./attribution.js";
 const ALLOWED_ORIGIN = "https://neurofeedback-praxis-muenchen.de";
 const DESTINATION = "neurofeedback.praxis.muenchen@gmail.com";
 // The account is on Workers Free. Cloudflare permits free sends to verified
@@ -7,7 +8,7 @@ const DESTINATION = "neurofeedback.praxis.muenchen@gmail.com";
 // as the technical envelope sender. Replies still go directly to the lead.
 const SENDER = "formular@psychotherapie-praxis-in-muenchen.de";
 const SELFTEST_INSTRUMENT_VERSION = "ADHS-ST-0.2";
-const SELFTEST_CONSENT_VERSION = "CONSENT-0.1";
+const SELFTEST_CONSENT_VERSION = "CONSENT-0.2";
 const SELFTEST_ITEM_IDS = [
   "A01", "A02", "A03", "A05", "A07", "A08", "A09", "A10", "A11", "A12", "A13", "A14",
   "B01", "B03", "B04", "B06",
@@ -79,12 +80,17 @@ async function storeSelftest(body, env) {
   const consentAt = clean(body.consentAt, 40);
   const consentDate = new Date(consentAt);
   const now = Date.now();
+  // Keep already-open clients functional while the new, separate storage
+  // consent is rolled out. New clients always use CONSENT-0.2.
+  const hasValidStorageConsent =
+    (body.storageConsent === true &&
+      consentVersion === SELFTEST_CONSENT_VERSION) ||
+    (body.consent === true && consentVersion === "CONSENT-0.1");
 
   if (
     !isUuidV4(responseId) ||
     instrumentVersion !== SELFTEST_INSTRUMENT_VERSION ||
-    body.consent !== true ||
-    consentVersion !== SELFTEST_CONSENT_VERSION ||
+    !hasValidStorageConsent ||
     !Number.isFinite(consentDate.getTime()) ||
     consentDate.getTime() > now + 5 * 60 * 1000 ||
     consentDate.getTime() < now - 7 * 24 * 60 * 60 * 1000
@@ -223,6 +229,9 @@ export default {
 
     const consentTimestamp = new Date().toISOString();
 
+    const attribution = normalizeAttribution(body);
+    const reference = crypto.randomUUID();
+    const sourceNote = attributionText(attribution, reference);
     const subject = `Neue Terminanfrage: ${serviceNames[service]}`;
     const text = [
       "Neue Terminanfrage über neurofeedback-praxis-muenchen.de",
@@ -233,11 +242,12 @@ export default {
       `Terminwunsch: ${timeslotNames[timeslot] || "–"}`,
       `Nachricht: ${message || "–"}`,
       `Verknüpfte Selbsttest-Antwort-ID: ${linkedResponseId || "nicht freigegeben"}`,
-      "Ausdrückliche Einwilligung zur Verarbeitung freiwillig übermittelter Gesundheitsdaten: erteilt",
+      "Ausdrückliche Einwilligung zur Verarbeitung des gesundheitsbezogenen Anliegens und freiwilliger Gesundheitsangaben: erteilt",
       `Einwilligungszeitpunkt: ${consentTimestamp}`,
+      "", sourceNote,
     ].join("\n");
 
-    const html = `<h2>Neue Terminanfrage</h2><table cellpadding="6" style="border-collapse:collapse"><tr><th align="left">Name</th><td>${escapeHtml(name)}</td></tr><tr><th align="left">E-Mail</th><td>${escapeHtml(email)}</td></tr><tr><th align="left">Anliegen</th><td>${escapeHtml(serviceNames[service])}</td></tr><tr><th align="left">Terminwunsch</th><td>${escapeHtml(timeslotNames[timeslot] || "–")}</td></tr><tr><th align="left">Nachricht</th><td>${escapeHtml(message || "–")}</td></tr><tr><th align="left">Verknüpfte Selbsttest-Antwort-ID</th><td>${escapeHtml(linkedResponseId || "nicht freigegeben")}</td></tr><tr><th align="left">Datenschutzeinwilligung</th><td>Ausdrücklich erteilt</td></tr><tr><th align="left">Einwilligungszeitpunkt</th><td>${escapeHtml(consentTimestamp)}</td></tr></table>`;
+    const html = `<pre>${escapeHtml(sourceNote)}</pre><h2>Neue Terminanfrage</h2><table cellpadding="6" style="border-collapse:collapse"><tr><th align="left">Name</th><td>${escapeHtml(name)}</td></tr><tr><th align="left">E-Mail</th><td>${escapeHtml(email)}</td></tr><tr><th align="left">Anliegen</th><td>${escapeHtml(serviceNames[service])}</td></tr><tr><th align="left">Terminwunsch</th><td>${escapeHtml(timeslotNames[timeslot] || "–")}</td></tr><tr><th align="left">Nachricht</th><td>${escapeHtml(message || "–")}</td></tr><tr><th align="left">Verknüpfte Selbsttest-Antwort-ID</th><td>${escapeHtml(linkedResponseId || "nicht freigegeben")}</td></tr><tr><th align="left">Datenschutzeinwilligung</th><td>Ausdrücklich erteilt</td></tr><tr><th align="left">Einwilligungszeitpunkt</th><td>${escapeHtml(consentTimestamp)}</td></tr></table>`;
 
     try {
       const receipt = await env.EMAIL.send({

@@ -1,5 +1,5 @@
 export const SELFTEST_INSTRUMENT_VERSION = "ADHS-ST-0.2";
-export const SELFTEST_CONSENT_VERSION = "CONSENT-0.1";
+export const SELFTEST_CONSENT_VERSION = "CONSENT-0.2";
 export const SELFTEST_SESSION_KEY = "adhs-praxis.selftest.0.2";
 export const SELFTEST_LINK_KEY = "adhs-praxis.selftest.linked-response.v1";
 

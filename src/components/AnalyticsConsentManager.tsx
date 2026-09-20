@@ -1,4 +1,5 @@
 "use client";
+import { syncAttribution } from "@/lib/attribution";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,6 +20,7 @@ import {
 
 export default function AnalyticsConsentManager() {
   const pathname = usePathname();
+  useEffect(() => { syncAttribution(); }, [pathname]);
   const [consent, setConsent] = useState<AnalyticsConsent | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   // View mode: 'banner' (compact floating bottom bar) or 'modal' (detailed category settings)
@@ -38,7 +40,7 @@ export default function AnalyticsConsentManager() {
       setConsent(savedConsent);
       setAnalyticsSelected(hasAnalyticsConsent(savedConsent));
       setMarketingSelected(hasMarketingConsent(savedConsent));
-      if (savedConsent !== "denied") loadGoogleAnalytics();
+      if (hasAnalyticsConsent(savedConsent)) loadGoogleAnalytics();
     } else {
       // First visit: show floating bottom banner
       setConsent("denied");
@@ -67,18 +69,19 @@ export default function AnalyticsConsentManager() {
   }, []);
 
   useEffect(() => {
-    if (consent === null || consent === "denied") return;
+    if (consent === null || !hasAnalyticsConsent(consent)) return;
 
     loadGoogleAnalytics();
     const pagePath = `${pathname}${window.location.search}`;
     if (lastTrackedPath.current === pagePath) return;
 
-    lastTrackedPath.current = pagePath;
-    trackAnalyticsEvent("page_view", {
+    const accepted = trackAnalyticsEvent("page_view", {
       page_location: window.location.href,
       page_path: pagePath,
       page_title: document.title,
     });
+    // A refused event must not suppress the first view after consent is granted.
+    if (accepted) lastTrackedPath.current = pagePath;
   }, [consent, pathname]);
 
   useEffect(() => {
@@ -105,8 +108,9 @@ export default function AnalyticsConsentManager() {
 
   const chooseConsent = (nextConsent: AnalyticsConsent) => {
     writeAnalyticsConsent(nextConsent);
+    syncAttribution();
     updateAnalyticsConsent(nextConsent);
-    if (nextConsent !== "denied") loadGoogleAnalytics();
+    if (hasAnalyticsConsent(nextConsent)) loadGoogleAnalytics();
     setConsent(nextConsent);
     setAnalyticsSelected(hasAnalyticsConsent(nextConsent));
     setMarketingSelected(hasMarketingConsent(nextConsent));
@@ -153,25 +157,25 @@ export default function AnalyticsConsentManager() {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-2 sm:shrink-0">
+          <div className="grid w-full grid-cols-1 gap-2 sm:w-auto sm:grid-cols-3 sm:shrink-0">
             <button
               type="button"
               onClick={() => chooseConsent("denied")}
-              className="inline-flex min-h-[40px] flex-1 sm:flex-initial items-center justify-center rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-[13px] font-semibold text-slate-700 transition hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98]"
+              className="inline-flex min-h-[42px] items-center justify-center rounded-xl bg-[#173838] px-4 py-2 text-[13px] font-bold text-white shadow-sm transition hover:bg-[#1b4343] active:scale-[0.98]"
             >
               Nur notwendige
             </button>
             <button
               type="button"
               onClick={() => setViewMode("modal")}
-              className="inline-flex min-h-[40px] flex-1 sm:flex-initial items-center justify-center rounded-xl border border-[#173838] bg-white px-3.5 py-2 text-[13px] font-bold text-[#173838] transition hover:bg-[#173838]/5 active:scale-[0.98]"
+              className="inline-flex min-h-[42px] items-center justify-center rounded-xl border border-[#173838] bg-white px-4 py-2 text-[13px] font-bold text-[#173838] transition hover:bg-[#173838]/5 active:scale-[0.98]"
             >
               Einstellungen
             </button>
             <button
               type="button"
               onClick={() => chooseConsent("granted")}
-              className="inline-flex min-h-[40px] w-full sm:w-auto items-center justify-center rounded-xl bg-[#173838] px-4 py-2 text-[13px] font-bold text-white shadow-sm transition hover:bg-[#1b4343] active:scale-[0.98]"
+              className="inline-flex min-h-[42px] items-center justify-center rounded-xl bg-[#173838] px-4 py-2 text-[13px] font-bold text-white shadow-sm transition hover:bg-[#1b4343] active:scale-[0.98]"
             >
               Alle akzeptieren
             </button>
@@ -424,16 +428,16 @@ export default function AnalyticsConsentManager() {
               Datenschutzerklärung
             </Link>
 
-            <div className="flex flex-col-reverse gap-2 sm:flex-row sm:items-center">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
               <button
-                className="inline-flex min-h-[42px] items-center justify-center rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-[13px] font-semibold text-slate-700 transition hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98]"
+                className="inline-flex min-h-[42px] items-center justify-center rounded-xl bg-[#173838] px-4 py-2 text-[13px] font-bold text-white shadow-sm transition hover:bg-[#1b4343] active:scale-[0.98]"
                 onClick={() => chooseConsent("denied")}
                 type="button"
               >
                 Nur notwendige
               </button>
               <button
-                className="inline-flex min-h-[42px] items-center justify-center rounded-xl border border-[#173838] bg-white px-3.5 py-2 text-[13px] font-bold text-[#173838] transition hover:bg-[#173838]/5 active:scale-[0.98]"
+                className="inline-flex min-h-[42px] items-center justify-center rounded-xl border border-[#173838] bg-white px-4 py-2 text-[13px] font-bold text-[#173838] transition hover:bg-[#173838]/5 active:scale-[0.98]"
                 onClick={handleConfirmSelection}
                 type="button"
               >

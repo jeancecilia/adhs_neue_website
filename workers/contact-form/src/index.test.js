@@ -12,8 +12,8 @@ function validPayload() {
   return {
     responseId: "550e8400-e29b-41d4-a716-446655440000",
     instrumentVersion: "ADHS-ST-0.2",
-    consent: true,
-    consentVersion: "CONSENT-0.1",
+    storageConsent: true,
+    consentVersion: "CONSENT-0.2",
     consentAt: new Date().toISOString(),
     age: null,
     gender: "keine-angabe",
@@ -114,6 +114,18 @@ describe("self-test Worker endpoint", () => {
     expect(bind.mock.calls[0].slice(13, 21)).toEqual([4, 3, 1, 1.5, 4, 12, 4, 0]);
   });
 
+  it("accepts former combined consent for an already-open client during deployment", async () => {
+    const payload = validPayload();
+    delete payload.storageConsent;
+    payload.consent = true;
+    payload.consentVersion = "CONSENT-0.1";
+    const { env } = databaseMock();
+
+    const response = await worker.fetch(request(payload), env);
+
+    expect(response.status).toBe(200);
+  });
+
   it("rejects incomplete or manipulated answer data", async () => {
     const payload = validPayload();
     delete payload.answers.D05;
@@ -127,7 +139,7 @@ describe("self-test Worker endpoint", () => {
 
   it.each([
     ["wrong instrument", (payload) => { payload.instrumentVersion = "ADHS-ST-9.9"; }],
-    ["missing consent", (payload) => { payload.consent = false; }],
+    ["missing storage consent", (payload) => { payload.storageConsent = false; }],
     ["wrong consent version", (payload) => { payload.consentVersion = "CONSENT-9.9"; }],
     ["stale consent", (payload) => { payload.consentAt = new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString(); }],
     ["future consent", (payload) => { payload.consentAt = new Date(Date.now() + 6 * 60 * 1000).toISOString(); }],

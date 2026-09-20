@@ -152,7 +152,7 @@ export default function PsychotherapyServicePage({ data }: { data: Psychotherapy
           <div className="space-y-3">
             <p className="eyebrow mb-1">{isCounseling ? "Ihr Ansprechpartner in München" : "Ihr Therapeut in München"}</p>
             <h2 className="text-[24px] font-bold text-[#173838] sm:text-[30px]">Jean-Maurice Cecilia-Menzel, M.Sc.</h2>
-            <p className="text-[14px] font-semibold text-[#7a5600]">{isCounseling ? "Heilpraktiker Psychotherapie · Kognitive Verhaltenstherapie · Neurofeedback & Biofeedback" : "Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie · Ausbildung in KVT und Hypnosetherapie"}</p>
+            <p className="text-[14px] font-semibold text-[#7a5600]">{isCounseling ? "Heilpraktiker, beschränkt auf Psychotherapie · Kognitive Verhaltenstherapie · Neurofeedback & Biofeedback" : "Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie · Ausbildung in KVT und Hypnosetherapie"}</p>
             <p className="text-[15px] leading-relaxed text-slate-600">{data.therapistText}</p>
             <Link href="/ueber-mich" className="inline-flex min-h-[44px] items-center text-[14px] font-bold text-[#173838] hover:underline">Qualifikationen & Arbeitsweise →</Link>
           </div>

@@ -73,9 +73,9 @@ export default function AdhsTestPage() {
         { name: "ADHS-Diagnostik", path: "/adhs-test-muenchen" },
       ]} />
       {/* 1. HERO SECTION */}
-      <section className="border-b border-[rgba(47,79,79,0.1)] bg-[#faf9f8] py-12 sm:py-18">
+      <section className="border-b border-[rgba(47,79,79,0.1)] bg-[#faf9f8] py-5 sm:py-12 [&_p]:hyphens-none">
         <div className="container-shell max-w-4xl">
-          <nav className="mb-6 flex items-center gap-2 text-[13px] text-slate-500" aria-label="Breadcrumb">
+          <nav className="mb-3 flex items-center gap-2 text-[13px] text-slate-500" aria-label="Breadcrumb">
             <Link href="/" className="inline-flex min-h-[44px] items-center hover:text-[#173838]">Startseite</Link>
             <span>/</span>
             <span className="text-[#173838] font-medium">ADHS-Diagnostik</span>
@@ -84,45 +84,39 @@ export default function AdhsTestPage() {
           <h1 className="text-[32px] leading-[1.15] text-[#173838] sm:text-[46px] md:text-[50px]">
             ADHS-Diagnostik für Erwachsene in München
           </h1>
-          <p className="mt-4 text-[18px] font-semibold leading-[1.4] text-[#7a5600] sm:text-[22px]">
-            Strukturierte Diagnostik bei Verdacht auf ADHS im Erwachsenenalter mit Anamnese, standardisierten diagnostischen Verfahren und differenzialdiagnostischer Einordnung.
+          <p className="mt-4 text-[16px] leading-[1.6] text-slate-700 sm:text-[18px]">
+            Persönliche Abklärung mit Anamnese, standardisierten Testverfahren, Auswertungsgespräch und schriftlichem Befundbericht.
           </p>
-          <p className="mt-4 text-[16px] leading-[1.7] text-slate-700 sm:text-[18px]">
-            Viele Erwachsene leiden jahrelang unter chronischer Prokrastination, Konzentrationsproblemen, innerer Unruhe oder Versagensängsten – ohne zu wissen, dass eine neurobiologische Veranlagung dahintersteht. Eine fundierte Diagnostik bringt Klarheit, entlastet von Schuldgefühlen und schafft die Grundlage für passgenaue Unterstützung.
-          </p>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <div className="mt-4 rounded-xl border border-[#dec77f] bg-white px-4 py-3">
+            <p className="text-[20px] font-bold text-[#173838]">199 € Festpreis · Selbstzahler</p>
+            <p className="mt-1 text-[13px] leading-relaxed text-slate-600">Keine Abrechnung mit gesetzlichen Krankenkassen.</p>
+          </div>
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
             <Link
               href="#diagnostik-anfrage"
               className="inline-flex min-h-[50px] items-center justify-center rounded-full bg-[#173838] px-8 py-3.5 text-[15px] font-bold text-white shadow-lg transition-transform hover:-translate-y-0.5"
             >
               ADHS-Diagnostik anfragen
             </Link>
+          </div>
+          <p className="mt-4 text-[14px] font-semibold leading-relaxed text-[#173838]">Jean-Maurice Cecilia-Menzel, M.Sc.</p>
+          <p className="mt-1 text-[13px] leading-relaxed text-slate-600">Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie · Neurofeedback-Trainer</p>
+          <p className="mt-3 text-[13px] leading-relaxed text-slate-600">Sie fragen zunächst unverbindlich an. Wir melden uns an Werktagen in der Regel innerhalb von 24–48 Stunden zur Terminabstimmung.</p>
+          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
             <Link
               href="/ablauf-kosten"
-              className="inline-flex min-h-[50px] items-center justify-center rounded-full border border-[rgba(47,79,79,0.25)] bg-white px-7 py-3.5 text-[14px] font-semibold text-[#173838] hover:bg-slate-50"
+              className="inline-flex min-h-[44px] items-center text-[14px] font-semibold text-[#173838] underline underline-offset-4"
             >
               Ablauf & Kosten ansehen →
             </Link>
             <Link
               href="/adhs-selbsttest-erwachsene"
-              className="inline-flex min-h-[50px] items-center justify-center rounded-full border border-[rgba(47,79,79,0.25)] bg-white px-7 py-3.5 text-[14px] font-semibold text-[#173838] hover:bg-slate-50"
+              className="inline-flex min-h-[44px] items-center text-[14px] font-semibold text-[#173838] underline underline-offset-4"
             >
               Kostenloser ADHS-Selbsttest
             </Link>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-4 text-[13px] text-slate-600">
-            <span className="flex items-center gap-1.5 font-medium text-[#173838]">
-              <span className="text-[#7a5600]">✓</span> Zeitnahe Termine (ohne 12–24 Monate Wartezeit)
-            </span>
-            <span className="flex items-center gap-1.5 font-medium text-[#173838]">
-              <span className="text-[#7a5600]">✓</span> 199 € transparenter Festpreis
-            </span>
-            <span className="flex items-center gap-1.5 font-medium text-[#173838]">
-              <span className="text-[#7a5600]">✓</span> Ausführlicher schriftlicher Befundbericht
-            </span>
-          </div>
         </div>
       </section>
 

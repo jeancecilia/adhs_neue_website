@@ -1,7 +1,9 @@
 export const GA_MEASUREMENT_ID = "G-0LZ943NZZR";
 export const ANALYTICS_CONSENT_STORAGE_KEY =
   "adhs-praxis.analytics-consent.v1";
+export const ANALYTICS_CONSENT_VERSION = 2;
 export const OPEN_CONSENT_SETTINGS_EVENT = "analytics-consent:open";
+const ANALYTICS_CONSENT_MAX_AGE_MS = 365 * 24 * 60 * 60 * 1000;
 
 export type AnalyticsConsent =
   | "analytics"
@@ -11,9 +13,15 @@ export type AnalyticsConsent =
 
 type Gtag = (...args: unknown[]) => void;
 
+type StoredAnalyticsConsent = {
+  version: typeof ANALYTICS_CONSENT_VERSION;
+  choice: AnalyticsConsent;
+  decidedAt: number;
+};
+
 export type ContactLinkAnalyticsEvent = {
-  eventName: "whatsapp_click" | "email_click";
-  method: "whatsapp" | "email";
+  eventName: "whatsapp_click" | "email_click" | "phone_click";
+  method: "whatsapp" | "email" | "phone";
 };
 
 declare global {
@@ -32,13 +40,33 @@ export function readAnalyticsConsent(): AnalyticsConsent | null {
 
   try {
     const stored = window.localStorage.getItem(ANALYTICS_CONSENT_STORAGE_KEY);
-    return stored === "analytics" ||
-      stored === "marketing" ||
-      stored === "granted" ||
-      stored === "denied"
-      ? stored
-      : null;
+    if (!stored) return null;
+    const parsed = JSON.parse(stored) as Partial<StoredAnalyticsConsent>;
+    const validChoice =
+      parsed.choice === "analytics" ||
+      parsed.choice === "marketing" ||
+      parsed.choice === "granted" ||
+      parsed.choice === "denied";
+    const validDate =
+      typeof parsed.decidedAt === "number" &&
+      Number.isFinite(parsed.decidedAt) &&
+      parsed.decidedAt <= Date.now() &&
+      parsed.decidedAt >= Date.now() - ANALYTICS_CONSENT_MAX_AGE_MS;
+    if (
+      parsed.version !== ANALYTICS_CONSENT_VERSION ||
+      !validChoice ||
+      !validDate
+    ) {
+      window.localStorage.removeItem(ANALYTICS_CONSENT_STORAGE_KEY);
+      return null;
+    }
+    return parsed.choice as AnalyticsConsent;
   } catch {
+    try {
+      window.localStorage.removeItem(ANALYTICS_CONSENT_STORAGE_KEY);
+    } catch {
+      // Storage can be unavailable in hardened browser configurations.
+    }
     return null;
   }
 }
@@ -47,7 +75,15 @@ export function writeAnalyticsConsent(consent: AnalyticsConsent): void {
   if (typeof window === "undefined") return;
 
   try {
-    window.localStorage.setItem(ANALYTICS_CONSENT_STORAGE_KEY, consent);
+    const record: StoredAnalyticsConsent = {
+      version: ANALYTICS_CONSENT_VERSION,
+      choice: consent,
+      decidedAt: Date.now(),
+    };
+    window.localStorage.setItem(
+      ANALYTICS_CONSENT_STORAGE_KEY,
+      JSON.stringify(record),
+    );
   } catch {
     // Consent still applies for the current page when storage is unavailable.
   }
@@ -103,7 +139,7 @@ export function updateAnalyticsConsent(consent: AnalyticsConsent): void {
     ? "granted"
     : "denied";
 
-  setAnalyticsDisabled(consent === "denied");
+  setAnalyticsDisabled(!hasAnalyticsConsent(consent));
   gtag("consent", "update", {
     analytics_storage: analyticsStorage,
     ad_storage: advertisingStorage,
@@ -125,24 +161,36 @@ export function hasMarketingConsent(consent: AnalyticsConsent): boolean {
 
 export function loadGoogleAnalytics(): void {
   if (typeof document === "undefined" || typeof window === "undefined") return;
-  if (document.querySelector(`script[data-ga-id="${GA_MEASUREMENT_ID}"]`)) return;
-
-  const gtag = ensureGtag();
-  if (!gtag) return;
-
+  const consent = readAnalyticsConsent();
+  if (!consent || !hasAnalyticsConsent(consent)) return;
+  if (!ensureGtag()) return;
+  if (document.querySelector("script[data-praxis-gtm]")) return;
+  // Consent is queued first. GTM is the sole tag loader; no parallel gtag.js.
+  window.dataLayer?.push({ "gtm.start": Date.now(), event: "gtm.js" });
   const script = document.createElement("script");
   script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  script.dataset.gaId = GA_MEASUREMENT_ID;
+  script.src = "https://www.googletagmanager.com/gtm.js?id=GTM-M5SJ3HGB";
+  script.dataset.praxisGtm = "GTM-M5SJ3HGB";
   document.head.appendChild(script);
+}
 
-  gtag("js", new Date());
-  gtag("config", GA_MEASUREMENT_ID, {
-    allow_ad_personalization_signals: true,
-    allow_google_signals: true,
-    anonymize_ip: true,
-    send_page_view: false,
+function pushGtmEvent(
+  channel: "analytics" | "contact",
+  eventName: string,
+  parameters: Record<string, string | number | boolean>,
+): boolean {
+  if (!ensureGtag()) return false;
+  loadGoogleAnalytics();
+  // Only technical fields; never forward contact details, answers or messages.
+  window.dataLayer?.push({
+    event: channel === "contact" ? "praxis_contact" : "praxis_analytics",
+    praxis_event_name: eventName,
+    praxis_method: typeof parameters.method === "string" ? parameters.method : undefined,
+    praxis_page_location: window.location.origin + window.location.pathname,
+    praxis_page_path: window.location.pathname,
+    praxis_page_title: document.title,
   });
+  return true;
 }
 
 export function trackAnalyticsEvent(
@@ -150,7 +198,7 @@ export function trackAnalyticsEvent(
   parameters: Record<string, string | number | boolean> = {},
 ): boolean {
   const consent = readAnalyticsConsent();
-  if (!consent || consent === "denied") return false;
+  if (!consent || !hasAnalyticsConsent(consent)) return false;
 
   // Do not depend on the consent manager's React effect having finished first.
   // A successful form response can arrive while the analytics script is still
@@ -161,11 +209,7 @@ export function trackAnalyticsEvent(
   const gtag = ensureGtag();
   if (!gtag) return false;
 
-  gtag("event", eventName, {
-    ...parameters,
-    send_to: GA_MEASUREMENT_ID,
-  });
-  return true;
+  return pushGtmEvent("analytics", eventName, parameters);
 }
 
 export function getContactLinkAnalyticsEvent(
@@ -175,6 +219,10 @@ export function getContactLinkAnalyticsEvent(
 
   if (normalizedHref.startsWith("https://wa.me/")) {
     return { eventName: "whatsapp_click", method: "whatsapp" };
+  }
+
+  if (normalizedHref.startsWith("tel:")) {
+    return { eventName: "phone_click", method: "phone" };
   }
 
   if (normalizedHref.startsWith("mailto:")) {

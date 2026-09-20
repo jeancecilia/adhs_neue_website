@@ -45,8 +45,8 @@ export default function ImpressumPage() {
           <div>
             <h2 className="text-[20px] font-bold text-[#173838] mb-2">Kontakt</h2>
             <p>
-              E-Mail: {siteConfig.email}<br />
-              Website: {siteConfig.domain}
+              E-Mail: <a href={siteConfig.emailHref} className="underline underline-offset-2">{siteConfig.email}</a><br />
+              Website: <a href={siteConfig.baseUrl} className="underline underline-offset-2">{siteConfig.domain}</a>
             </p>
           </div>
 
@@ -54,11 +54,16 @@ export default function ImpressumPage() {
             <h2 className="text-[20px] font-bold text-[#173838] mb-2">Gesetzliche Berufsbezeichnung & Aufsichtsbehörde</h2>
             <p>
               <strong>Gesetzliche Berufsbezeichnung:</strong><br />
-              Heilpraktiker beschränkt auf das Gebiet der Psychotherapie (verliehen in der Bundesrepublik Deutschland).
+              Heilpraktiker, beschränkt auf das Gebiet der Psychotherapie (verliehen in der Bundesrepublik Deutschland).
             </p>
             <p className="mt-2">
               <strong>Zuständige Aufsichtsbehörde:</strong><br />
-              {siteConfig.regulatoryAuthority}
+              <a href={siteConfig.regulatoryAuthority.url} target="_blank" rel="noreferrer" className="underline underline-offset-2">
+                {siteConfig.regulatoryAuthority.name}
+              </a><br />
+              {siteConfig.regulatoryAuthority.department}<br />
+              {siteConfig.regulatoryAuthority.address}<br />
+              E-Mail: <a href={`mailto:${siteConfig.regulatoryAuthority.email}`} className="underline underline-offset-2">{siteConfig.regulatoryAuthority.email}</a>
             </p>
             <p className="mt-2">
               <strong>Berufsrechtliche Regelungen:</strong><br />
@@ -78,6 +83,13 @@ export default function ImpressumPage() {
             <p>
               {siteConfig.practitioner}<br />
               {siteConfig.addressLine1}, {siteConfig.postalCity}
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-[20px] font-bold text-[#173838] mb-2">Verbraucherstreitbeilegung</h2>
+            <p>
+              Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
             </p>
           </div>
         </div>
