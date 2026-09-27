@@ -19,7 +19,7 @@ export const siteConfig = {
     "https://www.udemy.com/user/jean-maurice-cecilia-menzel-3/",
     "https://www.youtube.com/@adhs-hilfe",
   ],
-  whatsappDisplay: "+49 174 3243387",
+  whatsappDisplay: "+49 176 44252656",
   whatsappHref: "https://wa.me/4917644252656",
   email: "info@neurofeedback-praxis-muenchen.de",
   emailHref: "mailto:info@neurofeedback-praxis-muenchen.de",

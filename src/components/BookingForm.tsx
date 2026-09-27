@@ -2,7 +2,7 @@
 import SourceQuestion from "@/components/SourceQuestion";
 import { getAttribution } from "@/lib/attribution";
 
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { trackAnalyticsEvent } from "@/lib/analytics";
@@ -32,6 +32,7 @@ function BookingFormInner() {
   const [error, setError] = useState("");
   const [linkedResponseId, setLinkedResponseId] = useState("");
   const [linkTestResult, setLinkTestResult] = useState(true);
+  const startTracked = useRef(false);
 
   useEffect(() => {
     try {
@@ -56,6 +57,9 @@ function BookingFormInner() {
 
     setSubmitting(true);
     setError("");
+    // Diagnostic steps are not leads. No field values or selected health topic
+    // are sent; the analytics helper enforces the visitor's consent.
+    trackAnalyticsEvent("contact_form_submit", { method: "contact_form" });
 
     try {
       const response = await fetch("/api/contact", {
@@ -89,6 +93,7 @@ function BookingFormInner() {
       }
       setSubmitted(true);
     } catch {
+      trackAnalyticsEvent("contact_form_error", { method: "contact_form" });
       setError("Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es später erneut oder nutzen Sie WhatsApp.");
     } finally {
       setSubmitting(false);
@@ -144,7 +149,15 @@ function BookingFormInner() {
 
   return (
     <div className="rounded-2xl border border-[rgba(47,79,79,0.1)] bg-white p-6 sm:p-8 card-shadow">
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form
+        onSubmit={handleSubmit}
+        onChangeCapture={(event) => {
+          const field = event.target as HTMLInputElement;
+          if (field.name === "website" || startTracked.current) return;
+          startTracked.current = trackAnalyticsEvent("contact_form_start", { method: "contact_form" });
+        }}
+        className="space-y-5"
+      >
         <div>
           <label htmlFor="form-name" className="block text-[13px] font-bold uppercase tracking-wider text-[#173838] mb-1.5">
             Ihr Name *

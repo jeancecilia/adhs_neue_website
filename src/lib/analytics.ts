@@ -1,3 +1,5 @@
+import { isPrivateMeasurementPage, measurementPageLocation, measurementReferrer } from "./measurement-url";
+
 export const GA_MEASUREMENT_ID = "G-0LZ943NZZR";
 export const ANALYTICS_CONSENT_STORAGE_KEY =
   "adhs-praxis.analytics-consent.v1";
@@ -91,6 +93,7 @@ export function writeAnalyticsConsent(consent: AnalyticsConsent): void {
 
 export function ensureGtag(): Gtag | null {
   if (typeof window === "undefined") return null;
+  if (isPrivateMeasurementPage(window.location.pathname)) return null;
 
   window.dataLayer = window.dataLayer ?? [];
   if (!window.gtag) {
@@ -131,6 +134,7 @@ function setAnalyticsDisabled(disabled: boolean): void {
 export function updateAnalyticsConsent(consent: AnalyticsConsent): void {
   const gtag = ensureGtag();
   if (!gtag) return;
+  syncMeasurementContext(consent);
 
   const analyticsStorage = hasAnalyticsConsent(consent)
     ? "granted"
@@ -159,11 +163,25 @@ export function hasMarketingConsent(consent: AnalyticsConsent): boolean {
   return consent === "marketing" || consent === "granted";
 }
 
+function syncMeasurementContext(consent: AnalyticsConsent): void {
+  const gtag = ensureGtag();
+  if (!gtag) return;
+  const location = measurementPageLocation(window.location.href, consent === "granted");
+  if (!location) return;
+  // Queue before the base tag and refresh on navigation/consent changes, so
+  // automatic events use the same privacy-filtered URL as our manual events.
+  gtag("set", {
+    page_location: location,
+    page_referrer: measurementReferrer(document.referrer),
+  });
+}
+
 export function loadGoogleAnalytics(): void {
   if (typeof document === "undefined" || typeof window === "undefined") return;
   const consent = readAnalyticsConsent();
   if (!consent || !hasAnalyticsConsent(consent)) return;
   if (!ensureGtag()) return;
+  syncMeasurementContext(consent);
   if (document.querySelector("script[data-praxis-gtm]")) return;
   // Consent is queued first. GTM is the sole tag loader; no parallel gtag.js.
   window.dataLayer?.push({ "gtm.start": Date.now(), event: "gtm.js" });
@@ -186,7 +204,7 @@ function pushGtmEvent(
     event: channel === "contact" ? "praxis_contact" : "praxis_analytics",
     praxis_event_name: eventName,
     praxis_method: typeof parameters.method === "string" ? parameters.method : undefined,
-    praxis_page_location: window.location.origin + window.location.pathname,
+    praxis_page_location: measurementPageLocation(window.location.href, readAnalyticsConsent() === "granted"),
     praxis_page_path: window.location.pathname,
     praxis_page_title: document.title,
   });
