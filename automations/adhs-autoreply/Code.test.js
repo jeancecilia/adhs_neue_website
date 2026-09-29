@@ -92,7 +92,7 @@ describe("ADHS mailbox automatic reply", () => {
     expect(runtime().eligibleRecord(mail({ ...record, ...changes }, overrides), start, now)).toBeNull();
   });
   it.each([["herr", "Sehr geehrter Herr"], ["frau", "Sehr geehrte Frau"], ["", "Guten Tag"]])("uses the explicit salutation %s", (salutation, greeting) => {
-    expect(runtime().replyText({ ...record, salutation })).toBe(greeting + " Erika von Beispiel,\n\n" + runtime().REPLY_BODY);
+    expect(runtime().replyText({ ...record, salutation })).toBe(greeting + " Erika von Beispiel,\n\n" + runtime().REPLY_BODY + "\n\n" + runtime().SIGNATURE_TEXT);
   });
   it("keeps the user's complete wording", () => {
     expect(runtime().REPLY_BODY).toBe([
@@ -117,6 +117,22 @@ describe("ADHS mailbox automatic reply", () => {
     rt.anfragenPruefen();
     expect(rt.sendEmail).toHaveBeenCalledOnce();
     expect(rt.releaseLock).toHaveBeenCalledTimes(2);
+  });
+  it("includes the practice signature in both formats and escapes names in HTML", () => {
+    const rt = runtime([mail({ ...record, name: "Test <b>Name</b> & Co" })]);
+    rt.anfragenPruefen();
+    const [, , text, options] = rt.sendEmail.mock.calls[0];
+    expect(text.endsWith("\n\n" + rt.SIGNATURE_TEXT)).toBe(true);
+    expect(options.htmlBody).toContain("Test &lt;b&gt;Name&lt;/b&gt; &amp; Co");
+    expect(options.htmlBody.match(/Jean-Maurice Cecilia-Menzel/g)).toHaveLength(1);
+    expect(options.htmlBody).toContain('href="mailto:info@neurofeedback-praxis-muenchen.de"');
+    expect(options.htmlBody).toContain('href="https://www.neurofeedback-praxis-muenchen.de/"');
+    expect(options.htmlBody).toContain("Hildeboldstraße 1, 80797 München");
+  });
+  it("sends the signature test only to the practice using the same message format", () => {
+    const rt = runtime();
+    rt.signaturTest();
+    expect(rt.sendEmail).toHaveBeenCalledWith("info@neurofeedback-praxis-muenchen.de", "TEST – ADHS-Antwort mit Praxissignatur", expect.stringContaining(rt.SIGNATURE_TEXT), expect.objectContaining({ htmlBody: expect.stringContaining("gmail_signature") }));
   });
   it("retains pending mail when the daily quota is exhausted", () => {
     const rt = runtime();

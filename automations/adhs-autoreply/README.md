@@ -25,6 +25,7 @@ Mit `pausieren` lässt sich die Automation ausschalten.
 
 - Nur exakt `adhs-diagnostik`, authentifizierter Formularabsender und passende Reply-To-Adresse.
 - Der vollständige Nutzertext bleibt unverändert; Anrede nach expliziter Auswahl, sonst `Guten Tag <vollständiger Name>,`.
+- Jede Antwort enthält die bestehende Gmail-Praxissignatur mit Zeilenumbrüchen und E-Mail-/Website-Links, zusätzlich als Klartext. Die Signatur wurde am 29.09.2026 aus den Gmail-Einstellungen übernommen; spätere Signaturänderungen dort müssen auch in `Code.js` und im Apps-Script-Projekt übernommen werden.
 - Mindestens 300 Sekunden nach Absenden **und** Eingang im Postfach; bei normalem Minutentrigger etwa fünf bis sechs Minuten, bei Google-Verzögerungen später.
 - Keine Patientennachrichten, Namen oder Adressen in Script Properties; nur Aktivierungszeit und Vorgangsnummer/Versandstatus.
 - Die letzten sieben Tage werden geprüft; erfolgreiche Versandnachweise bleiben acht Tage gespeichert.
@@ -44,3 +45,11 @@ Praxispostfach; Anrede und vollständiger Antworttext stimmen. Auch nach weitere
 Minutenläufen blieb es bei einer Antwort. Die interne Anfrage von vor der
 Aktivierung wurde nicht beantwortet. Insgesamt 147 automatisierte Tests und
 der Produktionsbuild waren erfolgreich.
+
+Die Signatur-Ergänzung ist durch 28 erfolgreiche Tests der Mail-Automation
+abgedeckt, einschließlich HTML-Escaping der Anrede und Signatur in beiden
+Nachrichtenformaten. `signaturTest` sendet über denselben Versandweg ausschließlich
+an das eigene Praxispostfach und verändert weder Aktivierung noch Versandnachweise.
+Live gespeichert und am 29.09.2026 um 15:29 Uhr geprüft: Die interne Testmail
+wurde zugestellt; die vollständige Praxissignatur einschließlich beider Links
+ist im empfangenen HTML sichtbar.

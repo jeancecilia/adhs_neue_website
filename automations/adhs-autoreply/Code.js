@@ -13,6 +13,22 @@ const REPLY_BODY = [
   "Teilen Sie mir gerne kurz mit, ob der Ablauf und die Kosten für Sie soweit verständlich sind oder ob vorab noch Fragen bestehen.",
 ].join("\n\n");
 
+// Existing Gmail “Praxissignatur”, copied on 29 September 2026.
+const SIGNATURE_TEXT = [
+  "Jean-Maurice Cecilia-Menzel",
+  "Praxisgemeinschaft Menzel",
+  "Hyperkinetische Störungen – Therapie,",
+  "Test und Edukation",
+  "Emotional-motivationale Defizite –",
+  "Belohnungssysteme – Arousalmodelle",
+  "Forschung und Empirie ADS/ADHS",
+  "T: 089 44135911",
+  "E: info@neurofeedback-praxis-muenchen.de",
+  "www.neurofeedback-praxis-muenchen.de",
+  "Hildeboldstraße 1, 80797 München",
+].join("\n");
+const SIGNATURE_HTML = 'Jean-Maurice Cecilia-Menzel<br>Praxisgemeinschaft Menzel<br>Hyperkinetische Störungen – Therapie,<br>Test und Edukation<br>Emotional-motivationale Defizite –<br>Belohnungssysteme – Arousalmodelle<br>Forschung und Empirie ADS/ADHS<br>T: 089 44135911<br>E: <a href="mailto:info@neurofeedback-praxis-muenchen.de" target="_blank">info@neurofeedback-praxis-muenchen.de</a><br><a href="https://www.neurofeedback-praxis-muenchen.de/" target="_blank">www.neurofeedback-praxis-muenchen.de</a><br>Hildeboldstraße 1, 80797 München';
+
 function address(value) {
   const match = String(value || "").trim().match(/^(?:[^<>]*<)?([^<>\s,;]+@[^<>\s,;]+)>?$/);
   return match ? match[1].toLowerCase() : "";
@@ -21,7 +37,23 @@ function address(value) {
 function replyText(data) {
   const greeting = data.salutation === "herr" ? "Sehr geehrter Herr" :
     data.salutation === "frau" ? "Sehr geehrte Frau" : "Guten Tag";
-  return greeting + " " + data.name + ",\n\n" + REPLY_BODY;
+  return greeting + " " + data.name + ",\n\n" + REPLY_BODY + "\n\n" + SIGNATURE_TEXT;
+}
+
+function sendReply(data, subject) {
+  const text = replyText(data);
+  const body = text.slice(0, -(SIGNATURE_TEXT.length + 2));
+  const html = body.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br>");
+  GmailApp.sendEmail(data.email, subject, text, {
+    name: "ADHS Praxis München", replyTo: PRACTICE,
+    htmlBody: '<div>' + html + '<br><br><div class="gmail_signature">' + SIGNATURE_HTML + '</div></div>',
+  });
+}
+
+// Manual formatting check, always sent exclusively to the practice itself.
+function signaturTest() {
+  assertPracticeAccount();
+  sendReply({ email: PRACTICE, name: "Interner Signaturtest", salutation: "" }, "TEST – ADHS-Antwort mit Praxissignatur");
 }
 
 function eligibleRecord(message, activatedAt, now) {
@@ -100,9 +132,7 @@ function anfragenPruefen() {
           // do not blindly retry and send the patient a duplicate.
           props.setProperty(key, JSON.stringify({ at: data.receivedAt, state: "sending" }));
           try {
-            GmailApp.sendEmail(data.email, REPLY_SUBJECT, replyText(data), {
-              name: "ADHS Praxis München", replyTo: PRACTICE,
-            });
+            sendReply(data, REPLY_SUBJECT);
             props.setProperty(key, JSON.stringify({ at: data.receivedAt, state: "sent" }));
           } catch (_) {
             throw new Error("Versandstatus unklar für Vorgang " + data.reference + ". Bitte in Gesendet prüfen; kein automatischer Doppelversand.");
@@ -124,4 +154,4 @@ function anfragenPruefen() {
 }
 
 // Exports are ignored by Google Apps Script and used by the local tests.
-if (typeof module !== "undefined") module.exports = { eligibleRecord, replyText, REPLY_BODY, aktivieren, anfragenPruefen, pausieren };
+if (typeof module !== "undefined") module.exports = { eligibleRecord, replyText, REPLY_BODY, SIGNATURE_TEXT, aktivieren, anfragenPruefen, pausieren, signaturTest };
