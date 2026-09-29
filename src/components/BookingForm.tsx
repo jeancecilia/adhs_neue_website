@@ -22,6 +22,7 @@ function BookingFormInner() {
 
   const [service, setService] = useState(getInitialService);
   const [name, setName] = useState("");
+  const [salutation, setSalutation] = useState("");
   const [email, setEmail] = useState("");
   const [timeslot, setTimeslot] = useState("egal");
   const [message, setMessage] = useState("");
@@ -69,6 +70,7 @@ function BookingFormInner() {
           attribution: getAttribution(),
           reportedSource,
           name,
+          salutation,
           email,
           service,
           timeslot,
@@ -158,6 +160,23 @@ function BookingFormInner() {
         }}
         className="space-y-5"
       >
+        <div>
+          <label htmlFor="form-salutation" className="block text-[13px] font-bold uppercase tracking-wider text-[#173838] mb-1.5">
+            Anrede (optional)
+          </label>
+          <select
+            id="form-salutation"
+            name="salutation"
+            autoComplete="honorific-prefix"
+            className="w-full rounded-xl border border-slate-200 bg-[#faf9f8] px-4 py-3 text-[15px] text-slate-800 focus:border-[#173838] focus:bg-white focus:outline-none"
+            value={salutation}
+            onChange={(e) => setSalutation(e.target.value)}
+          >
+            <option value="">Keine Angabe</option>
+            <option value="herr">Herr</option>
+            <option value="frau">Frau</option>
+          </select>
+        </div>
         <div>
           <label htmlFor="form-name" className="block text-[13px] font-bold uppercase tracking-wider text-[#173838] mb-1.5">
             Ihr Name *

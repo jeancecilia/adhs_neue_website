@@ -217,6 +217,7 @@ export default {
     }
 
     const name = clean(body.name, 120);
+    const salutation = ["herr", "frau"].includes(body.salutation) ? body.salutation : "";
     const email = clean(body.email, 254).toLowerCase();
     const service = clean(body.service, 60);
     const timeslot = clean(body.timeslot, 60);
@@ -234,9 +235,14 @@ export default {
     const reference = crypto.randomUUID();
     const sourceNote = attributionText(attribution, reference);
     const subject = `Neue Terminanfrage: ${serviceNames[service]}`;
+    const replyRecord = `ADHS-AUTOREPLY-V1: ${JSON.stringify({ reference, service, name, salutation, email, submittedAt: consentTimestamp })}`;
     const text = [
       "Neue Terminanfrage über neurofeedback-praxis-muenchen.de",
+      // A fixed, single-line record lets the practice mailbox automation use
+      // validated fields without interpreting the visitor's free-text message.
+      replyRecord,
       "",
+      `Anrede: ${salutation === "herr" ? "Herr" : salutation === "frau" ? "Frau" : "keine Angabe"}`,
       `Name: ${name}`,
       `E-Mail: ${email}`,
       `Anliegen: ${serviceNames[service]}`,
@@ -257,7 +263,7 @@ export default {
         replyTo: email,
         subject,
         text,
-        html,
+        html: `<pre>${escapeHtml(replyRecord)}</pre>${html}`,
       });
 
       if (!clean(receipt?.messageId, 998)) {
