@@ -5,6 +5,10 @@ Die Benachrichtigung enthält zusätzlich einen strukturierten Datensatz und die
 `Code.js` wird als `Code.gs` im Google-Apps-Script-Projekt des Kontos
 `info@neurofeedback-praxis-muenchen.de` gespeichert. Es benötigt keinen eingeschalteten PC.
 
+Das [Apps-Script-Projekt](https://script.google.com/u/5/home/projects/1nx8vcgUiCVLhApHmUJItePg0ByYpyS0cKDDtpBMIWNKh_M4QwTQzYHdD/edit)
+wurde am 29.09.2026 um 13:20 Uhr (Europe/Berlin) nach der ausdrücklichen
+Google-Freigabe aktiviert. Ein Minutentrigger führt `anfragenPruefen` aus.
+
 ## Aktivierung
 
 1. Das Skript im Praxis-Konto öffnen und einmal `aktivieren` ausführen.
@@ -33,3 +37,10 @@ Mit `pausieren` lässt sich die Automation ausschalten.
 Zeitgrenzen, Anliegenfilter, historische Nachrichten, Kontoprüfung, wiederholte
 Ausführung, Kontingent und unklare Versandfehler. Ein echter End-to-End-Test
 benötigt die einmalige Google-Freigabe und eine anschließend neu abgesendete Testanfrage.
+
+Am 29.09.2026 erfolgreich live geprüft: interne Anfrage um 13:21 Uhr,
+automatische Antwort um 13:26 Uhr im Lauf um 13:26:49. Absender ist das
+Praxispostfach; Anrede und vollständiger Antworttext stimmen. Auch nach weiteren
+Minutenläufen blieb es bei einer Antwort. Die interne Anfrage von vor der
+Aktivierung wurde nicht beantwortet. Insgesamt 147 automatisierte Tests und
+der Produktionsbuild waren erfolgreich.
